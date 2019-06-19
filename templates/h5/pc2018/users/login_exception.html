@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit" />
+	<meta name="keyword" content="">
+	<meta name="frontend" content="Robin">
+	<title>用户中心-9377 H5平台</title>
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/user.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/pc/header.html"}}
+		<div class="g-container">
+			<div class="g-main">
+				<div class="user-hd laybox">
+					<div class="user-hd-left fl">
+						<div class="user-avatar">
+							<a href="javascript:;"><img src="{{$CONFIG.resource}}/images/2017/h5/pc/noavatar_middle.gif" width="100" height="100" /></a>
+							<!-- <a href="javascript:avapopOpen();" class="btn-avatar">修改头像</a> -->
+						</div>
+						<ul class="user-info">
+							<li>您好，<b>{{if !$user['BBS_NAME']}}{{$user['LOGIN_ACCOUNT']}}{{else}}{{$user['BBS_NAME']}}{{/if}}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="{{$CONFIG.app_url}}/login.php?do=logout" class="quit">[退出]</a>
+							</li>
+							<li>账号：{{$user.LOGIN_ACCOUNT}}</li>
+							<li>上次登陆时间：{{$user.LAST_LOGIN_TIME}}</li>
+							<li><a href="{{$CONFIG.app_url}}/new_gamecard/game_card.php" class="g-btn-s btn-getlb">领取礼包</a></li>
+						</ul>
+					</div>
+					
+					<div class="user-hd-right fl">
+					{{data name="个人中心游戏推荐"}}
+						<ul class="remgame-list fix">
+
+						{{foreach from=$DATA['个人中心游戏推荐'].list item=item}}
+							<li>
+								<a href="{{$CONFIG.app_url}}/game_box.php?game={{$item.ALIAS}}&system={{$item.system}}" class="img"><img src="{{$CONFIG.resource}}/images/2014/game/icon-big/{{$item.ALIAS}}.png" alt="" width="70" height="70"></a>
+								{{data name="{{$item.NAME}}下载次数"}}
+								<div class="info">
+									<a href="{{$item.CONFIG.site}}" class="name">《{{$item.NAME}}》</a>
+									<p>{{$DATA["{{$item.NAME}}下载次数"]}}次下载</p>
+									<a href="{{$item.CONFIG.android_link_url}}" class="g-btn-s">立即下载</a>
+								</div>
+							</li>
+						{{/foreach}}
+						</ul>
+					</div>
+				</div>
+				<div class="user-bd laybox fix">
+					<ul class="user-menu fl" id="user-menu">
+						<li {{if !isset($type) || $type == 0}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php" class="menu-1"><i></i> 账号资料</a>
+						</li>
+						<li {{if isset($type) && $type == 1 || $type == 3 || $type == 4}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php?type=1" class="menu-2"><i></i> 帐号安全</a>
+						</li>
+						<li {{if isset($type) && $type == 5}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php?type=5" class="menu-3"><i></i> 修改密码</a>
+						</li>
+						<li {{if isset($type) && $type == 2}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php?type=2" class="menu-4"><i></i> 礼包中心</a>
+						</li>
+					</ul>
+					<div class="user-section-wrap fl" id="user-section-wrap">
+						<div class="user_main_area us2-exc" >
+                            <div class="section-tit">登录异常验证</div>
+				            <div class="cont">
+				                {{if $user['LOCKED']}}
+				                <div class="form-tips">
+				                    <h4>安全提示</h4>您的账号已经被锁定
+				                    <a href="{{$CONFIG.app_url}}/login.php?do=logout">退出登录</a>
+				                </div>
+				                {{else}}
+				                <a name="pos"></a>
+				                <div class="form-tips">
+				                    <h4>安全提示</h4>您的账号 {{$user.LOGIN_ACCOUNT}} 不在常用地区登录。为了确保账号安全，请进行手机短信验证。<br />
+				                    点击获取验证码之后，短信验证码将会发送到绑定的手机上。验证码5分钟内有效。
+				                </div>
+				                <form method="post" method="post" onsubmit="return check_form();">
+                                    <div class="w-item">
+                                        <label for="" class="w-label">手机号码：</label>
+                                        <span class="w-txt">{{$user['PHONE']}}</span>
+                                    </div>
+                                    <div class="w-item">
+                                        <label for="" class="w-label">手机验证码：</label>
+                                        <input type="text" name="captcha" id="captcha" class="w-input-s" /> &nbsp;&nbsp;
+                                        <input class="g-btn" type="button" value="获取验证码" id="fetch" onclick="exc_cellphone_captcha();" /> &nbsp;&nbsp;
+                                        <a href="{{$CONFIG.app_url}}/login.php?do=logout">退出登录</a>
+                                    </div>
+				              
+                                    <div class="tomark">
+                                        <input type="checkbox" name="remember" value="1" /> 把 “{{$user.LOGIN_AREA}} ({{$ip}})” 作为我的常用登录地区。<br />勾选之后，下次登录不需要验证码。不勾选则继续使用验证码。如果您在异地临时登录几次，建议不要勾选。<br /><br />
+                                        {{if $is_test}}
+                                        <br /><font color="red">你是白名单用户, 输入 {{$test_code}} 通过</font><br /><br />
+                                        {{/if}}
+                                        <input type="hidden" name="step" value="2" />
+                                        <div class="btn"><input class="g-btn"  type="submit" value="验证" /></div>
+                                    </div>
+				                </form>
+				                {{/if}}
+				            </div>
+				            
+				    
+				        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="h5/pc/footer.html"}}
+	</div>
+
+	<!-- 修改头像弹窗 -->
+	<i class="mask none" id="mask"></i>
+	<div class="avatar-pop none" id="avatar-pop">
+		<a href="javascript:avapopClose();" class="avapop-close"></a>
+		<div class="ava-hd" id="curavatar">
+			<img src="{{$user_avatar}}" />
+			<p>当前头像</p>
+		</div>
+		<div class="ava-bd">
+			<div class="ava-uptype fix">
+				<a href="javascript:;" class="active">推荐头像</a>
+				{{if $user['BBS_ID']}}
+				<a href="javascript:;">自定义头像</a>
+				<span class="line"></span>
+				{{/if}}
+			</div>
+			<div class="ava-upwrap">
+				<div class="ava-upbox ava-system">
+					<p class="tips">选择一个新照片进行保存，即可获得全新造型。</p>
+					<div class="sys-ava-list fix" id="sys-ava-list"></div>
+					<a href="javascript:;" class="sys-ava-submit" id="sys-ava-submit">保存</a>
+					<p class="sub-tips" id="s-tips"></p>
+				</div>
+				<div class="ava-upbox ava-custom none">
+					{{if $user['BBS_ID']}} {{$avatar_swf}} {{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script> var BBS_ID = "{{$user['BBS_ID']}}"; var navactive = '4'; </script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/main_2016.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/users.js?{{$CONFIG.build}}"></script>
+    <script type="text/javascript">
+        function check_form(){
+            var captcha = $('#captcha').val();
+            if(!/^\d{6,6}$/.test(captcha)){
+                alert('验证码格式不正确');
+                $('#captcha').focus();
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function exc_cellphone_captcha(){
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                url: '/users/login_exception.php',
+                data: {step: 1},
+                success: function(data){
+                    if(data.status > 0){
+                        refetch.time = 60;
+                        refetch(true);
+                    }else if(data.status == -2){
+                        alert('验证码发送太频繁');
+                        if(data.remain){
+                            refetch.time = parseInt(data.remain);
+                            refetch(true);
+                        }
+                    }else{
+                        alert('发送失败');
+                    }
+                }
+            });
+        }
+        
+        function refetch(start){
+            if(start === true){
+                $('#fetch').attr('disabled', true);
+                refetch.interval = setInterval(refetch, 1000);
+                refetch.time--;
+            }else if(0 == refetch.time){
+                clearInterval(refetch.interval);
+                $('#fetch').val(refetch.text);
+                $('#fetch').attr('disabled', false);
+                return;
+            }
+            
+            $('#fetch').val('('+ refetch.time +') '+ refetch.text);
+            
+            refetch.time--;
+        }
+        refetch.text = '重新获取验证码';
+        refetch.interval = null;
+        refetch.time = 60;
+    </script>
+</body>
+</html>

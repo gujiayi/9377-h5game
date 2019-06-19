@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>{{$DATA["{{$G.NAME}}页面标题"]}}</title>
+	<meta name="keywords" content="{{$DATA["{{$G.NAME}}页面关键字"]}}" />
+	<meta name="description" content="{{$DATA["{{$G.NAME}}页面描述"]}}" />
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/game.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	{{data name="{{$G.NAME}}页面标题"}}
+	{{data name="{{$G.NAME}}页面关键字"}}
+	{{data name="{{$G.NAME}}页面描述"}}
+	<div class="wrapper">
+		{{include file="/header.html"}}
+		<div class="g-container game-container">
+			<div class="game-bg">{{data name="游戏背景图片"}}{{$DATA["游戏背景图片"]}}</div>
+			<div class="g-main">
+				<div class="game-wp laybox fix">
+					<div class="game-left fl">
+						<div class="game-infomation fix">
+							<div class="logo fl">
+								<div class="img"><img src="" _src="{{$CONFIG.resource}}/images/2014/game/icon-big/{{$G.ALIAS}}.png?{{$CONFIG.build}}" alt="" width="110" height="110" class="lazy-load"></div>
+								{{if $G.CONFIG.site != 'http://www.9377.cn'}} <a href="{{$G.CONFIG.site}}" target="_blank" class="g-btn enterhome">进入官网</a> {{/if}}
+							</div>
+							<div class="info fl">
+								<div class="name">{{$G.NAME}}</div>
+								{{data name="玩家评分"}}
+								<div class="level">{{$DATA["玩家评分"]}}</div>
+								<p>所属分类：{{$G.TYPE}}</p>
+								<p>游戏大小：{{$G.df_pack_size}}</p>
+								{{data name="系统要求"}}
+								<p>系统要求：{{$DATA["系统要求"]}}</p>
+								{{data name="游戏版本"}}
+								<p>版本：{{$DATA["游戏版本"]}}</p>
+							</div>
+							<div class="dl fl">
+								{{if $G.CONFIG.android_link_url}}<a href="{{$G.CONFIG.android_link_url}}" target="_blank" class="btn-dl w-btn-android">安卓下载</a>{{/if}}
+								{{if $G.CONFIG.ios_zb_link_url}}<a href="{{$G.CONFIG.ios_zb_link_url}}" target="_blank" class="btn-dl w-btn-ios">App Store下载</a>{{/if}}
+								<div class="dl-qr">
+								{{data name="{{$G.NAME}}二维码"}}
+									{{$DATA["{{$G.NAME}}二维码"]}}
+									<p>扫描二维码下载游戏</p>
+								</div>
+								<i class="qr"></i>
+							</div>
+
+						</div>
+                        <p style="color:#f00; position:absolute; top:220px; left:520px;">温馨提示：本游戏适合18岁(含)以上玩家娱乐</p>
+						<div class="gamedetail">
+							<div class="tit"> <div class="in"> <h3>游戏详情</h3> <p>GAME DETAILS </p> </div> </div>
+							<div class="con">
+								{{$G.DESCRIPTION}}
+							</div>
+						</div>
+						<div class="gamedetail gamepic">
+							<div class="tit"> <div class="in"> <h3>游戏截图</h3> <p>GAME DETAILS </p> </div> </div>
+							<div class="gamepic-box" id="gamepic-box">
+							{{data name="{{$G.NAME}}截图"}}
+								<div class="slide-in">
+									<ul class="slide-bd fix">
+									{{foreach from=$DATA["{{$G.NAME}}截图"].list item=item}}
+										<li><img src="" _src="{{$item.thumb}}" alt="" class="lazy-load"></li>
+									{{/foreach}}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="game-right fr">
+						<div class="mod-othergift laybox">
+						{{data name="游戏页礼包推荐"}}
+							<div class="bdr-tit">其他礼包</div>
+							<ul class="othergift-list">
+							{{foreach from=$DATA["游戏页礼包推荐"].list item=item}}
+								<li>
+									<img src="" _src="{{$CONFIG.resource}}/images/2014/game/icon-big/{{$item.G.ALIAS}}.png?{{$CONFIG.build}}" alt="" width="68" height="68" class="lazy-load img">
+									<div class="info">
+										<p class="name">{{$item.G.NAME}}</p>
+										<p class="type">{{$item.name}}</p>
+									</div>
+									<a href="{{$CONFIG.app_url}}/new_gamecard/game_card.php?card_type={{$item.id}}" class="btn-getgift">领取礼包</a>
+								</li>
+							{{/foreach}}
+							</ul>
+						</div>
+						<div class="mod-pfqr laybox">
+							<div class="global-qr fl"><img src="" _src="{{$CONFIG.resource}}/images/2016/globalqr.jpg?{{$CONFIG.build}}" width="125" height="125" alt="" class="lazy-load"></div>
+							<div class="info fl">
+								<p class="t1">9377手游二维码</p>
+								<p class="t2">扫描二维码下载<br>享受更多游戏乐趣！</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="/footer.html"}}
+	</div>
+	<script> var navactive = '99'; //通用游戏navid = 99</script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/jquery.slideBox.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2016/main_2016.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

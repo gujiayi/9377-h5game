@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>h5游戏中心_H5游戏大全_h5游戏排行榜_9377h5游戏平台</title>
+	<meta name="keyword" content="h5游戏中心,Html5游戏中心,h5游戏大全,H5游戏排行榜,h5游戏分类,免费h5游戏,h5游戏平台">
+	<meta name="description" content="9377h5游戏中心,汇集了大量时下火爆好玩的html5游戏,还有热门的h5游戏排行榜,来h5游戏中心,海量H5游戏任你玩。玩h5游来9377,一起玩更快乐。">
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/gamecenter.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/pc/header.html"}}
+		<div class="g-container">
+			<div class="g-main">
+				<div class="g-tit"> <i></i> <span>全部游戏</span> </div>
+				<div class="game-select-box laybox fix">
+					<div class="game-item">
+						<span>类型：</span>
+						<a href="{{$CONFIG.app_url}}/game_center.php" {{if empty($cur_type)}}class="active"{{/if}}>不限</a>
+						{{foreach from=$games_type item=item key=type}}
+						{{if $type && $item}}
+						<a href="{{$CONFIG.app_url}}/game_center.php?type={{$type|urlencode}}#type" {{if $cur_type == $type}}class="active"{{/if}}>{{$type}}</a>|
+						{{/if}}
+						{{/foreach}}
+					</div>
+					<div class="game-item">
+						<span>题材：</span>
+						<a href="{{$CONFIG.app_url}}/game_center.php" {{if empty($cur_subject)}}class="active"{{/if}}>不限</a></em>
+						{{foreach from=$games_subject item=item key=type}}
+						{{if $type && $item}}
+						<a href="{{$CONFIG.app_url}}/game_center.php?subject={{$type|urlencode}}#type" {{if $cur_subject == $type}}class="active"{{/if}}>{{$type}}</a>|
+						{{/if}}
+						{{/foreach}}
+					</div>
+					<div class="game-item">
+						<span>字母：</span>
+						<a href="{{$CONFIG.app_url}}/game_center.php" {{if empty($cur_letter)}}class="active"{{/if}}>不限</a></em>
+						{{foreach from=$games_letter item=item key=type}}
+						{{if $type && $item}}
+						<a href="{{$CONFIG.app_url}}/game_center.php?letter={{$type|urlencode}}#type" {{if $cur_letter == $type}}class="active"{{/if}}>{{$type|strtoupper}}</a>|
+						{{/if}}
+						{{/foreach}}
+					</div>
+				</div>
+				
+				<!-- <div class="game-content-box">
+					<ul class="game-list fix" id="gc-game-list">
+						{{foreach from=$games item=item}}
+						<li class="laybox">
+							<a href="{{$CONFIG.app_url}}/game.php?gid={{$item.ID}}&sid=new" target="_blank" class="img">
+								<img src="" _src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png?{{$CONFIG.build}}" alt="" width="98" height="98" class="lazy-load">
+							</a>
+							<div class="info">
+								<a href="{{$CONFIG.app_url}}/game.php?gid={{$item.ID}}&sid=new" target="_blank" class="name">{{$item.NAME}}</a>
+								<p class="intro"> 简介：{{$item.SHORT_DESCRIPTION|truncate:120}} </p>
+							</div>
+							<div class="opt">
+								<a href="{{$CONFIG.app_url}}/game.php?gid={{$item.ID}}&sid=new" target="_blank" class="enterhome">开始游戏</a>
+								<a href="javascript:void(0);" alias="{{$item.ALIAS}}" class="download J-play">用手机玩</a>
+							</div>
+						</li>
+						{{/foreach}}
+					</ul>
+					<div class="pagination" id="gamecenter-pagination"> {{$pagelist}} </div>
+				</div> -->
+			</div>
+		</div>
+		{{include file="h5/pc/footer.html"}}
+	</div>
+	<!-- 弹窗 -->
+	{{include file="h5/pc/game_pop.html"}}
+	<!-- 弹窗 -->
+	<script> var navactive = '2'; C9377.build = '{{$CONFIG.build}}';</script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/main.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

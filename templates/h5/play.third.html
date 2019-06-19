@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{$G.CONFIG.alias_name}}_9377{{$G.CONFIG.alias_name}}h5游戏_一起玩更快乐</title>
+    <meta name="keywords" content="{{$G.CONFIG.alias_name}},9377{{$G.CONFIG.alias_name}}" />
+    <meta name="description" content="9377游戏平台{{$G.CONFIG.alias_name}}，{{$G.CONFIG.alias_name}}h5游戏，在线手机网页游戏，无需下载，快速玩页戏。9377手游{{$G.CONFIG.alias_name}}，一起玩更快乐。" />
+    <meta content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.game2.css?{{$CONFIG.build}}" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/play.game2.css?{{$CONFIG.build}}" />
+    {{if $G.ID == '715'}} <style> .loading { background-image: url('{{$CONFIG.resource}}/images/2017/h5/loading/xkx.jpg?20180423');} </style> {{/if}}
+</head>
+<body scroll="no">
+    <div class="loading" id="loading"></div>
+    <iframe scrolling="no" id="ifr" src="{{$url}}" frameborder="0" width="100%" height="100%" {{if $G.ID == '715'}}style="opacity:0;"{{/if}}></iframe>
+    <!-- 浮标 -->
+    <div class="floatmod floaticon-right" id="floatmod">
+        <img src="{{$CONFIG.resource}}/images/2017/h5/floaticonv2.png?{{$CONFIG.build}}" width="46" class="floaticon" id="floaticon">
+        <ul class="float-menu {{if $G.CONFIG.parent == 394 || $G.CONFIG.parent == 481 || $G.CONFIG.parent == 511}}float-menu4{{/if}}">
+            <li><a href="javascript:H9377.selectUcMod('ctl');"><i class="icon-user"></i><p>账户</p></a></li>
+            <li><a href="javascript:H9377.selectUcMod('gift');"><i class="icon-gift"></i><p>礼包</p></a></li>
+            <li><a href="javascript:H9377.selectUcMod('kf');"><i class="icon-kf"></i><p>客服</p></a></li>
+            {{if $G.CONFIG.parent == 394 || $G.CONFIG.parent == 481 || $G.CONFIG.parent == 511}} <li><a href="javascript:H9377.selectUcMod('gg');"><i class="icon-gg"></i><p>公告</p></a></li> {{/if}}
+        </ul>
+    </div>
+    <div class="pay-wp"> 
+        <a href="javascript:closePayWindows();" class="pay-close icon-close"></a>
+        <iframe src="" frameborder="0" id="iframe-pay"></iframe> 
+    </div>
+    <div class="kf-wp"> 
+        <a href="javascript:closeKfWindows();" class="close"></a>
+        <iframe src="" frameborder="0" id="iframe-pay"></iframe> 
+    </div>
+
+    <div class="mask none" id="uc-pop">
+        <!-- 控制面板 -->
+        <div class="dialog-box mod-login mod-uc mod-uc-ctl none"> 
+            <a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+            <div class="w-form"> 
+                <div class="w-item">
+                    <i class="icon-user2"></i> <p class="place">{{$user['LOGIN_ACCOUNT']}}</p>
+                </div>
+            </div> 
+            <ul class="uc-tool"> 
+                <li onClick="H9377.selectUcMod('pass')">修改密码 <i class="icon-arrr"></i></li> 
+                <li onClick="H9377.selectUcMod('idv')">实名认证 <i class="icon-arrr"></i></li> 
+                <li onClick="H9377.selectUcMod('bindphone')">绑定手机 <i class="icon-arrr"></i></li> 
+            </ul>
+            <a href="javascript:switchAcc();" class="btn-submit logout">切换帐号(注销)</a>
+        </div>
+        <div class="dialog-box mod-login mod-uc mod-uc-pass none"> 
+            <a href="javascript:H9377.selectUcMod();" class="icon-back"></a>
+            <div class="w-form"> 
+                <div class="w-item"> <i class="icon-lock"></i> <input name="oldpassword" type="password" placeholder="请输入当前密码"> </div>
+                <div class="w-item">
+                    <i class="icon-lock"></i> 
+                    <input name="newpassword" type="password" maxlength="20" placeholder="请输入新密码"> 
+                    <div class="place none"></div>
+                    <em class="icon-oeye J-eye"></em>
+                </div> 
+                <a href="javascript:;" class="btn-submit" onClick="H9377.modifyPass(this)">确 定</a> 
+            </div> 
+        </div>
+        <div class="dialog-box mod-login mod-uc mod-uc-idv none"> 
+            <a href="javascript:H9377.selectUcMod();" class="icon-back"></a>
+            <div class="w-form"> 
+                <div class="w-item"> <i class="icon-user"></i> <input name="realname" type="text" placeholder="请输入真实姓名" value="{{$user.NAME}}"> </div>
+                <div class="w-item"> <i class="icon-lock"></i> <input name="idc" type="text" placeholder="请输入身份证号码" value="{{$user.ID_CARD_NUMBER}}">
+                </div> 
+                {{if empty($user.ID_CARD_NUMBER)}} <a href="javascript:;" class="btn-submit" onClick="H9377.bindIdc(this)">确 定</a> {{/if}}
+            </div> 
+        </div>
+        <div class="dialog-box mod-login mod-uc mod-uc-bindphone none"> 
+            <a href="javascript:H9377.selectUcMod();" class="icon-back"></a>
+            <div class="w-form"> 
+                <div class="w-item"> <i class="icon-mobile"></i> <input name="cellphone" type="text" placeholder="请输入手机号码" value="{{$user.PHONE}}"> </div>
+                {{if !$user.BIND_CELLPHONE || !$user.PHONE}}
+                <div class="w-item-wp"> 
+                    <div class="w-item w-item-s"> <i class="icon-email"></i> <input name="captcha" type="text" placeholder="请输入验证码"> </div> 
+                    <button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this,'bindphone');">发送验证码</button> 
+                </div> 
+                <a href="javascript:;" class="btn-submit" onClick="H9377.bindPhone(this)">绑 定</a> 
+                {{/if}}
+            </div> 
+        </div>
+        <!-- 礼包 -->
+        <div class="dialog-box mod-login mod-uc mod-uc-gift none"> 
+            <a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+            <div class="login-hd"> 礼包 </div> 
+            <ul class="gift-tab">
+                <li class="active">所有礼包</li>
+                <li>已领礼包</li>
+            </ul>
+            <div class="gift-wp">
+                <div class="gift-box">
+                    <ul class="gift-list">
+                        {{data name="礼包列表"}}
+                        {{foreach from=$DATA['礼包列表'].list item=item}}
+                        <li class="flex">
+                            <div class="flex flex-list">
+                                <img src="{{$CONFIG.resource}}/images/2017/h5/gift.png?{{$CONFIG.build}}" width="48" height="48" class="img">
+                                <div class="ginfo">
+                                    <p>{{$item.title}}</p>
+                                    <p>剩余量：{{$item.ext3}}</p>
+                                </div>
+                            </div>
+                            <a href="javascript:H9377.getCard('{{$item.ext4}}', '{{$item.ext5}}', '');" class="btn-get {{if !empty($item.ext5)}}btn-getBPcard{{/if}}">领号</a>
+                        </li>
+                        {{/foreach}}
+                        {{data name="系统礼包列表"}}
+                        {{foreach from=$DATA['系统礼包列表'].list item=item}}
+                        <li class="flex">
+                            <div class="flex flex-list">
+                                <img src="{{$CONFIG.resource}}/images/2017/h5/gift.png?{{$CONFIG.build}}" width="48" height="48" class="img">
+                                <div class="ginfo">
+                                    <p>{{$item.name}}</p>
+                                    <p>剩余量：{{if $item.surplus}}{{$item.surplus}}{{else}}0{{/if}}</p>
+                                </div>
+                            </div>
+                            <a href="javascript:H9377.getCard('', '{{$item.CONFIG.bindingMobile}}', '{{$item.id}}');" class="btn-get {{if $item.CONFIG.bindingMobile == 1}}btn-getBPcard{{/if}}">领号</a>
+                        </li>
+                        {{/foreach}}
+                        {{if $DATA['礼包列表'] == '' && $DATA['系统礼包列表'] == ''}}
+                        <div class="nodata">敬请期待</div>
+                        {{/if}}
+                    </ul>
+                </div>
+                <div class="gift-box">
+                    <ul class="gift-list">
+                        {{foreach from=$DATA['礼包列表'].list item=item}}
+                        <li class="flex">
+                            <div class="flex flex-list">
+                                <img src="{{$CONFIG.resource}}/images/2017/h5/gift.png?{{$CONFIG.build}}" width="48" height="48" class="img">
+                                <div class="ginfo">
+                                    <p>{{$item.title}}</p>
+                                    <p>剩余量：{{$item.ext3}}</p>
+                                </div>
+                            </div>
+                            <a href="javascript:H9377.getCard('{{$item.ext4}}', '{{$item.ext5}}', '');" class="btn-get {{if !empty($item.ext5)}}btn-getBPcard{{/if}}">领号</a>
+                        </li>
+                        {{/foreach}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 客服 -->
+        <div class="dialog-box mod-login mod-uc mod-uc-kf none"> 
+            <a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+            <div class="login-hd"> 客服 </div> 
+            <div class="w-form"> 
+                <div class="w-item"> <a href="tel:020-36152720">020-36152720 （08:30-00:30）</a> </div>
+                <div class="w-item"> <a href="javascript:H9377.kfOnline();">在线客服</a> </div>
+            </div> 
+        </div>
+        {{if $G.CONFIG.parent == 394 || $G.CONFIG.parent == 481 || $G.CONFIG.parent == 511}}
+        <!-- 公告 -->
+        <div class="dialog-box mod-login mod-uc mod-uc-gg none"> 
+            <a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+            
+            {{data name="公告列表{{$G.CONFIG.parent}}"}}
+            <div class="login-hd"> 公告 </div> 
+            <div class="gg-wp">
+                <ul class="gg-list">
+                    {{foreach from=$DATA["公告列表{{$G.CONFIG.parent}}"].list item=item name=list}}
+                    <li>{{$smarty.foreach.list.index+1}}.{{$item.title}}</li>
+                    {{/foreach}}
+                </ul>
+            </div>
+        </div>
+        <!-- 公告内容 -->
+        <div class="dialog-box mod-login mod-uc mod-uc-ggc none"> 
+            <a href="javascript:H9377.selectUcMod('gg');" class="icon-back"></a>
+            <div class="gg-con-wp">
+                {{foreach from=$DATA["公告列表{{$G.CONFIG.parent}}"].list item=item name=list}}
+                <div class="gg-con-box none">
+                    {{data name="{{$item.title}}内容"}}
+                    <div class="login-hd">{{$item.title}}</div> 
+                    <div class="gg-con">{{$DATA["{{$item.title}}内容"]}}</div>
+                </div>
+                {{/foreach}}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    <script src="{{$CONFIG.resource}}/js/2017/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+    <script type="text/javascript">
+		var footer = 0;
+        C9377.build = '{{$CONFIG.build}}';
+		C9377.gid = '{{$G.ID}}';
+		C9377.app_url = C9377.app_url.replace(/:\/\/[^\/]+\//, '://'+ window.location.hostname +'/');
+	</script>
+    <script src="{{$CONFIG.resource}}/js/2017/h5/main.game2.js?{{$CONFIG.build}}"></script>
+    <script src="{{$CONFIG.resource}}/js/2017/h5/play.game2.js?{{$CONFIG.build}}"></script>
+    {{assign var=aurl value="{{$CONFIG.app_url}}/cp_login.php?gid={{$G.ID}}&gourl=http%3a%2f%2fapp.9377.com%2fh5%2fgame_login.php%3fgid%3d{{$G.ID}}%26sid%3d1%26client%3d1"}}
+    <script>
+        function switchAcc(){
+            try {
+                window.AndroidUtils.switchAccount();
+                setTimeout(function(){
+                    window.location.href = "{{$CONFIG.app_url}}/login.php?do=logout&gourl={{$aurl|urlencode}}";
+                }, 100);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+    </script>
+</body>
+</html>

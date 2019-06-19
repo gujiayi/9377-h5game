@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>{{$row.title}}-9377 H5平台</title>
+	<meta name="keywords" content="{{$row.title}},H5平台">
+	<meta name="description" content="{{if $description neq ''}}{{$description}}{{/if}}">
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc2018/global.css?{{$CONFIG.build}}x" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc2018/news.css?{{$CONFIG.build}}111" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc2018/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/pc2018/header.html"}}
+		<div class="g-container news-page">
+			<div class="g-main">
+				<div class="g-row fix">
+					<div class="fl">
+						<div class="g-tit"> <i class="icon icon-sms"></i> <span>游戏资讯</span> </div>
+						<div class="news-detail-box laybox">
+							<div class="detail-bd">
+								<h1 class="title">{{$row.title}}</h1>
+								<p class="desc"><em>日期：{{$row.adddate|date_format:'%Y/%m/%d'}}</em></p>	
+								<div class="content">
+									{{$body}}
+								</div>
+								<div id="SOHUCS"></div>
+							</div>
+						</div>
+					</div>
+					<div class="fr">
+						<div class="g-tit"> <i class="icon icon-fire"></i> <span>热门游戏榜</span> </div>
+						<div class="rank-wp laybox">
+							{{data name="H5游戏排行榜1"}}
+							<ul class="rank-list slide-item">
+								{{foreach from=$DATA['H5游戏排行榜1'].list item=item name=rank1}}
+								<li {{if $smarty.foreach.rank1.first}}class="active"{{/if}}>
+									{{if $smarty.foreach.rank1.index==0}} <em class="rank-1">
+									{{elseif $smarty.foreach.rank1.index==1}} <em class="rank-2">
+									{{elseif $smarty.foreach.rank1.index==2}} <em class="rank-3">
+									{{else}} <em> {{/if}}
+									{{$smarty.foreach.rank1.index+1}}</em>
+									<p class="gname">{{$item.CONFIG.alias_name}}</p>
+									<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png?{{$CONFIG.build}}" width="68" class="img">
+									<div class="info">
+										<p class="name">{{$item.CONFIG.alias_name}}</p>
+										<p>{{$item.TYPE}}</p>
+									</div>
+									<p class="xinfo">{{$item.TYPE}}</p>
+									<div class="opt">
+										<a href="{{$CONFIG.app_url}}/game_card.php" title="礼包" class="gift"></a>
+										<a href="{{$item.CONFIG.download_url}}" title="下载" class="down"></a>
+									</div>
+								</li>
+								{{/foreach}}
+							</ul>
+						</div>
+						<div class="g-row">
+							<div class="g-tit"> <i class="icon icon-sms"></i> <span>新闻资讯</span> </div>
+							<div class="news-wp laybox">
+								{{data name="H5平台图文资讯"}}
+								<div class="pnews-box">
+								{{foreach from=$DATA['H5平台图文资讯'].list item=item}}
+									<a href="{{$item.url}}" target="_blank">
+										<img src="{{$item.thumb}}" alt="">
+										<p>{{$item.title}}</p>
+									</a>
+								{{/foreach}}
+								</div>
+								<ul class="news-list">
+									{{data name="H5平台资讯新闻"}}
+									{{foreach from=$DATA['H5平台资讯新闻'].list item=item}}
+									<li><a href="{{$item.artlink}}" target="_blank">· {{$item.title}}</a></li>
+									{{/foreach}}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="h5/pc2018/footer.html"}}
+	</div>
+	<script> var navactive = '6'; </script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc2018/main.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

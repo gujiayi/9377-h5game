@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="frontend" content="Jinlian">
+    <title>9377 H5游戏</title>
+    <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/swiper.min.css?{{$CONFIG.build}}"/>
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/wap2018/style.css?{{$CONFIG.build}}" />
+    <script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/adaptive.js"></script>
+    <script type="text/javascript">
+        window['adaptive'].desinWidth = 1242;
+        window['adaptive'].baseFont = 36;
+        window['adaptive'].maxWidth = 640;
+        window['adaptive'].scaleType = 3;
+        window['adaptive'].init();
+    </script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/wap2018/h5_top.html"}}
+		<!-- game -->
+		<div class="game-list">
+			{{data name="游戏列表"}}
+			<ul>
+				{{foreach from=$DATA['游戏列表']['list'] item=item}}
+				<li>
+					<a class="game-icon" href="javascript:;"><img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png" alt="" title="" /></a>
+					<p class="game-tit">{{$item.CONFIG.alias_name}}</p>
+					<p class="game-txt">{{$item.SHORT_DESCRIPTION}}</p>
+					<a class="all-btn" href="{{$CONFIG.app_url}}/h5/game_login.php?gid={{$item.ID}}&sid=1">开始</a>
+				</li>
+				{{/foreach}}
+			</ul>
+		</div>
+	</div>
+    <script> var menuID = 0; </script>
+	{{include file="h5/wap2018/h5_footer.html"}}
+
+	<script> 
+		if ($_GET['type'] != 'mobile' && window.name != 'gameIframe') {
+			if(!/(mobile|ipad|iphone|android|\s+adr\s+)/i.test(navigator.userAgent)){window.location.href = 'http://h5.9377.com/pc_index.html';} 
+		}
+	</script>
+</body>
+</html>

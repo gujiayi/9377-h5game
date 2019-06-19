@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="baidu-site-verification" content="l18xwLxEKU" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>"{{$q}}"相关搜索结果_9377 H5游戏</title>
+	<meta name="keywords" content="{{$q}}" />
+	<meta name="description" content="{{$q}}相关搜索结果_937H5游戏" />
+	<meta name="frontend" content="jinlian">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/search_page.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="/header.html"}}
+		<div class="g-container">
+			<div class="g-main fix">
+				<!-- 右侧栏 -->
+				<div class="search-slider fr">
+					<!-- 热门活动 -->
+					<div class="search-hot laybox">
+						<h3 class="search-tit"><span>热门活动</span><i class="s-icon hot-top"></i></h3>
+						{{data name="搜索页热门活动文章调用"}}
+						<ul class="search-hot-list">
+                            {{foreach from=$DATA['搜索页热门活动文章调用'].list item=item name="op"}}
+                            <li class="{{if $smarty.foreach.op.index == 0}}sh-1{{elseif $smarty.foreach.op.index == 1}}sh-2{{elseif $smarty.foreach.op.index == 2}}sh-3{{/if}}"><span>{{$smarty.foreach.op.index+1}}</span><a href="{{$item.artlink}}" title="{{$item.title|cn_substr:50}}">{{$item.title|cn_substr:55}}</a></li>
+                            {{/foreach}}
+						</ul>
+					</div>
+<!--					<div class="search-hot laybox">
+						<h3 class="search-tit"><span>热门活动</span><i class="s-icon hot-top"></i></h3>
+						{{data name="热门活动数据块调用"}}
+						<ul class="search-hot-list">
+							{{foreach from=$DATA["热门活动数据块调用"].list item="v" name="op"}}
+							<li class="{{if $smarty.foreach.op.index == 0}}sh-1{{elseif $smarty.foreach.op.index == 1}}sh-2{{elseif $smarty.foreach.op.index == 2}}sh-3{{/if}}">
+								<span>{{$smarty.foreach.op.index+1}}</span><a href="{{$v.url}}">{{$v.title}}</a>
+							</li>
+							{{/foreach}}
+						</ul>
+					</div>
+-->					<!-- 游戏开服表 -->
+					<div class="search-kf laybox">
+						{{data name="搜索页开服时间列表"}}
+						{{$t = $smarty.now|date_format:"%Y-%m-%d"}}
+						{{$today = $t|cat:" "|cat:"00:00:00"}}
+						{{$end = $t|cat:" "|cat:"23:59:59"}}
+						{{$server = $DATA['搜索页开服时间列表'].list}}
+						<!-- 这个判断用于筛选开服时间大于等于今天的服，测试期间可注释 -->
+						{{foreach from=$DATA['搜索页开服时间列表'].list key=k item=v}}
+							{{if $v.SERVER_START_TIME le $end}}
+								{{$a.$k = $v.GAME}}
+							{{/if}}
+						{{/foreach}}
+						<!-- 处理游戏信息 -->
+						{{$game = $a|games_by_system}}
+						<h3 class="search-tit"><span>游戏开服表</span></h3>
+						<div class="rank-kf-list">
+							<div class="rank-kf-tit fix">
+								<span class="kf-tit-name">游戏名称</span>
+								<span class="kf-tit-date">日期</span>
+								<span class="kf-tit-time">时间</span>
+								<span class="kf-tit-zone">区服</span>
+								<span class="kf-tit-down">下载</span>
+							</div>
+							<div class="rank-kf-wrap">
+								<div class="rank-kf-tab" id="rank-kf-tab">
+									<ul>
+										{{foreach from=$game key=k item=v name="list"}}
+										<li>
+											<div class="kf-tab-box clearfix">
+												<span class="kf-tab-name"><a href="{{$v.CONFIG.site}}" target="_blank">{{$v.NAME}}</a>	
+												</span>
+												<span class="kf-tab-date">{{$server.$k.SERVER_START_TIME|substr:'5':'5'}}</span>
+												<span class="kf-tab-time">{{$server.$k.SERVER_START_TIME|substr:'11':'5'}}</span>
+												<span class="kf-tab-zone"><a href="{{$v.CONFIG.site}}" target="_blank">{{$server.$k.SERVER_NAME}}</a></span>
+												{{if $server.$k.GAME.NAME|strstr:'IOS'}}<a class="ikai tab-down" href="{{$v.CONFIG.ios_zb_link_url}}"></a>{{else}}<a class="ikai tab-down" href="{{$v.CONFIG.android_link_url}}"></a>{{/if}}<a class="ikai tab-gift" href="{{$CONFIG.app_url}}/new_gamecard/game_card.php"></a>
+											</div>
+											<p class="kf-tab-line"></p>
+										</li>
+										{{/foreach}}
+									</ul>
+								</div>
+							</div>
+							<div class="kf-tab-page">
+								<span id="current_game_page" class="pageState"></span>
+								<a onclick="_switch('left')" class="prev">&lt;</a><a onclick="_switch('right')" class="next">&gt;</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 主体内容 -->
+				<div class="search-main fl">
+					{{if !empty($data.games.data)}}
+						<!-- 先处理游戏信息数组,过滤掉分包什么乱七八糟的 -->
+						{{foreach from=$data.games.data key=k item="item"}}
+							{{$tmp.$k = $item}}							
+						{{/foreach}}
+						{{$s_game = $tmp|games_by_system}}
+						{{$num = $s_game|count}}
+					{{/if}}
+					<div class="search-game laybox">
+						<h4 class="search-game-tit">
+							“<font class="orange_col">{{$q}}</font>”的搜索结果：共搜索到{{if !empty($s_game )}}<a href="#games"><font class="orange_col">{{$num|intval}}</font></a>款相关游戏和{{/if}}<a href="#articles"><font class="orange_col"> {{$data.articles.total|intval}} </font></a>篇相关资讯
+						</h4>
+						{{if !empty($s_game)}}
+                		{{foreach from=$s_game item="item"}}
+						<div class="search-game-list fix">
+							<div class="search-game-img fl">
+								<a href="{{$item.CONFIG['site']}}">
+									{{data name="292*209游戏{{$item.ALIAS}}"}}
+									{{if {{$DATA["292*209游戏{{$item.ALIAS}}"]}} == ''}}
+									<img src="" _src="{{$CONFIG.resource}}/images/2016/search_page/games.jpg?{{$CONFIG.build}}" alt="" title="" width="292" height="209" class="lazy-load"/>
+									{{else}}
+									{{$DATA["292*209游戏{{$item.ALIAS}}"]}}
+									{{/if}}
+								</a>
+							</div>
+							<div class="search-game-con fr">
+								<div class="game-title">
+									<a class="game-name" href="{{$item.CONFIG['site']}}" target="_blank"><font class="red"></font>{{$item.NAME}}</a>
+									<span class="title-guide">
+										<a href="{{$CONFIG.app_url}}/new_gamecard/game_card.php" target="_blank" class="title-guide-getcard s-icon">礼包领取</a>
+										<a href="{{$item.CONFIG['site']}}" class="title-guide-website s-icon" target="_blank">进入官网</a>
+									</span>
+								</div>
+								<p class="search-game-type">游戏类型：{{$item.TYPE}} </p>
+								<div class="search-share fix">
+									{{if $item.CONFIG.android_link_url || $item.CONFIG.ios_zb_link_url || $item.CONFIG.ios_yy_link_url}}
+									<div class="search-wechat fr">
+										{{data name="82*82游戏{{$item.ALIAS}}"}}
+										{{if {{$DATA["82*82游戏{{$item.ALIAS}}"]}} == ''}}
+										<img src="" _src="{{$CONFIG.resource}}/images/2016/search_page/wechat.jpg?{{$CONFIG.build}}" alt="" title="" width="82" height="82" class="lazy-load"/>
+										{{else}}
+										{{$DATA["82*82游戏{{$item.ALIAS}}"]}}
+										{{/if}}
+										<p>扫一扫下载游戏</p>
+									</div>
+									{{else}}
+									<div class="search-wechat">
+										{{data name="82*82游戏{{$item.ALIAS}}"}}
+										{{if {{$DATA["82*82游戏{{$item.ALIAS}}"]}} == ''}}
+										<img src="" _src="{{$CONFIG.resource}}/images/2016/search_page/wechat.jpg?{{$CONFIG.build}}" alt="" title="" width="82" height="82" class="lazy-load"/>
+										{{else}}
+										{{$DATA["82*82游戏{{$item.ALIAS}}"]}}
+										{{/if}}
+										<p>扫一扫下载游戏</p>
+									</div>
+									{{/if}}
+									<div class="search-down">
+									{{if !empty($item.CONFIG.android_link_url) && !empty($item.CONFIG.ios_zb_link_url)}}
+										<a class="search-android" href="{{$item.CONFIG.android_link_url}}"><i class="s-icon"></i>安卓下载</a>
+										<a class="search-ios" href="{{$item.CONFIG.ios_zb_link_url}}" target="_blank"><i class="s-icon"></i>App Store下载</a>
+									{{elseif !empty($item.CONFIG.android_link_url) && !empty($item.CONFIG.ios_yy_link_url)}}
+										<a class="search-android" href="{{$item.CONFIG.android_link_url}}"><i class="s-icon"></i>安卓下载</a>
+										<a class="search-ios" href="{{$item.CONFIG.ios_yy_link_url}}" target="_blank"><i class="s-icon"></i>App Store下载</a>
+									{{elseif !empty($item.CONFIG.android_link_url)}}
+										<a class="search-android" href="{{$item.CONFIG.android_link_url}}"><i class="s-icon"></i>安卓下载</a>
+									{{elseif !empty($item.CONFIG.ios_zb_link_url)}}
+										<a class="search-ios" href="{{$item.CONFIG.ios_zb_link_url}}" target="_blank"><i class="s-icon"></i>App Store下载</a>
+									{{elseif !empty($item.CONFIG.ios_yy_link_url)}}
+										<a class="search-ios" href="{{$item.CONFIG.ios_yy_link_url}}" target="_blank"><i class="s-icon"></i>App Store下载</a>
+									{{else}}
+									<!-- 有些游戏是没有下载链接的 -->
+									{{/if}}
+									</div>
+								</div>
+							</div>
+						</div>
+						{{/foreach}}
+						{{/if}}
+					</div>
+					
+					{{if !empty($data.articles.data)}}
+					{{foreach from=$data.articles.data item=item}}
+					<div class="search-article laybox">
+						<h2 class="article-tit">
+							<a href="{{$item.artlink}}" target="_blank">{{$item.title}}</a>
+						</h2>
+						<div class="article-tips">
+							<span class="author"><em class="s-icon"></em>作者：{{if $item.author}}{{$item.author}}{{else}}9377平台{{/if}}</span><span class="time"><em class="s-icon"></em>时间：{{$item.adddate|date_format:'%Y-%m-%d'}}</span>
+						</div>
+						<p class="article-txt">
+							<a href="{{$item.artlink}}" target="_blank">{{$item.description}}</a>
+						</p>
+						<div class="article-more"><a href="{{$item.artlink}}" target="_blank">点击阅读</a></div>
+					</div>
+					{{/foreach}}
+					{{/if}}
+					
+					<div class="article-page">
+						{{$data.articles.pages}}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="/footer.html"}}
+	</div>
+	<script type="text/javascript">var navactive = '9';</script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2016/main.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2016/game_kf.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

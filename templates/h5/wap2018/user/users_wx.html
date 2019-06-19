@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="frontend" content="Jinlian">
+    <title>用户中心-关注微信</title>
+    <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/swiper.min.css?{{$CONFIG.build}}"/>
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/wap2018/style.css?{{$CONFIG.build}}1sf" />
+    <script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/adaptive.js"></script>
+    <script type="text/javascript">
+        window['adaptive'].desinWidth = 1242;
+        window['adaptive'].baseFont = 36;
+        window['adaptive'].maxWidth = 1242;
+        window['adaptive'].scaleType = 3;
+        window['adaptive'].init();
+    </script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="user-tit">关注我们</div>
+		{{include file="h5/wap2018/user/users_top.html"}}
+		<!-- 关注我们 -->
+		<div class="wx-box">
+			<div class="wx-img"><img src="{{$CONFIG.resource}}/images/2017/h5/wap2018/code.jpg" alt="" title="" /></div>
+			<div class="wx-tips">
+				<p>长按图片保存二维码</p>
+				<p>关注【9377微游戏】公众号</p>
+				<p>海量礼包等你来拿</p>
+				<p>微信号：gameh9377</p>
+			</div>
+		</div>
+	</div>
+    <script> var menuID = 3; </script>
+	{{include file="h5/wap2018/h5_footer.html"}}
+</body>
+</html>

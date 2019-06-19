@@ -1,0 +1,47 @@
+<div class="us2-index">
+	<div class="section-tit">帐号安全</div>
+	<div class="safe-setting-box">
+		<div class="safe-level">
+			<strong>帐号安全等级： &nbsp;</strong>
+			{{section name="tt" loop=$user.security_per}}
+			<span class="level level-on"></span>
+			{{/section}}
+			{{section name="tt" loop=3-$user.security_per}}
+			<span class="level"></span>
+			{{/section}}
+			<em>&nbsp;&nbsp;安全指数：<em class="c-blue">{{$user.security_level}}</em></em>
+		</div>
+		<div class="safe-item">
+			<i class="u-mibao"></i>
+			<div class="u-tips">
+				<strong class="stit">密保问题{{if !empty($user.ANSWER)}}(已设置){{else}}(未设置){{/if}}</strong>
+				<p>用于忘记密码或帐号被盗时快速重置密码</p>
+			</div>
+			<a href="{{$CONFIG.app_url}}/users/users_index.php?type=3" class="g-btn" target="_blank">设置密保</a>	
+		</div>
+		<div class="safe-item">
+			<i class="u-email"></i>
+			<div class="u-tips">
+				<strong class="stit">密保邮箱{{if !empty($user.EMAIL)}}(已设置){{else}}(未设置){{/if}}</strong>
+				<p>用于忘记密码或帐号被盗时快速重置密码</p>
+			</div>
+			<a href="{{$CONFIG.app_url}}/users/users_index.php?type=0" class="g-btn" target="_blank">设置邮箱</a>	
+		</div>
+		<div class="safe-item">
+			<i class="u-phone"></i>
+			<div class="u-tips">
+				<strong class="stit">手机号码{{if !empty($user.PHONE)}}(已设置){{else}}(未设置){{/if}}</strong>
+				<p>用于密码修改时短信提示和密码遗失时重置密码</p>
+			</div>
+			<a href="{{$CONFIG.app_url}}/users/users_index.php?type=4" class="g-btn" target="_blank">{{if !empty($user.PHONE)}}(重置手机){{else}}(绑定手机){{/if}}</a>	
+		</div>
+		<div class="safe-item">
+			<i class="u-idcard"></i>
+			<div class="u-tips">
+				<strong class="stit">证件信息{{if !empty($user.ID_CARD_NUMBER)}}(已设置){{else}}(未设置){{/if}}</strong>
+				<p>用于帐号防沉迷认证和密码遗失时重置密码</p>
+			</div>
+			<a href="{{$CONFIG.app_url}}/users/users_index.php?type=0" class="g-btn" target="_blank">设置证件</a>	
+		</div>
+	</div>
+</div>

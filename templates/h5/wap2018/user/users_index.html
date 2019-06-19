@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="frontend" content="Jinlian">
+    <title>用户中心</title>
+    <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/swiper.min.css?{{$CONFIG.build}}"/>
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/style.game2.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/wap2018/style.css?{{$CONFIG.build}}" />
+    <script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/adaptive.js"></script>
+    <script type="text/javascript">
+        window['adaptive'].desinWidth = 1242;
+        window['adaptive'].baseFont = 36;
+        window['adaptive'].maxWidth = 1242;
+        window['adaptive'].scaleType = 3;
+        window['adaptive'].init();
+    </script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="user-tit">个人中心</div>
+		{{include file="h5/wap2018/user/users_top.html"}}
+		<div class="my-part">
+			<a class="item" onClick="H9377.enterPD(this)" url="{{$CONFIG.app_url}}/user_phone.php"><i class="myicon sj"></i><div class="mylist">绑定手机</div></a>
+			<a class="item" onClick="H9377.enterPD(this)" url="{{$CONFIG.app_url}}/user_idc.php"><i class="myicon sm"></i><div class="mylist">实名认证</div></a>
+			<a class="item" onClick="H9377.enterPD(this)" url="{{$CONFIG.app_url}}/user_game.php"><i class="myicon yx"></i><div class="mylist">我的游戏</div></a>
+			<a class="item" href="https://tb.53kf.com/code/client/10165082/1" target="_blank"><i class="myicon kf"></i><div class="mylist">在线客服</div></a>
+			<a class="item" href="{{$CONFIG.app_url}}/user_wx.php"><i class="myicon wm"></i><div class="mylist">关注我们</div></a>
+		</div>
+	</div>
+
+
+    <script> var menuID = 3; </script>
+
+	{{include file="h5/wap2018/h5_footer.html"}}
+
+    <script> H9377.xloginPOP = 1;</script>
+	
+</body>
+</html>

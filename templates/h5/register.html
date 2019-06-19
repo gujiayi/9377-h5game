@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台登录</title>
+	<meta name="frontend" content="Robin">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel='stylesheet' href='css/register.css'/>
+    <style>
+     .login-way{
+         display: flex;
+     }   
+    .login-way .line{
+        flex: 1;
+        height:1px;
+        background:#656565;
+        margin:18px 22px 0;
+        /* border-bottom:1px solid #656565; */
+
+    }
+    .login-way .login-hd-tit{
+        line-height:36px;
+        font-size:12px;
+        color:#000;
+    }
+    </style>
+    </head>
+    <body>
+        <div class="mask" id="login-pop">
+             <!-- 选择登录方式 -->
+             <div class="dialog-box mod-login mod-login-module mod-login-ulogin"> 
+                    <div class="login-hd login-way">
+                        <div class="line"></div> 
+                        <div class="login-hd-tit">请选择登录方式</div> 
+                        <div class="line"></div>
+                    </div> 
+                    <div class="login-form"> 
+                        <div class="w-form"> 
+                            <a href="javascript:;" class="btn-submit1" onClick="javascript:H9377.loadLoginMode('onekey');" style='background:#f24767'>快速登录</a> 
+                            <a href="javascript:;" class="btn-submit1" onClick="javascript:H9377.loadLoginMode('phone');" style='background:url("img/referrer.png") #39bbec no-repeat right;background-size:contain'>手机登录</a>  
+                            <a href="javascript:;" class="btn-submit1" onClick="javascript:H9377.loadLoginMode('reg');" style='background: #42e9a4'>账号登录</a> 
+                        </div> 
+                    </div> 
+                </div>
+            <!-- 手机注册 -->
+            <div class="dialog-box mod-login mod-login-module mod-reg-phone none"> 
+                <div class="login-hd tc">
+                    <div class="login-hd-tit">手机注册</div> 
+                    <a href="javascript:H9377.loadLoginMode('select');" class="icon-back"></a>
+                </div>
+                 <div class="login-form"> 
+                    <div class="w-form"> 
+                        <div class="w-item"> <i class="icon-mobile" ></i> <input name="cellphone" type="phone" placeholder="请输入您的手机号码"> </div> 
+                        <div class="w-item-wp"> 
+                            <div class="w-item " > <i class="icon-email" ></i> <input name="captcha" type="text" placeholder="请输入验证码"> </div> 
+                            <button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this);">发送验证码</button> 
+                        </div> 
+                        <div class="w-item-wp"> 
+                            <div class="w-item"> <i class="icon-lock" ></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+                            <i class='icon-password' onClick="H9377.openPassword(this);" ></i>
+                        </div>
+                        <div class="login-fun"><input type="checkbox" name="terms" checked> <a href="http://www.9377.com/yhxy.html" target="_blank">我同意“服务条款”和“隐私条约”</a></div>
+                        <a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'phone','terms')">注册并登录</a> 
+                    </div> 
+                </div> 
+                <ul class="login-group-tool"> 
+                    <li style='float: right;'><a href="javascript:H9377.loadLoginMode('reg');">已有账号</a></li> 
+                </ul> 
+            </div>
+            <!-- 普通注册 -->
+            <div class="dialog-box mod-login mod-login-module mod-reg-pub none"> 
+                <div class="login-hd tc">
+                    <div class="login-hd-tit">账号注册</div> 
+                    <a href="javascript:H9377.loadLoginMode('select');" class="icon-back" ></a>
+                </div>
+                <div class="login-form"> 
+                    <div class="w-form"> 
+                        <div class="w-item"> <i class="icon-user" ></i> <input name="username" type="text" placeholder="请输入账号"> </div> 
+                        <div class="w-item-wp"> 
+                            <div class="w-item"> <i class="icon-lock" ></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+                            <i class='icon-password' onClick="H9377.openPassword(this);" ></i>
+                        </div> 
+                        <a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'reg')">注 册</a> 
+                    </div> 
+                </div> 
+                <ul class="login-group-tool"> 
+                    <li style='width:40%'><a href="javascript:H9377.loadLoginMode('select');">其他方式登录</a></li> 
+                    <li style='float:right'><a href="javascript:H9377.loadLoginMode('password');">忘记密码？</a></li> 
+                </ul> 
+            </div>
+            <!-- 一键注册 -->
+            <div class="dialog-box mod-login mod-login-module mod-reg-onekey none"> 
+                <div class="login-hd tc">
+                    <div class="login-hd-tit">快速注册</div> 
+                    <a href="javascript:H9377.loadLoginMode('select');" class="icon-back" ></a>
+                </div>
+                <div class="login-form"> 
+                    <div class="w-form "> 
+                        <div class="w-item"> <i class="icon-user" '></i> <input name="username" readonly type="text" placeholder="请输入账号"  onClick="H9377.dialog('当前账号为自动生成<br>无法修改')"> </div> 
+                        <div class="w-item"> <i class="icon-lock" ></i> <input name="password" type="text" placeholder="请输入密码"> </div> 
+                        <a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'onekey')">进入游戏</a> 
+                    </div> 
+                </div> 
+                <ul class="login-group-tool"> 
+                    <li><a href="javascript:H9377.loadLoginMode('phone');">手机号登录</a></li> 
+                    <li><a href="javascript:H9377.loadLoginMode('reg');">账号注册</a></li> 
+                    <li><a href="javascript:H9377.loadLoginMode('password');">忘记密码？</a></li> 
+                </ul> 
+            </div>
+            <!-- 一键登录，第二次登录-->
+            <div class="dialog-box mod-login mod-login-module mod-reg-onekey-login none"> 
+                <div class="login-hd tc">
+                     <div class="login-hd-tit">提示</div> 
+                    <a href="javascript:;" class="icon-back" style='position:absolute;left:10px;top:18px'></a>
+                    </div>
+                <div class="accinfo">
+                    你的<span class="aitem">账号：qy***</span>与<span class="aitem">密码：123456789</span>已截图至您手机内，建议进入后尽快绑定手机信息
+                </div>
+                <div class="login-btn">
+                    <a href="javascript:;" class="btn-reg" onClick="javascript:H9377.loadLoginMode('reg');">账号登录</a>
+                    <a href="javascript:;" class="btn-enter" >快速游戏</a>
+                </div>
+                <div class="login-form"> 
+                    <input name="username" disabled="disabled" type="hidden" >
+                    <input name="password" disabled="disabled" type="hidden" >
+                </div> 
+            </div>
+        <!-- 忘记密码-->    
+        <div class="dialog-box mod-login mod-login-module mod-reg-password none"> 
+            <div class="login-hd tc">
+                <div class="login-hd-tit">忘记密码</div> 
+                <a href="javascript:H9377.loadLoginMode();" class="icon-back"></a>
+            </div>
+                <div class="login-form"> 
+                <div class="w-form"> 
+                    <div class="w-item"> <i class="icon-mobile" ></i> <input name="cellphone" type="phone" placeholder="请输入您的手机号码"> </div> 
+                    <div class="w-item-wp"> 
+                        <div class="w-item " > <i class="icon-email" ></i> <input name="captcha" type="text" placeholder="请输入验证码"> </div> 
+                        <button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this);">发送验证码</button> 
+                    </div> 
+                    <a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'phone','terms')">验证身份</a> 
+                    <div class="login-fun"><i style='color:#f24767 ;margin-right:4px;'>*</i>如未绑定手机号，请<a href="javascript:;" style='color:#5186f0' onclick="H9377.dialogBox('QQ:2850907640',function(){},'请联系客服')" >联系客服</a>找加密码</div>
+                </div> 
+            </div> 
+
+        </div>
+       
+</body>
+</html>
+<script src='js/zepto.min.js'></script>
+<script src='js/main.game2.js'></script>
+<script>
+	function thirdLogin(type){
+		try {
+			if (type == 'wx') {
+				window.AndroidUtils.WXLogin();
+			}else if (type == 'qq'){
+				window.AndroidUtils.QQLogin();
+			}
+		} catch(e) {
+			console.log(e);
+		}
+	}
+</script>

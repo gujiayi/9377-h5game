@@ -1,0 +1,38 @@
+<ul class="wrap-footer">
+	<li><a href="http://h5.9377.com/"><span class="tcps iconf1"></span><p>首页</p></a></li>
+	<li><a href="http://wvw.9377.com/h5/gift.php"><span class="tcps iconf2"></span><p>礼包</p></a></li>
+	<li><a href="http://h5.9377.com/xwzx/"><span class="tcps iconf3"></span><p>攻略</p></a></li>
+	<li><a href="http://wvw.9377.com/h5/user.php"><span class="tcps iconf4"></span><p>个人</p></a></li>
+</ul>
+<div class="mask none" id="dialog"> 
+	<div class="dialog-box"> 
+		<p class="title">提示信息</p> 
+		<div class="info"> <div class="cell">请输入正确帐号</div> </div> 
+		<div class="flex opt"><a href="javascript:;" class="flex-list cancel">确定</a></div> 
+	</div> 
+</div>
+{{include file="h5/login.tpl2.html"}}
+
+<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/swiper.min.js?{{$CONFIG.build}}"></script>
+<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/wap2018/main.js?{{$CONFIG.build}}"></script>
+<script> window['isRefresh'] = true;</script>
+<script type="text/javascript">
+	
+	try {
+		var swiper = new Swiper('.swiper-container', {
+				pagination: '.swiper-pagination',
+				paginationClickable: true,
+				autoplay: 2500,
+				loop: true
+			});
+	} catch(e) {
+		console.log(e);
+	}
+	try {
+		$('.wrap-footer li').eq(menuID).addClass('active');
+	} catch(e) {
+		// statements
+		console.log(e);
+	}
+</script>

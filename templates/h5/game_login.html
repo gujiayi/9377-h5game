@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{$G.CONFIG.alias_name}}_9377{{$G.CONFIG.alias_name}}h5游戏_一起玩更快乐</title>
+    <meta name="keywords" content="{{$G.CONFIG.alias_name}},9377{{$G.CONFIG.alias_name}}" />
+    <meta name="description" content="9377游戏平台{{$G.CONFIG.alias_name}}，{{$G.CONFIG.alias_name}}h5游戏，在线手机网页游戏，无需下载，快速玩页戏。9377手游{{$G.CONFIG.alias_name}}，一起玩更快乐。" />
+    <meta content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/game_login.css?{{$CONFIG.build}}" />
+    {{if $G.ID == 715}} <style> .loading { background-image: url('{{$CONFIG.resource}}/images/2017/h5/loading/xkx.jpg?20180423');} </style> {{/if}}
+    <script>document.domain = "9377.com";</script>
+</head>
+<body scroll="no">
+    <div class="loading" id="loading"></div>
+    <iframe scrolling="no" id="ifr" src="{{$url}}" frameborder="0" width="100%" height="100%" {{if $G.ID == '715'}}style="opacity:0;"{{/if}}></iframe>
+    <!-- 浮标 -->
+    <i class="floaticon none" id="floaticon"><img src="{{$CONFIG.resource}}/images/2017/h5/floaticon.png?{{$CONFIG.build}}" width="37" height="37"></i>
+    <!-- 侧边栏 -->
+    <div class="sidebar-wp" id="sidebar-wp">
+        <div class="sidebar" id="sidebar">
+            <div class="header">
+                <div class="player">
+                    <p class="username">帐号：<span id="username"></span></p>
+                    <div class="opt">
+                        <a href="javascript:H9377.modifyPass();" class="btn-modifypass">修改密码</a>
+                        <a href="javascript:H9377.loadLoginMode();" class="btn-changeacc">切换帐号</a>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active"> <i class="icon-hi"></i> <p>联系客服</p> </li>
+                <li> <i class="icon-gift"></i> <p>游戏礼包</p> </li>
+                <li> <i class="icon-game"></i> <p>开服列表</p> </li>
+                <li> <i class="icon-wechat"></i> <p>公众号</p> </li>
+            </ul>
+            <div class="box-wp">
+                <div class="box-item box-item-1">
+                    <p class="txt"><i></i><span>真诚服务 非凡体验</span></p>
+                    <h2>客服中心</h2>
+                    <h6>服务时间：8:00-24:00</h6>
+                    <h5><a href="https://tb.53kf.com/code/client/10165082/1" target="_blank">在线客服</a></h5>
+                    {{if $G.ID == 430}} <h5><a href="mqqwpa://im/chat?chat_type=crm&uin=707038940&version=1&src_type=web&web_src=http:://wpa.b.qq.com" class="tip">玩家QQ群：707038940</a></h5>{{/if}}
+
+                    {{if $G.ID != 430}}
+                    {{if $user.PHONE && $user.BIND_CELLPHONE}}
+                    <p class="tip">绑定手机，领取元宝大礼包</p>
+                    <a href="javascript:H9377.bindPhone();" class="btn-bindphone">绑定手机</a>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                <div class="box-item box-item-2 none">
+                    <ul class="gift-list">
+                        {{data name="礼包列表"}}
+                        {{foreach from=$DATA['礼包列表'].list item=item}}
+                        <li class="flex">
+                            <div class="flex-list">
+                                <p class="tit">{{$item.title}}</p>
+                                <p>礼包内容：{{$item.ext1}}</p>
+                                <div class="proc"><i style="width: {{$item.ext2}}%"></i></div>
+                                <p>礼包剩余：{{$item.ext3}}</p>
+                            </div>
+                            <a href="javascript:H9377.getCard('{{$item.ext4}}', '{{$item.ext5}}', '');" cid="" class="btn-get {{if !empty($item.ext5)}}btn-getBPcard{{/if}}">领号</a>
+                        </li>
+                        {{/foreach}}
+                        {{data name="系统礼包列表"}}
+                        {{foreach from=$DATA['系统礼包列表'].list item=item}}
+                        <li class="flex">
+                            <div class="flex-list">
+                                <p class="tit">{{$item.name}}</p>
+                                <div class="fix-txt">礼包内容：{{$item.description}}</div>
+                                <div class="proc">
+                                {{if $item.surplus && $item.total}}
+                                <i style="width: {{$item.surplus/$item.total*100}}%"></i>
+                                {{else}}
+                                <i style="width: 0%"></i>
+                                {{/if}}
+                                </div>
+                                <p>礼包剩余：{{if $item.surplus}}{{$item.surplus}}{{else}}0{{/if}}</p>
+                            </div>
+                            <a href="javascript:H9377.getCard('', '{{$item.CONFIG.bindingMobile}}', '{{$item.id}}');" class="btn-get {{if $item.CONFIG.bindingMobile == 1}}btn-getBPcard{{/if}}">领号</a>
+                        </li>
+                        {{/foreach}}
+                        {{if $DATA['礼包列表'] == '' && $DATA['系统礼包列表'] == ''}}
+                        <div class="nodata">敬请期待</div>
+                        {{/if}}
+                    </ul>
+                </div>
+                <div class="box-item box-item-3 none">
+                    {{data name="开服表"}}
+                    {{if !empty($DATA['开服表'].list)}}
+                    <ul class="server-list">
+                        <li class="hd">
+                            <span>区服</span>
+                            <span>日期</span>
+                            <span>时间</span>
+                            <span>状态</span>
+                        </li>
+                        {{foreach from=$DATA['开服表'].list item=item}}
+                        <li>
+                            <span class="name">{{$item.SERVER_NAME}}</span>
+                            <span>{{$item.SERVER_START_TIME|mb_substr:5:5}}</span>
+                            <span>{{$item.SERVER_START_TIME|mb_substr:11:5}}</span>
+                            {{if $item.STATE == 1 && $item.SID==$item.GAME.NEW_SERVER}}
+                            <span class="s-hot">火爆</span>
+                            {{elseif $item.STATE == -1}}
+                            <span class="s-ready">即将开启</span>
+                            {{else}}
+                            <span class="s-smooth">顺畅</span>
+                            {{/if}}
+                        </li>
+                        {{/foreach}}
+                    </ul>
+                    {{else}}
+                    <div class="nodata">暂无信息</div>
+                    {{/if}}
+                </div>
+                <div class="box-item box-item-4 none">
+                    <h2>关注微信公众号</h2>
+                    <p>防止记录丢失带来的不必要的损失</p>
+                    <img src="{{$CONFIG.resource}}/images/2017/h5/game_qr.jpg?{{$CONFIG.build}}" alt="">
+                    <p>关注公众号，领取游戏礼包</p>
+                </div>
+            </div>
+        </div>
+        <i class="sidebar-close" id="sidebar-close"></i>
+    </div>
+    <div class="pay-wp"> 
+        <a href="javascript:closePayWindows();" class="pay-close icon-close"></a>
+        <iframe src="" frameborder="0" id="iframe-pay"></iframe> 
+    </div>
+    <div class="pay-confirm-wp none">
+        <div class="pay-confirm-box">
+            <a href="javascript:;" class="close"></a>
+            <h3 class="hd">收银台</h3>
+            <ul class="bd">
+                <li>商品名：元宝</li>
+                <li>应付款：888.00元</li>  
+            </ul>
+            <a href="javascript:;" class="topay">立即支付：888.00元</a>
+        </div>
+    </div>
+    <div class="pay-qr-wp none">
+        <div class="pay-qr-box">
+            <a href="javascript:;" class="close"></a>
+            <img src="" class="qr">
+        </div>
+    </div>
+    <!-- 游客注册 -->
+    <div class="mask none" id="mask-vreg">
+        <div class="dialog-box dialog-vreg">
+            <i class="close" onClick="H9377.maskClose(this)"></i>
+            <div class="txt" id="txt-isopt"> 您现在处于游客模式，为保障您的正常游戏体验及账号信息，请注册正式账号，祝您游戏愉快！ </div>
+            <div class="txt none" id="txt-ispay"> 您现在处于游客模式，为保障您的充值信息，请进行账号注册，方可进行充值 </div>
+            <form action="" class="w-form mod-login-module">
+                <div class="w-item"> <input name="username" type="text" placeholder="请输入账号"> </div>
+                <div class="w-item"> <input name="password" type="password" placeholder="请输入密码"> </div>
+                <div class="w-item"> <input name="password2" type="password" placeholder="再次输入密码"> </div>
+                <a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'reg','',1, 1)"></a>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{$CONFIG.resource}}/js/2017/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+    <script type="text/javascript">
+		var footer = 0;
+        C9377.build = '{{$CONFIG.build}}';
+        C9377.gid = '{{$G.ID}}';
+		C9377.gname = '{{$G.CONFIG.alias_name}}';
+		C9377.app_url = C9377.app_url.replace(/:\/\/[^\/]+\//, '://'+ window.location.hostname +'/');
+	</script>
+    <script src="{{$CONFIG.resource}}/js/2017/h5/main.js?{{$CONFIG.build}}"></script>
+    <script src="{{$CONFIG.resource}}/js/2017/h5/game_login.js?{{$CONFIG.build}}"></script>
+    {{if $user.REFERER == 'tx_ly1' && ($G.ID == 409 || $G.ID == 424)}}
+    <script>
+        var refererCardCookie = getCookie('refererCardCookie'+C9377.gid),
+            refererUser = getCookie('login_name');
+        if (refererCardCookie != refererUser) {
+            if (C9377.gid == 409) {
+                setTimeout(function(){H9377.getCard('','',3286); }, 1000);
+            }
+            if (C9377.gid == 424) {
+                setTimeout(function(){H9377.getCard('','',3289); }, 1000);
+            }
+        }
+        C9377.setcookie('refererCardCookie'+C9377.gid,refererUser, (new Date('2020-12-30 08:00:00')/1000))
+    </script>
+    {{/if}}
+
+    {{if $FAKE}}
+    <script>
+        C9377.fake = 1;
+        setInterval(function(){
+            $('#mask-vreg, #txt-isopt').show();
+            $('#txt-ispay').hide();
+        }, 5*60*1000);
+    </script>
+    {{/if}}
+</body>
+</html>

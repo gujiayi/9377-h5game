@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>h5游戏礼包中心_H5游戏礼包大全_html5游戏礼包领取_9377h5游戏平台</title>
+	<meta name="keyword" content="h5游戏礼包中心,html5游戏礼包,H5游戏礼包大全,html5游戏礼包领取,H5游戏新手礼包,h5网页游戏,H5游戏平台">
+	<meta name="description" content="9377h5游戏礼包中心,拥有海量免费的H5游戏礼包,提供特权礼包、激活码、新手卡、新服礼包、礼包兑换码等礼包，任君选择。玩h5游来9377,一起玩更快乐。">
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc2018/global.css?{{$CONFIG.build}}11" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc2018/gift.css?{{$CONFIG.build}}x1xx" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc2018/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/pc2018/header.html"}}
+		<div class="g-container gift-show">
+			<div class="nav"> <div class="g-main"> 礼包中心>礼包详情 </div> </div>
+			<div class="g-main">
+				<div class="gift-article-top laybox">
+					<div class="img"><img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$new_card.G.ALIAS}}.png?{{$CONFIG.build}}" width="122" alt=""></div>
+					<div class="info">{{data name="手机礼包标识{{$new_card.id}}"}}{{data name="固定礼包码{{$new_card.id}}"}}
+						<div class="name">{{$new_card.G.NAME}} {{$new_card.name}}
+							<div class="opt">
+								<a href="{{$CONFIG.app_url}}/users/users_index.php?type=2" class="opt1">我的礼包</a>
+								<a href="{{$CONFIG.app_url}}/game.php?gid={{$new_card.G.ID}}&sid=new" class="opt2">游戏试玩</a>
+								<a href="{{$new_card.G.CONFIG.download_url}}" class="opt3">下载游戏</a>
+							</div>
+						</div>
+						<div class="progress-box">
+						剩余情况：
+						{{if $new_card.surplus == 0 && $new_card.total == 0}}
+							<span class="progress"><i style="width:99%"></i></span> 
+							<em>9999/10000</em>
+						{{else}}
+							<span class="progress"><i style="width:{{(($new_card.surplus/$new_card.total)|number_format:3)*100}}%"></i></span> 
+							<em>{{$new_card.surplus}}/{{$new_card.total}}</em>
+						{{/if}}
+						</div>
+						<div class="xopt">
+							<a href="javascript:;" onClick='PCGetCard(this, "{{$new_card.id}}", "{{$sign}}", "{{$DATA["固定礼包码{{$new_card.id}}"]}}", "{{$DATA["手机礼包标识{{$new_card.id}}"]}}")' class="g-btn">领取礼包</a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="g-row fix">
+					<div class="fl">
+						<div class="gift-art-wp">
+							<div class="g-tit"> <i class="icon icon-gift"></i> <span>礼包详情</span> </div>
+							<div class="gift-art-box laybox">
+								<p>发放日期：{{$new_card.CONFIG.start_day}}</p>
+								<p>有效期至：{{$new_card.CONFIG.end_day}}</p>
+								<p>礼包物品：</p>
+								<div class="desc">{{$new_card.description}}</div>
+							</div>
+						</div>
+						<div class="g-row fix">
+							<div class="fl">
+								<div class="g-tit"> <i class="icon icon-fire"></i> <span>热门游戏榜</span> </div>
+								<div class="rank-wp laybox">
+									<ul class="rank-list">
+										{{data name="H5游戏排行榜1"}}
+										{{foreach from=$DATA['H5游戏排行榜1'].list item=item name=rank1}}
+										{{if $smarty.foreach.rank1.index >= 5}}{{break}}{{/if}}
+										<li {{if $smarty.foreach.rank1.first}}class="active"{{/if}}>
+											{{if $smarty.foreach.rank1.index==0}} <em class="rank-1">
+											{{elseif $smarty.foreach.rank1.index==1}} <em class="rank-2">
+											{{elseif $smarty.foreach.rank1.index==2}} <em class="rank-3">
+											{{else}} <em> {{/if}}
+											{{$smarty.foreach.rank1.index+1}}</em>
+											<p class="gname">{{$item.CONFIG.alias_name}}</p>
+											<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png?{{$CONFIG.build}}" width="68" class="img">
+											<div class="info">
+												<p class="name">{{$item.CONFIG.alias_name}}</p>
+												<p>{{$item.TYPE}}</p>
+											</div>
+											<p class="xinfo">{{$item.TYPE}}</p>
+											<div class="opt">
+												<a href="{{$CONFIG.app_url}}/game_card.php" title="礼包" class="gift"></a>
+												<a href="{{$item.CONFIG.download_url}}" title="下载" class="down"></a>
+											</div>
+										</li>
+										{{/foreach}}
+									</ul>
+								</div>
+							</div>
+							<div class="fr">
+								<div class="g-tit"> <i class="icon icon-crown"></i> <span>推荐礼包</span> </div>
+								<div class="gift-box laybox">
+									{{data name="H5推荐礼包"}}
+									<ul class="gift-list">
+										{{foreach from=$DATA['H5推荐礼包'].list item=item name=gift}}
+										<li>
+											<div class="img"><img _src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.G.ALIAS}}.png?{{$CONFIG.build}}" width="68" class="lazy-load"><i class="icon-rgift"></i></div>
+											<div class="info">
+												<a href="{{$CONFIG.app_url}}/game_card.php?card_type={{$item.id}}" class="name">传奇来了</a>
+												<div class="con">{{$item.name}}</div>
+												<a href="{{$CONFIG.app_url}}/game_card.php?game={{$item.game}}&card_type={{$item.id}}" class="g-btn-s btn-get">领号</a>
+											</div>
+										</li>
+										{{/foreach}}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="fr">
+						<div class="rob-wp">
+							<div class="g-tit"> <i class="icon icon-light"></i> <span>大家都在抢</span> </div>
+							<ul class="rob-list laybox" id="rob-list">
+								<!-- <li>
+									<div class="item">
+										<img src="http://cdnsource.9377.com/images/2017/h5/icon/cqll.png?20180226150217" width="68" alt="">
+										<div class="info"> <p>18****11刚刚领取</p> <p>御迷狂欢礼包</p> </div>
+										<a href="#" class="btn-rob">抢</a>
+									</div>
+								</li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="h5/pc2018/footer.html"}}
+	</div>
+	<script type="text/javascript"> var sign = '{{$sign}}'; var card_type = '{{$new_card.id}}'; var game_alias = '{{$new_card.G.ALIAS}}'; var navactive = '3'; </script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/ZeroClipboard.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc2018/main.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

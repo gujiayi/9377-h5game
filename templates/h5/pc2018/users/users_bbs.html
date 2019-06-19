@@ -1,0 +1,33 @@
+<div class="section-tit">激活论坛</div>
+<form action="/users/users_do.php" method="post" >
+	{{if $gourl}} <input name="gourl" value="{{$gourl}}" type="hidden" /> {{/if}}
+
+	{{if $user.BBS_NAME}}
+	<br><br>
+	<div class="w-item">
+		<label class="w-label">论坛昵称：</label> 
+		<span id="{{$user.BBS_ID}}">{{$user.BBS_NAME}}</span>
+		<a href="http://bbs.9377.cn" target="_blank" class="c-blue">进入论坛</a>
+	</div>
+	{{else}}
+	<div class="w-item">
+		<label class="w-label">账号：</label> 
+		<div class="w-div">{{$user.LOGIN_ACCOUNT}}</div>
+	</div>
+	<div class="w-item">
+		<label class="w-label">论坛昵称：</label> 
+		<input type="text" class="w-input" value="{{$smarty.session.openid.nickname}}" name="bbs_name" id="bbs_name" required>
+		<span> <em class="c-red">*</em>论坛显示的名称，激活后不可修改.</span>
+	</div>
+	<div class="w-item">
+		<label class="w-label">&nbsp;</label> 
+		<input name="do" value="bbs_up" type="hidden" />
+		<input name="web" value="1" type="hidden" />
+		<input type="submit" class="g-btn" value="激活论坛">
+	</div>
+	<div class="w-item">
+		<label class="w-label">&nbsp;</label> 
+		<div class="w-div" id="bbs-tip"></div>
+	</div>
+	{{/if}}
+</form>

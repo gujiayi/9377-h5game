@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="frontend" content="Jinlian">
+    <title>用户中心-我的游戏</title>
+    <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/wap2018/style.css?{{$CONFIG.build}}" />
+    <script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/adaptive.js"></script>
+    <script type="text/javascript">
+        window['adaptive'].desinWidth = 1242;
+        window['adaptive'].baseFont = 36;
+        window['adaptive'].maxWidth = 1242;
+        window['adaptive'].scaleType = 3;
+        window['adaptive'].init();
+    </script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="user-tit">我的游戏</div>
+		{{include file="h5/wap2018/user/users_top.html"}}
+		<!-- 玩过的游戏 -->
+		<ul class="list-play">
+			{{foreach from=$last_games item=item name=glist}}
+			{{if $smarty.foreach.glist.index > 5}}{{break}}{{/if}}
+			<li class="flex">
+				<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png" alt="" title="" />
+				<div class="info flex-list"> <h2>{{$item.NAME}}</h2> <p>最近玩过：<a href="{{$item.url}}">{{$item.name}}</a></p> </div>
+				<div class="opt"> <a href="{{$item.url}}" class="go">开始</a> <a href="{{$CONFIG.app_url}}/gift.php" class="lb">领取礼包</a> </div>
+			</li>
+			{{/foreach}}
+		</ul>
+	</div>
+    <script> var menuID = 3; </script>
+	{{include file="h5/wap2018/h5_footer.html"}}
+    <script> if (!getCookie('login_name')) { window.history.go(-1);} </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+</head>
+<body>
+	<div class="wrapper">
+		<header class="flex">
+			<img src="http://bbs.9377.com/uc_server/images/noavatar_big.gif" class="avatar">
+			<div class="nick-name flex-list"></div>
+			<div class="search flex-list">
+				<form action="">
+					<input type="text" class="" placeholder="蜀山封魔录">
+					<a href="javascript:;" class="s-submit icon-search"></a>
+					<input type="submit" value="" class="none">
+				</form>
+			</div>
+			<a href="javascript:;" class="btn-focus" id="btn-focus">关注</a>
+		</header>
+		<div class="slidebox" id="slideBox">
+			<div class="bd">
+				{{data name="H5首页幻灯"}}
+				<ul>
+					{{foreach from=$DATA["H5首页幻灯"].list item="v"}}
+					<li> <a href="{{$v.url}}"><img src="{{$v.thumb}}" alt="{{$v.title}}"></a> </li>
+					{{/foreach}}
+				</ul>
+			</div>
+			<div class="hd"><ul></ul></div>
+		</div>
+		<div class="wrap">
+			<div class="played">
+
+			</div>
+			<ul class="flex nav" id="Js-nav">
+				<li class="flex-list active"><a href="#">热门</a></li>
+				<li class="flex-list"><a href="#">新游推荐<i class="dot"></i></a></a></li>
+				<li class="flex-list"><a href="#">公告<i class="dot"></i></a></li>
+				<li class="flex-list"><a href="#">新开服<i class="dot"></i></a></li>
+			</ul>
+			<div class="item-box" id="Js-navitem-box">
+				<div class="Js-navitem hot-list">
+					{{data name="H5首页热门游戏"}}
+					<ul>
+						{{foreach from=$DATA['H5首页热门游戏'].list item=item}}
+						<li>
+							{{data name="{{$item.ALIAS}} 人数"}}
+							{{data name="H5首页热门游戏图{{$item.ALIAS}}"}}
+							<a href="http://wvw.9377.com/h5/gameinfo.php?gid={{$item.ID}}" target="_blank">
+								{{$DATA["H5首页热门游戏图{{$item.ALIAS}}"]|replace:'src=':'class="" style="" src='}}
+								<div class="flex">
+									<div class="flex-list">
+										<p class="name">{{$item.NAME}} <span class="tags-grn">独家</span> </p>
+										<p>{{$DATA["{{$item.ALIAS}} 人数"]}}人玩过</p>
+									</div>
+									<span class="btn">进入</span>
+								</div>
+							</a>
+						</li>
+						{{/foreach}}
+					</ul>
+				</div>
+				<div class="Js-navitem game-list none">
+					{{data name="H5新游推荐"}}
+					<ul>
+
+						{{foreach from=$DATA['H5新游推荐'].list item=item}}
+						<li class="flex">
+							<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png">
+							<div class="flex flex-list flex-v flex-x-between">
+								<p class="flex"><strong>{{$item.NAME}} <!-- <span class="tags-grn">独家</span>  --><span class="tags-ylw">精品</span></strong></p>
+								<p>{{$DATA["火爆游戏介绍{{$item.ALIAS}}"]}}！</p>
+							</div>
+							<a href="http://wvw.9377.com/h5/gameinfo.php?gid={{$item.ID}}" target="_blank" class="btn">开始游戏</a>
+						</li>
+						{{/foreach}}
+					</ul>
+				</div>
+				<div class="Js-navitem news-list none">
+					{{data name="H5游戏公告"}}
+					<ul>
+						{{foreach from=$DATA['H5游戏公告'].list item=item}}
+						<li class="flex">  <span class="tags-grn">独家</span>  <a href="#" class="flex-list">{{$item.title}}</a> <span>{{$item.pubdate|date_format:'%y-%m-%d'}}</span> </li>
+						{{/foreach}}
+					</ul>
+				</div>
+				<div class="Js-navitem Js-pubtab-wrap server-list none">
+					<ul class="tab flex Js-pubtab">
+						<li class="flex-list active">已开新服</li>
+						<li class="flex-list">新服预告</li>
+					</ul>
+					<div class="server-mod-box game-list Js-tabitem-box">
+						{{data name="H5已开新服"}}
+						<ul class="Js-tabitem server-list-open">
+							{{foreach from=array(0,1,2) item=item key=key1}}
+							{{foreach from=range(0,11) item=item key=key2}}
+							{{assign var="item" value=$DATA['H5已开新服']['list'][$key1 * 12 + $key2]}}
+							{{if !empty($item)}}
+							<li class="flex">
+								<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.GAME.ALIAS}}.png" width="50" height="50">
+								<div class="flex flex-list flex-v flex-x-between"> 
+									<p class="flex"><strong> {{$item.GAME.CONFIG.alias_name}}<!-- <span class="tags-grn">独家</span> <span class="tags-ylw">精品</span> --></strong></p>
+									<p class="server">{{$item.SERVER_NAME}}</p>
+								</div>
+								<a href="http://wvw.9377.com/h5/gameinfo.php?gid={{$item.GAME.ID}}" target="_blank" class="btn">开始游戏</a>
+							</li>
+							{{/if}}
+							{{/foreach}}
+							{{/foreach}}
+						</ul>
+						{{data name="H5新服预告"}}
+						<ul class="Js-tabitem server-list-ready none">
+							{{foreach from=array(0,1,2) item=item key=key1}}
+							{{foreach from=range(0,11) item=item key=key2}}
+							{{assign var="item" value=$DATA['H5新服预告']['list'][$key1 * 12 + $key2]}}
+							{{if !empty($item)}}
+							<li class="flex">
+								<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.GAME.ALIAS}}.png" width="50" height="50">
+								<div class="flex flex-list flex-v flex-x-between">
+									<p class="flex"><strong> {{$item.GAME.CONFIG.alias_name}}<!-- <span class="tags-grn">独家</span> <span class="tags-ylw">精品</span> --></strong></p>
+									<p>{{$item.SERVER_NAME}}</p>
+								</div>
+								<span class="time">今日17:30开服</span>
+							</li>
+							{{/if}}
+							{{/foreach}}
+							{{/foreach}}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{include file="h5/footer.html"}}
+</body>
+</html>

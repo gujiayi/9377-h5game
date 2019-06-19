@@ -1,0 +1,49 @@
+<div class="us2-mibao">
+	<form action="/users/users_do.php" method="post">
+		<input name="do" value="pwd_bh" type="hidden" />
+		<input name="web" value="1" type="hidden" />
+		<div class="section-tit">密码保护</div>
+		{{if $user['QUESTION']}}
+		<div class="w-item">
+			<label for="" class="w-label">原密保问题：</label>
+			<div class="w-div">{{$user['QUESTION']}}</div>
+		</div>
+		<div class="w-item">
+			<label for="" class="w-label">原密保答案：</label>
+			<input name="old_answer" type="text" class="w-input">
+		</div>
+		{{/if}}
+		<div class="w-item">
+			<label for="" class="w-label">新密保问题：</label>
+			<select title="密码保护问题" class="w-select-l" name="question" id="question">
+				<option value="">请选择一个问题</option>
+				<option value="我就读的第一所学校的名称？">我就读的第一所学校的名称？</option>
+				<option value="我最喜欢的休闲运动是什么？">我最喜欢的休闲运动是什么？</option>
+				<option value="我最喜欢的运动员是谁？">我最喜欢的运动员是谁？</option>
+				<option value="我最喜欢的物品的名称？">我最喜欢的物品的名称？</option>
+				<option value="我最喜欢的歌曲？">我最喜欢的歌曲？</option>
+				<option value="我最喜欢的食物？">我最喜欢的食物？</option>
+				<option value="我最爱的人的名字？">我最爱的人的名字？</option>
+				<option value="我最爱的电影？">我最爱的电影？</option>
+				<option value="我妈妈的生日？">我妈妈的生日？</option>
+				<option value="我的初恋日期？">我的初恋日期？</option>
+			</select>
+		</div>
+		<div class="w-item">
+			<label for="" class="w-label">新密保答案：</label>
+			<input type="text" class="w-input" name="answer" id="answer">
+		</div>
+		<div class="w-item">
+			<label for="" class="w-label"></label>
+			<input type="submit" value="修改" class="g-btn">
+		</div>
+		<div class="utips">
+			<h4>友情提示</h4>
+			<ul>
+				<li>修改游戏密码，是指根据原密码由您自定义新密码。</li>
+				<li>混合使用数字、大小字母的密码能使您的账号更安全。</li>
+				<li>当您疑似账号异常时，请换一台电脑重新修改游戏密码。</li>
+			</ul>
+		</div>
+	</form>
+</div>

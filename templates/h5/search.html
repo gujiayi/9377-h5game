@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<div class="search">
+				<form action="" class="flex">
+					<input type="text" class="flex-list" placeholder="蜀山封魔录">
+					<a href="javascript:;" class="btn-s-submit s-submit">搜索 <i class="icon-search"></i></a>
+					<input type="submit" value="" class="none">
+				</form>
+			</div>
+		</header>
+		<div class="focus-bar"><div class="tr">共找到{{$data.games.total|intval}}条结果</div></div>
+		<div class="wrap">
+			<div class="item-box">
+				<div class="hot-list">
+					<ul>
+
+						{{if !empty($data.games.data)}}
+						{{foreach from=$data.games.data item="item"}}
+						<li>
+							<img src="http://www.9377.com/images/2017/h5/g.jpg" alt="">
+							<div class="flex">
+								<div class="flex-list">
+									<p class="name">{{$s.SERVER_NAME}}<span class="tags-grn">独家</span></p>
+									<p>1万人玩过</p>
+								</div>
+								<a href="#" class="btn">进入</a>
+							</div>
+						</li>
+						{{/foreach}}
+						{{/if}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{include file="h5/footer.html"}}
+</body>
+</html>

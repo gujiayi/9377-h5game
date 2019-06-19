@@ -1,0 +1,48 @@
+<!--[if lt IE 8]>
+<div class="killie">
+	<div class="main">
+	亲爱的小伙伴，您的浏览器过时啦！为了保障您的信息安全和更好的用户体验，建议您 <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_blank">升级IE浏览器</a>
+	</div>
+</div>
+<![endif]-->
+{{if $smarty.const.DOMAIN_9377}}
+	{{assign var="path" value="" scope=root}}
+{{else}}
+	{{assign var="path" value="/h5" scope=root}}
+{{/if}}
+<div class="top_sub_main">
+	<div class="top_sub_nav clearfix">
+		<div class="sub_nav_right fr">
+			<div class="top_login_tips fl" id="top_login_tips">
+				<a class="t_btn1" href="{{$CONFIG.app_url}}{{$path}}/pc_login.php?ac=login" rel="nofollow"><i class="c_login_icon"></i>登录</a>
+				<a class="t_btn2" href="{{$CONFIG.app_url}}{{$path}}/register.php" rel="nofollow"><i class="c_reg_icon"></i>注册</a>
+			</div>
+			<a href="{{$CONFIG.app_url}}{{$path}}/game_center.php" class="all_games_ico g-allgame-trigger fl" target="_blank" id="all_game_hover">全部游戏<i class="game_list_icon"></i></a>
+		</div>
+		<div class="sub_nav_left fl">
+			<a href="javascript:setHomePage();" rel="nofollow"> <i class="c_home_icon"></i>设为首页</a>
+			<a href="javascript:addToFav();" rel="nofollow"><i class="c_add_icon"></i>加入收藏</a>
+		</div>
+        <!-- 游戏列表弹出 -->
+        <div class="g-allgame-list" id="game_top_glist">
+            <i class="game-top-bg"></i>
+        </div>
+	</div>
+</div>
+<div class="g-header">
+	<div class="g-main fix">
+		<a href="{{$CONFIG.url}}{{$path}}/" title="9377 H5平台" class="g-logo fl"> 9377 H5平台 </a>
+		<div class="search-wp fr">
+			<input type="text" class="search-input" placeholder="决战沙城">
+			<a href="javascript:;" title="点击搜索" class="btn-tosearch"></a>
+		</div>
+		<div class="g-menu fr">
+			<a href="{{$CONFIG.url}}{{$path}}/"><span>首页</span><i></i></a>
+			<a href="{{$CONFIG.app_url}}{{$path}}/game_center.php"><span>游戏中心</span><i></i></a>
+			<a href="{{$CONFIG.app_url}}{{$path}}/users/users_index.php"><span>用户中心</span><i></i></a>
+			<a href="{{$CONFIG.app_url}}{{$path}}/game_card.php"><span>礼包中心</span><i></i></a>
+			<a href="{{$CONFIG.app_url}}{{$path}}/kefu_center.php"><span>客服中心</span><i></i></a>
+			<a href="http://www.9377.com/"><span>网页游戏</span><i></i></a>
+		</div>
+	</div>
+</div>

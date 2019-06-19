@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="frontend" content="Jinlian">
+    <title>9377 H5游戏</title>
+    <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/swiper.min.css?{{$CONFIG.build}}"/>
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/wap2018/style.css?{{$CONFIG.build}}1sf" />
+    <script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/adaptive.js"></script>
+    <script type="text/javascript">
+        window['adaptive'].desinWidth = 1242;
+        window['adaptive'].baseFont = 36;
+        window['adaptive'].maxWidth = 1242;
+        window['adaptive'].scaleType = 3;
+        window['adaptive'].init();
+    </script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="user-tit">个人中心</div>
+		{{include file="h5/wap2018/user/users_top.html"}}
+		{{if $smarty.get.opt == 'reset'}}
+			<!-- 重置手机 -->
+			<div class="my-part2 w-form">
+				<div class="item">
+					<i class="myicon2 sj2"></i>
+					<input class="hidden" type="text" name="cellphone" value="{{$user.PHONE}}" />
+					<div class="mylist"><span class="red">{{$user.PHONE}}</span></div>
+				</div>
+				<div class="item">
+					<i class="myicon2 yzm"></i>
+					<div class="mylist myinput"><input class="input" type="text" name="code" placeholder="请输入图片验证码"/></div>
+					<img onclick="this.src= 'http://wvw.9377.com/code.php?' +Math.random();" src="http://wvw.9377.com/code.php" title="点击更换" class="php-code">
+				</div>
+				<div class="item">
+					<i class="myicon2 dx"></i>
+					<div class="mylist myinput"><input class="input" type="text" name="captcha" placeholder="请输入短信验证码"/> </div>
+					<!-- <a class="get-code" href="javascript:;">获取验证码</a> -->
+					<button class="get-code w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this,'ubphone', 1);">获取验证码</button>
+				</div>
+				<p class="bind-tips"><span class="red">*注</span>：密保手机是用于密码修改时短信提示和密码遗失时重置密码</p>
+				<div class="item-btn"><a href="javascript:;" onClick="H9377.ubPhone(this)">验证</a></div>
+			</div>
+		{{else}}
+			{{if $user.PHONE && $user.BIND_CELLPHONE}}
+				<!-- 绑定手机 -->
+				<div class="my-part3">
+					<div class="bind-sj">
+						<p><span class="myicon2 mright"></span><span class="sj-txt">您的账号已绑定密保手机</span></p>
+						<p><span class="red">*</span>密保手机：<span class="red">{{$user.PHONE}}</span></p>
+					</div>
+					<div class="item-btn"><a href="?opt=reset">重置手机</a></div>
+					<div class="tips2"><span class="red">*注</span>：密保手机是用于密码修改时短信提示和密码遗失时重置密码</div>
+				</div>
+			{{else}}
+				<!-- 绑定手机 -->
+				<div class="my-part2 w-form">
+					<div class="item">
+						<i class="myicon2 sj2"></i>
+						<div class="mylist"><input class="input" type="text" name="cellphone" placeholder="请输入11位数手机号码"/></div>
+					</div>
+					<!-- <div class="item">
+						<i class="myicon2 yzm"></i>
+						<div class="mylist myinput"><input class="input" type="text" name="code" placeholder="请输入图片验证码"/></div>
+						<img src="{{$CONFIG.resource}}/images/2017/h5/wap2018/card.jpg" alt="" title="" />
+					</div> -->
+					<div class="item">
+						<i class="myicon2 dx"></i>
+						<div class="mylist myinput"><input class="input" type="text" name="captcha" placeholder="请输入短信验证码"/></div>
+						<button class="get-code w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this,'bindphone');">获取验证码</button>
+					</div>
+					<p class="bind-tips">* 账号绑定手机后，如忘记密码，可使用手机找回密码</p>
+					<div class="item-btn"><a href="javascript:;" onClick="H9377.bindPhone(this)">完成绑定</a></div>
+				</div>
+			{{/if}}
+		{{/if}}
+	</div>
+    <script> var menuID = 3; </script>
+	{{include file="h5/wap2018/h5_footer.html"}}
+    <script> if (!getCookie('login_name')) { window.history.go(-1);} </script>
+</body>
+</html>

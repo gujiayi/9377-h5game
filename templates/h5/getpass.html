@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台登录</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/style.game2.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/game_login.css?{{$CONFIG.build}}" />
+</head>
+<body>
+<div class="container mask">
+	<div class="dialog-box mod-login mod-login-module mod-forget-username "> 
+			<div class="login-hd tc">
+				<div class="login-hd-tit" >填写账号</div> 
+				<a  class="icon-back"  style='position:absolute;left:10px;top:14px' href="{{$refererUrl}}"></a>
+			</div>
+			<div class="login-form"> 
+				<div class="w-form"> 
+						<div class="login-fun" style='margin-left:5px;'>已绑定手机号,通过手机验证找回</div>
+					<div class="w-item"> <i class="icon-user" ></i> <input name="username" type="text" placeholder="请输入账号"> </div> 
+					<a href="javascript:;" class="btn-submit" onClick="authentication(this)">确 定</a> 
+					<div class="login-fun"><i style='color:#f24767 ;margin-right:4px;'>*</i>如未绑定手机号，请<a href="javascript:;" style='color:#5186f0' onclick="H9377.dialogBox('QQ:3388099926',function(){},'请联系客服')" >联系客服</a>找回密码</div>
+				</div> 
+			</div> 
+		</div>
+
+	<div class="dialog-box mod-login mod-login-module mod-forget-password none"> 
+		<div class="login-hd tc">
+			<div class="login-hd-tit" >身份认证</div> 
+			<a  class="icon-back"  style='position:absolute;left:10px;top:18px'  href="{{$refererUrl}}"></a>
+		</div>
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-mobile" ></i> <input readonly name="cellphone" type="number" placeholder="请输入已绑定手机号码"> </div> 
+				<div class="w-item-wp">
+					<div class="w-item" > <i class="icon-email"></i> <input id='textforget'  maxlength='4' type="text" placeholder="请输入图片验证码" > </div> 
+					<img  src='' onClick="H9377.createCode('forgetcode')" id='forgetcode' style='position: absolute;top:0;right:0;width:36%;height:42px;border-radius: 3px;'>
+				</div>
+				<div class="w-item-wp"> 
+					<div class="w-item " > <i class="icon-email" ></i> <input name="captcha"  oninput="javascript:H9377.setNumber(this,6)" type="number" placeholder="请输入手机验证码"> </div> 
+					<button class="w-button J-sendcaptcha" opt='phone' onClick="H9377.sendCaptcha(this,'forgetpass');">发送验证码</button> 
+				</div> 
+				<a href="javascript:;" class="btn-submit" onClick="forgetPass(this)">验证身份</a> 
+				<div class="login-fun"><i style='color:#f24767 ;margin-right:4px;'>*</i>如未绑定手机号，请<a href="javascript:;" style='color:#5186f0' onclick="H9377.dialogBox('QQ:3382286991',function(){},'请联系客服')" >联系客服</a>找回密码</div>
+			</div> 
+		</div> 
+	</div>
+
+	<div class="dialog-box mod-login mod-login-module  mod-reset-password none"> 
+		<div class="login-hd"> 
+			<div class="login-hd-tit">重置密码</div> 
+			<a  class="icon-back"  style='position:absolute;left:10px;top:18px'  href="{{$refererUrl}}"></a>
+		</div> 
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-user"></i> <input name="username" readonly type="text"  placeholder="请输入您的账号" onclick="H9377.dialog('当前账号不可修改')"> <b class="more"></b> </div>
+				<div class="w-item-wp passone"> 
+					<div class="w-item"> <i class="icon-lock" ></i> <input name="password" type="password" placeholder="请设置新密码6-16个字符"> </div> 
+					<i class='icon-password icon-noSee' onClick="H9377.openPassword(this);"></i>
+					<div class="place none"></div>
+				</div> 
+				<div class="w-item-wp passtow"> 
+					<div class="w-item"> <i class="icon-lock" ></i> <input name="password2" type="password" placeholder="确认新密码"> </div> 
+					<i class='icon-password icon-noSee' onClick="H9377.openPassword(this);"></i>
+					<div class="newplace none"></div>
+				</div> 
+				<a href="javascript:;" class="btn-submit" onClick="resetPass(this)">确 认</a> 
+			</div> 
+		</div> 
+		
+
+
+
+
+
+	</div>
+
+</div>
+</body>
+<script src="{{$CONFIG.resource}}/js/2018/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+
+<script src="{{$CONFIG.resource}}/js/2018/h5/main.game2.js?{{$CONFIG.build}}"></script>
+<script>
+	H9377.createCode('forgetcode');
+	var refererUrl = '{{$refererUrl}}',bindphone='',bindusername='',sign;
+	//填写账号
+	function authentication(ele){
+		var obj = $(ele), part = obj.closest('.mod-forget-username'),
+		    username = part.find('input[name=username]').val(),
+			param={
+				'username':username
+			};
+			getJson(param,function(result){
+				if(result.status==1){
+					bindphone=result.bindphone;
+					bindusername=result.username;
+					$('.mod-forget-password').find('input[name=cellphone]').val(bindphone);
+					setTimeout(() => {
+						$('.mod-forget-password').show().siblings().hide();
+						$('#textforget').val('');
+						$('.mod-forget-password').find('input[name=captcha]').val('')
+					}, 500);
+				}else{
+					H9377.dialog(result.msg);
+					part.find('input[name=username]').val('');
+				}
+
+			},' /csi/GetPass/verifyUserExists','post')
+
+	}
+		//忘记密码
+	function forgetPass(ele){
+		var obj = $(ele), part = obj.closest('.mod-forget-password'),
+			captcha = part.find('input[name=captcha]').val();
+			
+		if(!H9377.VerCode){
+			H9377.dialog('请输入图片验证码');
+			return false;
+		}
+		if (!CSRegular.captcha(captcha)) {
+			H9377.dialog('请输入手机验证码');
+			return false;
+		}
+		var param = {
+			'captcha':captcha,
+			'phone':bindphone,
+			'username':bindusername
+		}
+		getJson(param, function(result){
+			if (result.status == 1) {
+				sign=result.sign;
+				$('.mod-reset-password').find('input[name=username]').val(bindphone);
+				H9377.dialog('身份认证成功');
+				setTimeout(() => {
+					$('.mod-reset-password').show().siblings().hide();
+				}, 500);
+			}else{
+				H9377.dialog(result.msg);
+				part.find('input[name=captcha]').val('')
+			}
+		},'/csi/GetPass/forgetPassword','get');
+			
+	}
+	function resetPass(ele){
+		var obj = $(ele), part = obj.closest('.mod-reset-password'),
+			pass = part.find('input[name=password]').val(),
+			pass2 = part.find('input[name=password2]').val();
+			
+		if (!CSRegular.pass(pass)) {
+			H9377.dialog('请输入6~16位密码');
+			return false;
+		}
+		if (pass!=pass2) {
+			H9377.dialog('请输入相同密码');
+			return false;
+		}
+		var param = {
+			'username':bindusername,
+			'password':pass,
+			'password2':pass2,
+			'sign':sign,
+			
+		}
+		getJson(param, function(result){
+			console.log(result)
+			if (result.status == 1) {
+				H9377.dialog('密码修改成功');
+				setTimeout(() => {
+					window.location.href=refererUrl;
+				}, 500);
+			}else{
+				H9377.dialog(result.msg);
+			}
+		},'/csi/GetPass/resetPassword','post');
+			
+	}
+
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="frontend" content="Jinlian">
+    <title>9377 H5游戏</title>
+    <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/swiper.min.css?{{$CONFIG.build}}"/>
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/style.game2.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/wap2018/style.css?{{$CONFIG.build}}1sf" />
+    <script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/adaptive.js"></script>
+    <script type="text/javascript">
+        window['adaptive'].desinWidth = 1242;
+        window['adaptive'].baseFont = 36;
+        window['adaptive'].maxWidth = 640;
+        window['adaptive'].scaleType = 3;
+        window['adaptive'].init();
+    </script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/wap2018/h5_top.html"}}
+		<!-- 礼包 -->
+		<div class="gift-box">
+			{{data name="礼包对应游戏"}}
+			<ol>
+				{{foreach from=$DATA['礼包对应游戏']['list'] item=item}}
+				<li>
+					<div class="top flex">
+						<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png" alt="" title="" />
+						<h2 class="flex-list title">{{$item.CONFIG.alias_name}}</h2>
+					</div>
+					<ul>
+						{{data name="自定义礼包{{$item.ID}}"}}
+						{{data name="系统礼包{{$item.ID}}"}}
+						{{foreach from=$DATA["系统礼包{{$item.ID}}"]['list'] item=v}}
+						<li class="flex">
+							<div class="flex-list">
+								<p class="title2">{{$v.name}}</p>
+								<div class="intro">{{$v.description}}</div>
+							</div>
+							<a class="gift-btn" href="javascript:H9377.getCard('','',{{$v.id}},{{$v.game}});">领取</a>
+						</li>
+						{{/foreach}}
+						{{foreach from=$DATA["自定义礼包{{$item.ID}}"].list item=c}}
+						<li class="flex">
+							<div class="flex-list">
+								<p class="title2">{{$c.title}}</p>
+								<div class="intro">{{$c.ext4}}</div>
+							</div>
+							<a class="gift-btn" href="javascript:H9377.getCard('{{$c.ext5}}','{{$c.ext6}}');">领取</a>
+						</li>
+                        {{/foreach}}
+					</ul>
+				</li>
+				{{/foreach}}
+			</ol>
+		</div>
+	</div>
+    <script> var menuID = 1; </script>
+	{{include file="h5/wap2018/h5_footer.html"}}
+</body>
+</html>

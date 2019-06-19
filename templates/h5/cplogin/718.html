@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台登录</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.game2.css?{{$CONFIG.build}}" />
+	<style> .menu, .dialog-close { display: none; } html, body { width: 100%; height: 100%; overflow:hidden; } .login-hd .btn-loginmod { top: 20px; } .third-indep { display:inline-block; width: 40%; } </style>
+</head>
+<body>
+	<div class="login-bg" id="login-bg">
+		{{data name="背景图{{$gid}}"}}
+		{{data name="背景大图{{$gid}}"}}
+		{{if $smarty.const.DEVICE_PLATFORM != 0}}
+			 {{$DATA["背景图{{$gid}}"]}}
+		{{else}}
+			{{$DATA["背景大图{{$gid}}"]}}
+		{{/if}}
+	</div>
+
+	<!-- 第三方登录 -->
+	<div class="dialog-boxx mod-login mod-third">
+		<div class="third-wp">
+			<a href="javascript:;" class="third-indep" id="btn-indep"><img src="{{$CONFIG.resource}}/images/2017/h5/third-indep.png?{{$CONFIG.build}}" alt=""></a>
+		</div>
+	</div>
+	
+	<!-- 底部菜单模块 -->
+	<script src="{{$CONFIG.resource}}/js/2017/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+	<script>
+		function loginMaster(){
+			try {
+				window.MasterSDK.csMasterLogin();
+			} catch(e) {
+				console.log(e);
+			}
+		}
+		document.getElementById('btn-indep').addEventListener('touchstart', function(e) {
+			loginMaster();
+		}, false);
+		document.getElementById('login-bg').addEventListener('touchstart', function(e) {e.preventDefault();}, false);
+	</script>
+</body>
+</html>

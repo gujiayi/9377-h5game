@@ -1,0 +1,78 @@
+<div class="mask none mask-login-wx" id="login-pop">
+	<!-- 用户登录 -->
+	<div class="dialog-box mod-login mod-login-module mod-login-guide none"> 
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+		<div class="login-hd"> <div class="login-hd-tit">快捷登录</div> </div> 
+		<div class="login-form flex"> 
+			 <a href="javascript:thirdLogin('wx');" class="flex-list"><i class="icon-wechat"></i></a>
+			 <a href="javascript:thirdLogin('qq');" class="flex-list"><i class="icon-qqqb"></i></a>
+			 <a href="javascript:H9377.loadLoginMode('phone');;" class="flex-list"><i class="icon-mobile"></i></a>
+		</div>
+		<ul class="login-group-tool"> 
+			<li><a href="javascript:H9377.loadLoginMode('normal');">已有账号登录</a></li> 
+			<li><a href="javascript:H9377.loadLoginMode('phone');">手机注册</a></li> 
+		</ul> 
+	</div>
+	<!-- 用户登录 -->
+	<div class="dialog-box mod-login mod-login-module mod-login-ulogin none"> 
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+		<div class="login-hd"> <div class="login-hd-tit">账号登录</div> </div> 
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-user"></i> <input name="username" type="text" placeholder="请输入账号"> <b class="more none"></b> </div>
+				<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+				<a href="javascript:;" class="btn-submit" onClick="H9377.userLogin(this)">登 录</a> 
+			</div> 
+		</div> 
+		<ul class="login-group-tool"> 
+			<li><a href="javascript:H9377.loadLoginMode('guide');">其他登录方式</a></li> 
+			<li><a href="javascript:H9377.dialog('联系客服QQ：2850907640');">忘记密码?</a></li> 
+		</ul> 
+	</div>
+	<!-- 手机注册 -->
+	<div class="dialog-box mod-login mod-login-module mod-reg-phone none"> 
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+		<div class="login-hd"> <a href="javascript:H9377.loadLoginMode();" class="icon-back"></a> </div> 
+		<ul class="login-mod-sbox"> <li class="active">手机号注册</li> <li onClick="H9377.loadLoginMode('reg');">用户名注册</li> </ul> 
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-mobile"></i> <input name="cellphone" type="phone" placeholder="请输入您的手机号码"> </div> 
+				<div class="w-item-wp"> 
+					<div class="w-item"> <i class="icon-email"></i> <input name="captcha" type="text" placeholder="请输入验证码"> </div> 
+					<button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this);">发送验证码</button> 
+				</div> 
+				<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+				<a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'phone')">注 册</a> 
+			</div> 
+		</div> 
+	</div>
+	<!-- 普通注册 -->
+	<div class="dialog-box mod-login mod-login-module mod-reg-pub none"> 
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+		<div class="login-hd"> <a href="javascript:H9377.loadLoginMode();" class="icon-back"></a> </div> 
+		<ul class="login-mod-sbox"> <li onClick="H9377.loadLoginMode('phone');">手机号注册</li> <li class="active">用户名注册</li> </ul> 
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-user"></i> <input name="username" type="text" placeholder="请输入账号"> </div> 
+				<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+				<div class="login-fun"><input type="checkbox" name="terms"> <a href="http://www.9377.com/yhxy.html" target="_blank">我已阅读并同意《用户注册服务中心》</a></div>
+				<a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'reg',1)">注 册</a> 
+			</div> 
+		</div> 
+	</div>
+</div>
+<script>
+	function thirdLogin(type){
+		if (type == 'wx') {
+			var param = {
+				appid: 'wxecf5ddc138cc0951',
+				scope: 'snsapi_userinfo',
+				mini:1,
+				_9377_forward: '{{$gourl}}'
+			};
+			window.location.href = C9377.app_url+'/api/wx_login.php?_wx_action=login&'+ajax_parameters(param);
+		}else if (type == 'qq'){
+			window.location.href = C9377.app_url+'/api/qq.php?_qq_action=login';
+		}
+	}
+</script>

@@ -1,0 +1,8 @@
+<div class="user-top">
+	<div class="user-img"><img src="{{$CONFIG.resource}}/images/2017/h5/wap2018/my.png" alt="" title="" /></div>
+	{{if $user}}
+	<div class="user-info">您好，{{$user.LOGIN_ACCOUNT}} <a href="{{$CONFIG.app_url}}/login.php?do=logout">切换帐号</a></div>
+	{{else}}
+	<div class="user-info">您好，请<a href="javascript:H9377.checkUserLogin();">登录</a></div>
+	{{/if}}
+</div>

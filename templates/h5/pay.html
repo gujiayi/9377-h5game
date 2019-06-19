@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="耐玩 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>耐玩</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/style.css?{{$CONFIG.build}}" />
+	<style> .pay-close { display: none; } </style>
+</head>
+<body>
+	<div class="wrapper mod-pay">
+		<div class="pay-hd">
+       		<a href="javascript:payClose();" class="pay-close icon-close"></a>
+			<!-- <img src="{{$CONFIG.resource}}/images/2017/h5/logo_w.png?{{$CONFIG.build}}" alt=""> -->
+		</div>
+		<div class="pay-info">
+			<p>商品：{{$product}}</p>
+			<p>应付款：<span>{{$amount}}元</span></p>
+		</div>
+		<div class="pay-mod">
+			<form id="pay-form" action="{{$CONFIG.app_url}}/csi/pay/doPay" method="post" target="_blank">
+				<div class="pay-mod-tit">支付方式</div>
+				<ul id="pay-list">
+					{{foreach from=$pay_array key=k item=v}}
+					{{if empty($v.name)}}{{continue}}{{/if}}
+					<li id="pay-{{$k}}" class="flex" onClick="select_payway({{$k}})"><i pid="{{$k}}"></i><span class="flex-list">{{$v.name}}</span><em class="icon-arrr"></em></li>
+					{{/foreach}}
+				</ul>
+
+				<input type="hidden" name="pid" value="{{$pid}}" id="pid" />
+				<input type="hidden" name="gid" value="{{$gid}}" id="gid" />
+				<input type="hidden" name="_sid" value="{{$sid}}" id="sid" />
+				<input type="hidden" name="username" id="uname" value="{{$uname}}" />
+				<input type="hidden" name="amount" id="amount" value="{{$amount}}" />
+				<input type="hidden" name="platform" id="platform" value="{{$platform}}" />
+				<input type="hidden" name="extra_info" id="extra_info" value="{{$extra_info}}" />
+				<input type="hidden" name="referer" value="{{$smarty.const.HTTP_REFERER}}" />
+				<input type="hidden" name="device_info" value="qiyouworldSDK" />
+				<input type="hidden" name="mch_app_name" value="{{$game_info.NAME}}" id="name" />
+				<input type="hidden" name="mch_app_id" value="com.h5qiyouworld.game.{{$game_info.ALIAS}}" />
+			</form>
+		</div>
+		<div class="pay-tip">
+			<p>若充值遇到任何问题请联系客服：</p>
+			<p>客服QQ：800848219 </p>
+			<p>客服电话：020-37260535 </p>
+			<p>服务时间：09：00 - 21：00</p>
+		</div>
+		{{if $user.LOGIN_ACCOUNT == '225144q'}}
+			<div>extra_info = {{$smarty.get.extra_info}}</div>
+			<div>url = {{$smarty.server.REQUEST_URI|pr}}</div>
+			<br>
+			<div>last-ei = <span id="last-ei"></span> </div>
+			<div>coki-ei= <span id="coki-ei"></span> </div>
+			<div id="ntime">当前页面年时间：</div>
+		{{/if}}
+		<div onClick="maskClose()" class="pay-mask"></div>
+	</div>
+	{{include file="h5/footer.html"}}
+
+<script type="text/javascript">
+	if (/micromessenger/i.test(navigator.userAgent)) {
+		var lastEI = $_GET['extra_info'];
+		$('#last-ei').html(lastEI);
+		$('#coki-ei').html(getCookie('lastEI'));
+		$('#ntime').html(new Date());
+		if (lastEI == getCookie('lastEI')) {
+			window.history.go(-1);
+		}else{
+			C9377.setcookie('lastEI',$_GET['extra_info'],(new Date('2099-12-30 08:00:00')/1000))
+		}
+	}
+	// 根据充值id设置icon
+	var icon_list = {
+		ali : ['67', '88'], //支付宝id
+		wx : ['70', '76', '85'], //微信id
+		qq : ['91'] //qq钱包
+	}
+	$('#pay-list i').each(function(){
+		var pid = $(this).attr('pid');
+		if ($.inArray(pid, icon_list.ali) >= 0) {
+			$(this).addClass('icon-payali');
+		}
+		if ($.inArray(pid, icon_list.wx) >= 0) {
+			$(this).addClass('icon-paywx');
+		}
+		if ($.inArray(pid, icon_list.qq) >= 0) {
+			$(this).addClass('icon-qqqb');
+		}
+	});
+	// 充值类型选择
+	var mask_timer;
+	function select_payway(id){
+		if (id == 67 || id == 85) {
+			try {
+				// 跳APP支付
+				var param = {
+					'userID' : $('#uname').val(),
+					'total_fee' : $('#amount').val(),
+					'gid' : $('#gid').val(),
+					'sid' : '{{$server_info._SID}}',
+					'extra_info' : $('#extra_info').val(),
+					'game' : $('#name').val()
+				}
+				param = JSON.stringify(param);
+				if (id == 67) {
+					window.Pay.doAliPay(param);
+					maskOpen();
+				}else if (id == 85) {
+					window.Pay.doWXPay(param);
+					maskOpen();
+				}
+			} catch(e) {
+				payOnWeb(id);
+				console.log(e);
+			}
+		}else{
+			payOnWeb(id);
+		}
+	}
+	function payOnWeb(id){
+		if( id > 0 ) {
+			$('#pid').val(id);
+			$('#pay-form').submit();
+			// 加载弹窗 优化充值流程
+			maskOpen();
+		}
+	}
+
+	$(function(){
+		if(/mobile/i.test(navigator.userAgent)){
+			//$('#pay-76').remove();
+		}else{
+			$('#pay-85').remove();
+			$('#pay-67').remove(); //PC隐藏支付宝钱包
+		}
+
+		if(/micromessenger/i.test(navigator.userAgent)){
+			$('#pay-form').attr('target', '');
+			$('#pay-67').remove();
+			$('#pay-88').remove();
+			$('#pay-85').remove();
+		}else{
+			$('#pay-70').remove();
+		}
+		if(/iPhone/i.test(navigator.userAgent)){
+			$('#pay-91').remove();
+		}
+
+		{{if stripos($user.REFERER, 'tx_') === false}}
+			$('#pay-91').remove();
+		{{/if}}
+	});
+	// 打开loading弹窗
+	function maskOpen(){
+		clearTimeout(mask_timer);
+		$('.pay-mask').show();
+		$('.pay-close').hide();
+		mask_timer = setTimeout(function(){
+			// maskClose();
+			payClose();
+		}, 10000);
+		// window.parent.postMessage('{"event":"jumpToPay"}','*');
+	}
+	// 关闭loading弹窗 || 为防止透传旧信息，点击一次充值方式后，无法再点击充值。点击灰色遮罩关闭充值界面 2018年6月29日 14:39:34
+	function maskClose(){
+		payClose();
+		// $('.pay-mask').hide();
+		// $('.pay-close').show();
+	}
+	// 关闭充值弹窗
+	function payClose(){
+		try {
+			if (H9377.OS().name == 'Android') {
+                andClosePayUI();
+            }else{
+            	try {
+        			calliPhoneNative('get_end',{'status':1}); //2017.12.08之后ios端使用
+            	} catch(e) {
+					get_end();
+            		console.log(e);
+            	}
+            }
+            function andClosePayUI(){
+            	window.Pay.closePayUI();
+            }
+		} catch(e) {
+			window.parent.postMessage('{"event":"closePayIframe"}','*');
+		}
+	}
+	// 客户端webview下隐藏右上角关闭按钮
+	if (document.referrer) {
+		$('.pay-close').show();
+	}
+	// 禁止页面滑动
+	document.querySelector('body').addEventListener('touchmove', function (e) {e.preventDefault(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>9377 H5平台</title>
+	<meta name="keywords" content="9377 H5平台">
+	<meta name="description" content="9377 H5平台">
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/news.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="g-container news-page">
+			<div class="g-main">
+				<div class="imgnews-box fix">
+					<a href="{{$DATA["1左侧大图链接"]}}" target="_blank" class="item item-1">
+						{{data name="1左侧大图链接"}} {{data name="1左侧图文"}} {{$DATA["1左侧图文"]}}
+					</a>
+					<a href="{{$DATA["2中间图链接"]}}" target="_blank" class="item item-2">
+						{{data name="2中间图链接"}} {{data name="2中间图文"}} {{$DATA["2中间图文"]}}
+					</a>
+					<a href="{{$DATA["3右侧图上链接"]}}" target="_blank" class="item item-3">
+						{{data name="3右侧图上链接"}} {{data name="3右侧上图文"}} {{$DATA["3右侧上图文"]}}
+					</a>
+					<a href="{{$DATA["4右侧下图链接"]}}" target="_blank" class="item item-4">
+						{{data name="4右侧下图链接"}} {{data name="4右侧下图文"}} {{$DATA["4右侧下图文"]}}
+					</a>
+				</div>
+				<div class="newsmix fix">
+					<div class="newsmix-left fl">
+						<div class="newstype fix" id="newstype-tab">
+							<a href="javascript:;" class="active">最新资讯<i></i></a>
+							<a href="javascript:;">热门活动<i></i></a>
+							<a href="javascript:;">行业新闻<i></i></a>
+							<a href="javascript:;">新游资讯<i></i></a>
+							<a href="javascript:;">游戏攻略<i></i></a>
+						</div>
+						<div class="news-content-box" id="news-content-box">
+						
+							<ul class="news-list">
+                            {{data name="最新资讯"}}
+							{{foreach from=$DATA['最新资讯'].list item=item}}
+								<li class="laybox">
+									<div class="img"><img src="" _src="/{{$item.picurl}}?{{$CONFIG.build}}" alt="" class="lazy-load"></div>
+									<div class="info">
+										<span class="type">{{$item.typename}}</span>
+										<h3 class="tit"><a href="{{$item.artlink}}">{{$item.title}}</a></h3>
+										<p class="data">DATE：{{$item.adddate|date_format:'%Y-%m-%d'}}</p>
+										<p class="desrc">{{$item.description}}</p>
+									</div>
+								</li>
+							{{/foreach}}
+							</ul>
+
+							<ul class="news-list none">
+							{{data name="热门活动"}}
+							{{foreach from=$DATA['热门活动'].list item=item}}
+								<li class="laybox">
+									<div class="img"><img src="" _src="/{{$item.picurl}}?{{$CONFIG.build}}" alt="" class="lazy-load"></div>
+									<div class="info">
+										<span class="type">{{$item.typename}}</span>
+										<h3 class="tit"><a href="{{$item.artlink}}">{{$item.title}}</a></h3>
+										<p class="data">DATE：{{$item.adddate|date_format:'%Y-%m-%d'}}</p>
+										<p class="desrc">{{$item.description}}</p>
+									</div>
+								</li>
+							{{/foreach}}
+							</ul>
+
+							<ul class="news-list none">
+							{{data name="行业新闻"}}
+							{{foreach from=$DATA['行业新闻'].list item=item}}
+								<li class="laybox">
+									<div class="img"><img src="" _src="/{{$item.picurl}}?{{$CONFIG.build}}" alt="" class="lazy-load"></div>
+									<div class="info">
+										<span class="type">{{$item.typename}}</span>
+										<h3 class="tit"><a href="{{$item.artlink}}">{{$item.title}}</a></h3>
+										<p class="data">DATE：{{$item.adddate|date_format:'%Y-%m-%d'}}</p>
+										<p class="desrc">{{$item.description}}</p>
+									</div>
+								</li>
+							{{/foreach}}
+							</ul>
+
+							<ul class="news-list none">
+							{{data name="新游资讯"}}
+							{{foreach from=$DATA['新游资讯'].list item=item}}
+								<li class="laybox">
+									<div class="img"><img src="" _src="/{{$item.picurl}}?{{$CONFIG.build}}" alt="" class="lazy-load"></div>
+									<div class="info">
+										<span class="type">{{$item.typename}}</span>
+										<h3 class="tit"><a href="{{$item.artlink}}">{{$item.title}}</a></h3>
+										<p class="data">DATE：{{$item.adddate|date_format:'%Y-%m-%d'}}</p>
+										<p class="desrc">{{$item.description}}</p>
+									</div>
+								</li>
+							{{/foreach}}
+							</ul>
+
+							<ul class="news-list none">
+							{{data name="游戏攻略"}}
+							{{foreach from=$DATA['游戏攻略'].list item=item}}
+								<li class="laybox">
+									<div class="img"><img src="" _src="/{{$item.picurl}}?{{$CONFIG.build}}" alt="" class="lazy-load"></div>
+									<div class="info">
+										<span class="type">{{$item.typename}}</span>
+										<h3 class="tit"><a href="{{$item.artlink}}">{{$item.title}}</a></h3>
+										<p class="data">DATE：{{$item.adddate|date_format:'%Y-%m-%d'}}</p>
+										<p class="desrc">{{$item.description}}</p>
+									</div>
+								</li>
+							{{/foreach}}
+							</ul>
+							<!-- <div class="pagination none" id="gamecenter-pagination">
+								<a class="disabled">上一页</a>
+								<a class="current" id="current">1</a>
+								<a href="javascript:;" class="page">2</a>
+								<a href="javascript:;" class="page">3</a>
+								<a href="javascript:;" class="page">4</a>
+								<a class="more">...</a>
+								<a href="javascript:;" class="page">18</a>
+								<a href="javascript:;" class="nextPage" id="nextPage">下一页</a>
+							</div> -->
+						</div>
+					</div>
+					<div class="newsmix-right fr">
+						<div class="mod-rank-game laybox">
+							<div class="bdr-tit">游戏排行榜</div>
+							{{data name="游戏排行"}}
+							<ul class="rank-game-list">
+							{{$i=0}}
+							{{foreach from=$DATA['游戏排行'].list item=item}}
+								<li>
+									<em class="rank rank-{{$i++}}">{{$i}}</em>
+									<div class="detail"> <a href="{{$CONFIG.app_url}}/game_box.php?game={{$item.ALIAS}}&system={{$item.system}}" class="img fl"> <img src="" _src="{{$CONFIG.resource}}/images/2014/game/icon-big/{{$item.ALIAS}}.png?{{$CONFIG.build}}" width="68" height="68" alt="{{$item.ALIAS}}" class="lazy-load"> </a>
+										<div class="info fl">
+											<p class="name">{{$item.NAME}}</p>
+											<p class="type">{{$item.TYPE}} | {{$item.CONFIG.android_pack_size}}</p>
+										</div>
+										<a href="{{$item.CONFIG.android_link_url}}" class="g-btn-s">立即下载</a>
+									</div>
+									<p class="desc"> <span class="name">{{$item.NAME}}</span> <span class="type">{{$item.TYPE}} | {{$item.df_pack_size}}</span> </p>
+								</li>
+							{{/foreach}}
+								
+							</ul>
+						</div>
+						<div class="mod-slidehd laybox">
+						{{data name="火爆活动"}}
+							<div class="bdr-tit">火爆活动</div>
+							<ul class="slidehd-list">
+						{{foreach from=$DATA['火爆活动'].list item=item}}
+								<li> <a href="{{$item.url}}"><img src="" _src="{{$item.thumb}}" alt="" class="lazy-load"></a> </li>
+						{{/foreach}}
+							</ul>
+							
+						</div>
+						<div class="mod-pfqr laybox">
+							<div class="global-qr fl"><img src="" _src="{{$CONFIG.resource}}/images/2016/globalqr.jpg?{{$CONFIG.build}}" width="125" height="125" alt="" class="lazy-load"></div>
+							<div class="info fl">
+								<p class="t1">9377手游二维码</p>
+								<p class="t2">扫描二维码下载<br>享受更多游戏乐趣！</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script> var navactive = '6'; </script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2016/main.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

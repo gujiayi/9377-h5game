@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台登录</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+	<style> .menu, .dialog-close { display: none; } html, body { width: 100%; height: 100%; overflow:hidden; } .login-hd .btn-loginmod { top: 20px; } </style>
+	<style>
+		.mod-login-wp{ width: 80%; max-width:302px;padding: 10px 15px;background:#D8DBEA;background:rgba(255,255,255,.7);position:absolute;top:50%;left:50%;transform: translate(-50%, -50%)}
+		.login-tab{width:100%;overflow:hidden}
+		.login-tab-1 li{width: 100%;}
+		.login-tab-2 li{width: 50%;}
+		.login-tab li{height:37px;line-height:37px;border-bottom:1px solid #fff;text-align:center;color:#595757;font-size:14px;float:left}
+		.login-tab .active{border-bottom-color:#d70023}
+		.login-tab-con{}
+		.login-account{margin-top:32px}
+		.login-account .w-item{height:38px;margin-top:12px;position:relative}
+		.login-account .w-item label{width:34px;height:38px;position:absolute;top:0;left:0}
+		.login-account .w-item input{width:100%;height:38px;padding:12px 0 12px 34px;font-size:14px;color:#000;border:0 none;-webkit-border-radius:5px;border-radius:5px;background:#fff}
+		.login-account .w-item input:focus { outline: 0 none;}
+		.login-account .btn-tologin{display:block;width:100%;height:40px;color:#fff;font-size:16px;border:0 none;-webkit-border-radius:4px;border-radius:4px;cursor:pointer;background:#e1405a;font-family:'microsoft yahei'}
+		.login-account .btn-tologin:hover {background: #f6587b;}
+		.login-account .user-opt{height:14px;line-height:14px;margin:10px 0 18px;-moz-user-select:none; -webkit-user-select:none; -ms-user-select:none; -khtml-user-select:none; user-select:none;}
+		.icon-cb{display:inline-block;vertical-align:top;width:13px;height:13px;margin-right: 6px;}
+		.login-account .tips{height:12px;line-height:12px;color:#e1405a;margin:10px 0}
+		.login-account .user-third{height:24px;margin:10px 0}
+		.login-account .freereg {color:#e1405a;float: right;}
+		.login-account .freereg:hover { text-decoration: underline; }
+		.third-login-qq,.third-login-wx,.third-login-wb{display:inline-block;width:24px;height:24px;background:url('/images/2017/third.png?201708251703') no-repeat;*margin-right:4px;}
+		.third-login-wx{background-position:-27px 0}
+		.third-login-wb{background-position:-53px 0}.login-account .icon-xuser{background-position:2px 4px}.login-account .icon-xlock{background-position:-38px 4px}.icon-cb{background-position:0px -40px}.icon-cbed{background-position:-23px -40px}.login-account .icon-xuser,.login-account .icon-xlock,.icon-cb,.icon-cbed{background-image: url('/images/2017/login_z.png?201708251703');background-repeat: no-repeat;}
+	</style>
+</head>
+<body>
+	<div class="login-bg">
+		{{data name="背景图{{$gid}}"}}
+		{{$DATA["背景图{{$gid}}"]}}
+	</div>
+	
+	<div class="mod-login-wp">
+		<ul class="login-tab login-tab-1">
+			<li>9377游戏账号登录</li>
+			<!-- <li>扫码登录</li> -->
+		</ul>
+		<div class="login-tab-con">
+			<div class="login-item login-account">
+				<form method="post" action="{{$CONFIG.app_url}}/login.php" class="login-form" onsubmit="return _login_form(this);">
+					<input type="hidden" name="do" value="login" />
+					<input type="hidden" name="gourl" value="{{$CONFIG.app_url}}/game_login.php?gid={{$gid}}&sid=new" />
+					<input name="login_save" type="hidden" value="1" id="login-save" />
+					<input type="hidden" name="callback" value="login_callback">
+                    <input type="hidden" name="parent" value="1">
+                    <input type="hidden" name="return_json" value="1">
+					<div class="w-item"> <label for="username" class="icon-xuser"></label> <input name="username" id="username" type="text" placeholder="帐号" /> </div>
+					<div class="w-item"> <label for="password" class="icon-xlock"></label> <input name="password" id="password" type="password" placeholder="密码" /> </div>
+					<div class="user-opt fix">
+						<label class="login-save fl"><i class="icon-cb icon-cbed"></i>自动登录</label>
+						<a href="{{$CONFIG.app_url}}/getpass.php" target="_blank" rel="nofollow" class="fr">忘记密码</a>
+					</div>
+					<input class="btn-tologin" type="submit" value="登录" />
+					<p class="tips" id="tips">{{if $msg}}{{$msg}}{{/if}}</p>
+					<div class="user-third">
+						{{$wxurl = "{{$CONFIG.app_url}}/game.php?gid={{$gid}}&sid=new"}}
+						{{$csurl = "{{$CONFIG.app_url}}/game_login.php?gid={{$gid}}&sid=1"}}
+						<a href="{{$CONFIG.app_url}}/register.php?gourl={{$gourl|urlencode}}" target="_blank" rel="nofollow" class="freereg">免费注册<i></i></a>
+						<a href="{{$CONFIG.app_url}}/api/qq.php?_qq_action=login&_9377_forward={{$csurl|urlencode}}" rel="nofollow" title="QQ登录" class="third-login-qq"></a>
+						<a href="{{$CONFIG.app_url}}/api/wx_login.php?_wx_action=login&_9377_forward={{$wxurl|urlencode}}" rel="nofollow" title="微信登录" class="third-login-wx"></a>
+						<a href="{{$CONFIG.app_url}}/api/weibo.php?_wb_action=login&_9377_forward={{$csurl|urlencode}}" rel="nofollow" title="微博登录" class="third-login-wb"></a>
+					</div>
+				</form>
+			</div>
+			<div class="login-item login-qrcode"> </div>
+		</div>
+	</div>
+
+
+	{{include file="h5/footer.html"}}
+	<script> //H9377.checkUserLogin();</script>
+	<script>
+		if($_COOKIE['Puser']){
+			$('#username').val($_COOKIE['Puser']);
+		}
+		var save = $('#login-save').val();
+		$('.login-save').click(function() {
+			if (save == 1) {
+				$('#login-save').val(0);
+				$(this).find('i').removeClass('icon-cbed');
+			}else{
+				$('#login-save').val(1);
+				$(this).find('i').addClass('icon-cbed');
+			}
+		});
+		function _login_form(form) {
+			var form = $(form);
+			var label_acc = form.find('input[name=username]');
+			var label_psw = form.find('input[name=password]');
+			var username = label_acc.val();
+			var pwd = label_psw.val();
+			
+			if(username.length < 4 || username.length > 30) {
+				$('#tips').html('账户名不存在，请重新输入');
+				label_acc.focus();
+				return false;
+			}
+			if(pwd.length < 4){
+				$('#tips').html('账号与密码不匹配，请重新输入');
+				label_psw.focus();
+				return false;
+			}
+			var xurl = $('input[name=gourl]').val();
+			var param = {
+				'do' : 'login',
+				'username' : label_acc.val(),
+				'password' : label_psw.val(),
+				'gourl' : xurl,
+				'login_save' : save,
+				'return_json' : 1
+			}
+			getJson(param, function(result){
+				if (result.status == 0) {
+					window.location.href = xurl;
+				}else if(result.status == -2){
+					$('#tips').html('登录密码错误');
+					return false;
+				}else{
+					$('#tips').html(result.msg);
+					return false;
+				}
+			}, '/h5/login.php','POST');
+			return false;
+		}
+	</script>
+</body>
+</html>

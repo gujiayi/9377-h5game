@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>传奇手游_h5手游_传奇来了手游_9377h5游戏平台</title>
+	<meta name="keywords" content="传奇手游,传奇来了,h5游戏" />
+	<meta name="description" content="传奇手游平台，9377h5游戏平台,为广大玩家提供传奇类手游在线玩，海量不用下载立即玩的H5游戏。有热门html5游戏：传奇手游传奇来了，传奇来了复古版，传奇来了IOS版，武道至尊等h5游戏礼包。玩h5手游来9377,一起玩更快乐" />
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/index.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+	<script> if(/(mobile|Android|iPhone|iPod|iPad|BlackBerry|SymbianOS|webOS|Windows Phone|\s+adr\s+)/i.test(navigator.userAgent)){if (document.cookie.indexOf('skip_wap=1') <= -1) {window.location.href = 'http://h5.9377.com/'; } }
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/pc/header.html"}}
+		<div class="g-container">
+			<div class="g-main">
+				<div class="fix">
+					{{data name="H5平台幻灯"}}
+					<div class="slide-box slide-index" id="slide-box">
+						<ul class="slide-bd">
+						{{foreach from=$DATA['H5平台幻灯'].list item=item}}
+							<li class="slide-item"> <a href="{{$item.url}}" target="_blank"><img src="{{$item.thumb}}" alt=""></a> <div class="tit">{{$item.title}}</div></li>
+						{{/foreach}}
+						</ul>
+					</div>
+					<div class="news-list">
+						<div class="hd"><a href="{{$CONFIG.url}}{{$path}}/" class="more">更多</a>游戏资讯</div>
+						{{data name="H5平台资讯"}}
+						<ul class="bd">
+							{{foreach from=$DATA['H5平台资讯'].list item=item}}
+							<li><a href="{{$item.url}}" target="_blank">{{$item.title}}</a></li>
+							{{/foreach}}
+						</ul>
+					</div>
+				</div>
+				<div class="fix">
+					{{data name="H5游戏推荐"}}
+					<div class="g-tit"> <i class="icon i-crown"></i> <h1 class="dib">H5游戏</h1>推荐 </div>
+					<ul class="rmd-game-list fix">
+						{{foreach from=$DATA['H5游戏推荐'].list item=item}}
+						<li class="laybox">
+							<div class="img">{{data name="{{$item.NAME}}大图"}}{{$DATA["{{$item.NAME}}大图"]}}</div>
+							<div class="info">
+								<h2 class="name">{{$item.NAME}}</h2>
+								<p class="desc">{{$item.DESCRIPTION|truncate:46:"...":true}}</p>
+								<div class="opt fix">
+									<a href="{{$CONFIG.app_url}}{{$path}}/game.php?gid={{$item.ID}}&sid=new" target="_blank" class="play">开始游戏</a>
+									<a href="javascript:void(0);" alias="{{$item.ALIAS}}" class="playm J-play">用手机玩</a>
+								</div>
+							</div>
+						</li>
+						{{/foreach}}
+					</ul>
+				</div>
+				<div class="fix">
+					<!-- <div class="mod-hot-game fl">
+						{{data name="H5平台热门手游"}}
+						<div class="g-tit"> <i class="icon i-fire"></i> <span>热门游戏</span> </div>
+						<ul class="hot-game-list fix">
+							{{foreach from=$DATA['H5平台热门手游'].list item=item}}
+							<li class="laybox">
+								{{data name="{{$item.ALIAS}}次数"}}
+								<a href="{{$CONFIG.app_url}}{{$path}}/game.php?gid={{$item.ID}}&sid=new" target="_blank" class="item">
+									<img src="" _src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png?{{$CONFIG.build}}" width="75" height="75" class="lazy-load img" alt="">
+									<div class="ginfo">
+										<p class="name">{{$item.NAME}}</p>
+										<p>{{$DATA["{{$item.ALIAS}}次数"]}}人玩过</p>
+									</div>
+								</a>
+							</li>
+							{{/foreach}}
+						</ul>
+					</div> -->
+					<!-- 游戏开服表 -->
+					<div class="mod-open-game fr">
+						<div class="g-tit"> <i class="ikai i-kaifu"></i> <span>游戏开服表</span> </div>
+						<div class="sers-kf-list laybox">
+							<ul class="hd-tab">
+								<li class="active">新服预告{{data name="新服预告"}}</li>
+								<li>已开新服{{data name="已开新服"}}</li>
+							</ul>
+							<div class="sers-kf-tit fix">
+								<span class="kf-tit-time">开服时间</span>
+								<span class="kf-tit-zone">区服</span>
+								<span class="kf-tit-name">游戏</span>
+								<span class="kf-tit-lb"></span>
+							</div>
+							<div class="sers-kf-wrap">
+								<div class="sers-kf-tab" id="new-kf-tab">
+									<div class="slide-bd">
+										{{foreach from=array(0,1) item=item key=key1}}
+										<ul class="slide-item">
+											{{foreach from=range(0,6) item=item key=key2}}
+											{{assign var="item" value=$DATA['新服预告']['list'][$key1 * 6 + $key2]}}
+											{{if !empty($item)}}
+											<li>
+												<span class="kf-tab-time">{{$item.SERVER_START_TIME|date_format:'%m-%d %H:%M'}}</span>
+												<span class="kf-tab-zone"><a href="{{$CONFIG.app_url}}{{$path}}/game.php?gid={{$item.GAME.ID}}&sid=new" target="_blank">{{$item.SERVER_NAME}}</a></span>
+												<span class="kf-tab-name"><a href="{{$CONFIG.app_url}}{{$path}}/game.php?gid={{$item.GAME.ID}}&sid=new" target="_blank">{{$item.GAME.CONFIG.alias_name|default:$item.GAME.NAME}}</a>	
+												</span>
+												<a href="{{$CONFIG.app_url}}{{$path}}/game_card.php?gid={{$item.GAME.ID}}" target="_blank" class="kf-tab-lb">礼</a>
+											</li>
+											{{/if}}
+											{{/foreach}}
+										</ul>
+										{{/foreach}}
+									</div>
+								</div>
+								<div class="sers-kf-tab" id="oped-kf-tab">
+									<div class="slide-bd">
+										{{foreach from=array(0,1) item=item key=key1}}
+										<ul class="slide-item">
+											{{foreach from=range(0,6) item=item key=key2}}
+											{{assign var="item" value=$DATA['已开新服']['list'][$key1 * 6 + $key2]}}
+											{{if !empty($item)}}
+											<li>
+												<span class="kf-tab-time">{{$item.SERVER_START_TIME|date_format:'%m-%d %H:%M'}}</span>
+												<span class="kf-tab-zone"><a href="{{$CONFIG.app_url}}{{$path}}/game.php?gid={{$item.GAME.ID}}&sid=new" target="_blank">{{$item.SERVER_NAME}}</a></span>
+												<span class="kf-tab-name"><a href="{{$CONFIG.app_url}}{{$path}}/game.php?gid={{$item.GAME.ID}}&sid=new" target="_blank">{{$item.GAME.CONFIG.alias_name|default:$item.GAME.NAME}}</a>	
+												</span>
+												<a href="{{$CONFIG.app_url}}{{$path}}/game_card.php?gid={{$item.GAME.ID}}" target="_blank" class="kf-tab-lb">礼</a>
+											</li>
+											{{/if}}
+											{{/foreach}}
+										</ul>
+										{{/foreach}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--先隐藏其他游戏跟游戏榜单
+				<div class="fix">
+					<div class="mod-other-game">
+						<div class="g-tit"> <i class="icon i-other"></i> <span>其他游戏</span> </div>
+						<div class="laybox">
+							<ul class="other-game-list fix">
+								{{data name="H5其他游戏"}}
+								{{foreach from=$DATA['H5其他游戏'].list item=item}}
+								<li>
+									<a href="{{$item.CONFIG.site}}" target="_blank" class="item">
+										<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png?{{$CONFIG.build}}" alt="">
+										<p>{{$item.NAME}}</p>
+									</a>
+								</li>
+								{{/foreach}}
+								<li>
+									<a href="{{$CONFIG.app_url}}/h5/game_center.php" target="_blank" class="item">
+										<i class="add">+</i>
+										<p>更多游戏</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="fix">
+					<div class="mod-rank-game">
+						<div class="g-tit"> <i class="icon i-lists"></i> <span>游戏榜单</span> </div>
+						<div class="laybox fix">
+							<div class="rank-list-item">
+								<div class="hd">每周点击榜</div>
+								<ul class="rank-list fix">
+									{{data name="H5每周点击榜"}}
+									{{foreach from=$DATA['H5每周点击榜'].list name=rank item=item}}
+										<li>
+											<a href="{{$item.url}}" target="_blank" class="item">
+												<i class="r{{$smarty.foreach.rank.index+1}}">0{{$smarty.foreach.rank.index+1}}</i>
+												<span>{{$item.title}}</span>
+												<em>{{$item.ext4}}点击</em>
+											</a>
+										</li>
+									{{/foreach}}
+								</ul>
+							</div>
+							<div class="rank-list-item">
+								<div class="hd">评分排行榜</div>
+								<ul class="rank-list score-rank-list fix">
+									{{data name="H5评分排行榜"}}
+									{{foreach from=$DATA['H5评分排行榜'].list name=rank item=item}}
+										<li>
+											<a href="{{$item.url}}" target="_blank" class="item">
+												<i class="r{{$smarty.foreach.rank.index+1}}">0{{$smarty.foreach.rank.index+1}}</i>
+												<span>{{$item.title}}</span>
+												<em>{{$item.ext4}}分</em>
+											</a>
+										</li>
+									{{/foreach}}
+								</ul>
+							</div>
+							<div class="rank-list-item">
+								<div class="hd">上升最快榜</div>
+								<ul class="rank-list fix">
+									{{data name="H5上升最快榜"}}
+									{{foreach from=$DATA['H5上升最快榜'].list name=rank item=item}}
+										<li>
+											<a href="{{$item.url}}" target="_blank" class="item">
+												<i class="r{{$smarty.foreach.rank.index+1}}">0{{$smarty.foreach.rank.index+1}}</i>
+												<span>{{$item.title}}</span>
+												<em>{{$item.ext4}}点击</em>
+											</a>
+										</li>
+									{{/foreach}}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				-->
+				<div class="friends_link">
+					<span class="link_icon"><em></em></span>
+					{{data name="H5首页友情链接"}}
+					<div class="link">
+						{{foreach from=$DATA['H5首页友情链接']['list'][0] item=item}} <a href="{{$item.url}}" target="_blank">{{$item.name}}</a> {{/foreach}}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="h5/pc/footer.html"}}
+	</div>
+	<!-- 弹窗 -->
+	{{include file="h5/pc/game_pop.html"}}
+	<!-- 弹窗 -->
+	<script> var navactive = '0'; C9377.build = '{{$CONFIG.build}}'; </script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/jquery.slideBox2.0.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/main.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

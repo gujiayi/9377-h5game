@@ -1,0 +1,22 @@
+<div class="user-section user-section-3">
+	<div class="section-tit">礼包中心</div>
+	<ul class="ugift-list fix">
+	{{foreach from=$new_card item=item}}
+		{{if !$item.card_no || !$item.name}}{{continue}}{{/if}}
+		<li>
+			<div class="top">
+				<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.G.ALIAS}}.png" alt="" class="img fl" width="96" height="96">
+				<div class="info">
+					<p class="name">{{$item.G.NAME}} {{$item.name}}</p>
+					<p class="card">卡号：<em>{{$item.card_no}}</em></p>
+					<p>兑换截止：{{$item.CONFIG.end_day}}</p>
+				</div>
+			</div>
+			<div class="bottom">
+				<span class="tit">礼品详情</span>
+				<div class="con">{{$item.description}}</div>
+			</div>
+		</li>
+	{{/foreach}}
+	</ul>
+</div>

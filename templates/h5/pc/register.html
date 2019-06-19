@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>用户注册</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="{{$CONFIG.resource}}/style/2017/h5/pc/global.css?{{$CONFIG.build}}" rel="stylesheet" type="text/css" />
+	<link href="{{$CONFIG.resource}}/style/2017/h5/pc/register.css?{{$CONFIG.build}}" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/jquery.validator.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+<div class="register_bg">
+	<div class="register_main">
+    	<p class="tc"><a href="{{$CONFIG.url}}/"><img src="{{$CONFIG.resource}}/images/2017/h5/pc/logo.png?{{$CONFIG.build}}" height="70" /></a></p>
+        <div class="register_page clearfix"> 
+            <div class="reg_page_left"> 
+                <form method="post" action="{{$CONFIG.app_url}}/register.php" id="form">
+                	<input type="hidden" name="web" value="1" />
+	                 <div class="register">
+	                    <ul>
+	                        <li>
+	                        	<i class="ireg reg_ico1"></i>
+	                            <input name="LOGIN_ACCOUNT" type="text" id="username" class="reg_input" placeholder="帐号" />
+	                            <b><label class="nomal"></label></b>
+	                        </li>
+	                        <li>
+	                        	<i class="ireg reg_ico2"></i>
+	                            <input name="PASSWORD" id="password" type="password" class="reg_input" placeholder="密码" />
+	                            <b><label class="nomal"></label></b>
+	                        </li>
+	                        <li>
+	                        	<i class="ireg reg_ico2"></i>
+	                            <input name="PASSWORD1" type="password" class="reg_input" placeholder="确认密码" />
+	                            <b><label class="nomal"></label></b>
+	                        </li>
+	                        <li>
+	                        	<i class="ireg reg_ico3"></i>
+	                        	<input name="NAME" type="text" class="reg_input" placeholder="真实姓名" />
+	                        	<b><label class="nomal"></label></b>
+	                        </li>
+	                        <li>
+	                        	<i class="ireg reg_ico4"></i>
+	                        	<input name="ID_CARD_NUMBER" type="text" class="reg_input" placeholder="身份证" />
+	                        	<b><label class="nomal"></label></b>
+	                        </li>
+	                        <li>
+	                        	<i class="ireg reg_ico6"></i>
+	                            <input name="tel" type="text" class="reg_input" placeholder="手机号码" />
+	                        	<b><label class="nomal"></label></b>
+	                        </li>
+	                        <li>
+	                        	<i class="ireg reg_ico5"></i>
+	                            <input style="width:200px;" name="code" type="text" id="code" class="reg_input" placeholder="验证码" />
+	                            <img onclick="this.src= 'http://wvw.9377.com/code.php?' +Math.random();" src="http://wvw.9377.com/code.php" title="点击更换" class="php-code" />
+	                            <b><label class="nomal"></label></b>
+	                        </li>
+	                        <li>
+	                        	<i class="ireg reg_ico7"></i>
+	                            <input name="captcha" type="text" class="reg_input" placeholder="短信验证码" />
+	                            <input type="button" value="发送短信验证码" onclick="sendCaptchaX(this);" class="btn-captcha">
+	                            <b><label class="nomal"></label></b>
+	                        </li>
+	                        <li class="ac">
+	                        	<input data-rule="checkbox" class="check" name="TERMS" type="checkbox" id="checkboxname-p" value="checkbox" checked=""> 
+	                        	<a href="{{$CONFIG.url}}/yhxy.html" class="agreement" target="_blank">我已经阅读并同意《用户注册服务协议》</a>
+	                            <b><label class="nomal"></label></b>
+	                        </li>
+	                        <!-- <p class="regist_b" ><a href="javascript:;" onclick="$('#form').submit(); return false;"></a></p>-->
+	                        <li class="lisub"><input type="submit" value="注册" class="index_button" /></li>
+	                    </ul>
+	                   
+	                 </div>
+                    <input type="hidden" name="do" value="register" />
+                    <input type="hidden" name="cellphone" value="1" />
+                    <input type="hidden" name="register" value="1" />
+                    <input type="hidden" name="no_hint" value="1" />
+                    {{if $gourl}} <input type="hidden" name="gourl" value="{{$gourl}}" /> {{/if}}
+                </form>
+                <p style="color:#f00;">温馨提示：本游戏适合18岁(含)以上玩家娱乐</p>
+            </div>
+            <div class="reg_page_right">
+                <p>已有9377帐号，<a style="color:#237db2; text-decoration:underline" href="{{$CONFIG.app_url}}/pc_login.php?ac=login">可直接登录 »</a></p>
+                <br/><br/>
+                <p>第三方帐号登录：</p><br/>
+                <ul>
+                    <li><a href="javascript:;" onclick="window.location.href = '{{$CONFIG.app_url}}/api/qq.php?_qq_action=login&_9377_forward='+ encodeURIComponent($('#form input[name=gourl]').val()); return false;" target="_blank" rel="nofollow"><em class="qq_gray"></em>QQ登录</a></li>
+                    <li><a href="javascript:;" onclick="window.location.href = 'http://s.9377.com/api/wx_login.php?_wx_action=login&_s9377=1&_9377_forward='+ encodeURIComponent($('#form input[name=gourl]').val()); return false;" target="_blank" rel="nofollow"><em class="wx_gray"></em>微信登录</a></li>
+                    <li><a href="javascript:;" onclick="window.location.href = 'http://s.9377.com/api/weibo.php?_wb_action=login&_s9377=1&_9377_forward='+ encodeURIComponent($('#form input[name=gourl]').val()); return false;" target="_blank" rel="nofollow"><em class="wb_gray"></em>微博登录</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--脚注开始-->
+        {{include file="h5/pc/footer.html"}}
+        <!--脚注结束-->
+    </div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$(".register li input").focus(function(){
+			$(this).siblings("b").find(".nomal").show();	
+		});
+	});
+</script>
+<script type="text/javascript">
+
+$.validator.addMethod('valid_username', function(value, element){
+	return /^[a-zA-Z0-9\_]{4,20}$/.test(value);
+});
+
+$.validator.addMethod('valid_9377_username', function(value, element){
+	return !/9377/.test(value);
+});
+
+$.validator.addMethod('valid_name', function(value, element){
+	str=value.replace(/ /g,"")
+	if (str==''|| DataLength(str)<4 || DataLength(str)>16){return false}
+	var reg = /^[\u4E00-\u9FA5]+$/; 
+	if(!reg.test(str)){return false}
+	return true;
+});
+
+//身份证验证
+var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外"} 
+
+$.validator.addMethod('valid_id_card_number', function(sId, element){
+	var iSum=0
+	var info=""
+	if(!/^\d{17}(\d|x)$/i.test(sId))return false;
+	sId=sId.replace(/x$/i,"a");
+	if(aCity[parseInt(sId.substr(0,2))]==null)return false;
+	sBirthday=sId.substr(6,4)+"-"+Number(sId.substr(10,2))+"-"+Number(sId.substr(12,2));
+	var d=new Date(sBirthday.replace(/-/g,"/"))
+	if(sBirthday!=(d.getFullYear()+"-"+ (d.getMonth()+1) + "-" + d.getDate()))return false;
+	for(var i = 17;i>=0;i --) iSum += (Math.pow(2,i) % 11) * parseInt(sId.charAt(17 - i),11)
+	if(iSum%11!=1)return false;
+	return true;
+});
+
+//汉字长度判断
+function DataLength(fData)
+{
+    var intLength=0
+    for (var i=0;i<fData.length;i++)
+    {
+        if ((fData.charCodeAt(i) < 0) || (fData.charCodeAt(i) > 255))
+            intLength=intLength+2
+        else
+            intLength=intLength+1    
+    }
+    return intLength
+}
+
+$('#form').validate({
+	rules: {
+		LOGIN_ACCOUNT: {
+			required: true,
+			rangelength: [4, 20],
+			valid_username: true,
+			valid_9377_username: true,
+			remote: {
+				url: '/check_user.php',
+				cache: false,
+				data: {'do': 'user', 'new': 1, username: function(){ return $('#username').val(); }},
+				beforeSend: function(){}
+			}
+		},
+		
+		PASSWORD: {
+			required: true,
+			rangelength: [6, 20]
+		},
+		
+		PASSWORD1: {
+			required: true,
+			rangelength: [6, 20],
+			equalTo: '#password'
+		},
+		
+		NAME: {
+			required: true,
+			valid_name: true
+		},
+		
+		ID_CARD_NUMBER: {
+			required: true,
+			valid_id_card_number: true
+		},
+
+		tel: {
+			required: true,
+			rangelength: [11,11]
+		},
+		code: {
+			required: true,
+			remote: {
+				url: '/check_user.php',
+				cache: false,
+				data: {'do': 'code', 'new': 1, code: function(){ return $('#code').val(); }},
+				beforeSend: function(){}
+			}
+		},
+		captcha: {
+			required: true,
+			rangelength: [6, 6],
+		},
+		TERMS: {
+			required: true
+		}
+	},
+	
+	messages: {
+		LOGIN_ACCOUNT: {
+			required: '请填写账号名',
+			rangelength: '请填写4-20长度范围的用户名',
+			valid_username: '账号名只能由数字或字母组成',
+			valid_9377_username: '账号名不能包含9377',
+			remote: '账号名已存在'
+		},
+		
+		PASSWORD: {
+			required: '请填写密码',
+			rangelength: '请输入6-20位范围的密码'
+		},
+		
+		PASSWORD1: {
+			required: '请再次输入密码',
+			rangelength: '请输入6-20位范围的密码',
+			equalTo: '请确认两次输入的密码一致'
+		},
+		
+		NAME: {
+			required: '请填写真实姓名',
+			valid_name: '真实姓名填写错误，必须为中文'
+		},
+		
+		ID_CARD_NUMBER: {
+			required: '输入你的身份证',
+			valid_id_card_number: '请填写真实的身份证号码'
+		},
+
+		tel: {
+			required: '输入您的手机号码',
+			rangelength: '请填写正确的手机号码'
+		},
+		code: {
+			required: '请填写验证码',
+			remote: '请填写正确的验证码'
+		},
+		captcha: {
+			required: '输入短信验证码',
+			rangelength: '请填写正确的短信验证码'
+		},
+		TERMS: {
+			required: '请阅读注册协议并勾选同意'
+		}
+	},
+
+	submitHandler: function(form){
+		form.submit();
+		// try {
+		// 	var real_name = $('input[name="NAME"]').val();
+		// 	var card_id = $('input[name="ID_CARD_NUMBER"]').val();
+		// 	$.ajax({
+		// 		url: 'http://wvw.9377.com/api/idcard_check_interface.php',
+		// 		type: "GET",
+		// 		data: {
+		// 			'username': real_name,
+		// 			'id_card':card_id
+		// 		},
+		// 		timeout : 60000, //超时时间设置，单位毫秒
+		// 		// dataType: "json",
+		// 		dataType: "jsonp",
+		// 		jsonp:'callback',
+		// 		async: false,//异步
+		// 		cache:false, 
+		// 		success: function(result){
+		// 			if( result.status == -2 ) {
+		// 				alert('身份证号码格式不正确。');
+		// 				$('input[name="ID_CARD_NUMBER"]').focus();
+		// 				return false;
+		// 			}else if( result.status == -1 ) {
+		// 				alert('身份证号码和姓名不符。');
+		// 				$('input[name="ID_CARD_NUMBER"]').focus();
+		// 				return false;
+		// 			}else {
+		// 				form.submit();
+		// 			}
+		// 		}
+		// 	}); 
+		// } catch(e) {
+		// 	console.log(e);
+		// }
+		
+	},
+	
+	success: function(error, element){
+		error.removeClass('error').addClass('correct').html('&nbsp;');
+		//element.next('b').empty().append(error);
+	},
+	
+	errorClass: 'error',
+	validClass: 'correct',
+	
+	errorPlacement: function(error, element) {
+		element.parent().find('b').empty().append(error);
+	},
+	
+	invalidHandler: function(event, validator){
+		validator.element(validator.errorList[0].element);
+	},
+	
+	onkeyup: false
+});
+
+
+function sendCaptchaX(btn){
+	var phone = $('#form input[name=tel]'), vphone = phone.val(), ptip = phone.closest('.w-item').find('.w-tips'),
+		code = $('#form input[name=code]'), vcode = code.val(), ctip = code.closest('.w-item').find('.w-tips'), 
+		vbtn = $(btn);
+	if (vphone.length < 11) {
+		ptip.html('<label for="phone" generated="true" class="error">请填写正确手机号</label>')
+		return false;
+	}else{
+		// ptip.html('');
+	}
+	if (vcode.length != 4) {
+		ctip.html('<label for="code" generated="true" class="error">请填写验证码</label>')
+		return false;
+	}else{
+		// ctip.html('');
+	}
+
+	var param = {
+		'do' : 'register',
+		'tel' : vphone,
+		'cellphone' : 1,
+		'check_code' : 1,
+		'code' : vcode,
+		'send_captcha' : 'send',
+		'is_ajax' : 1
+	}
+	$.post('/h5/register.php', param, function(result) {
+		if (result.status == 0) {
+			vbtn.attr('disabled','disabled').addClass('w-button-disabled');
+			capt_cd = 60;
+			var capt_timer = setInterval(function(){
+				capt_cd--;
+				vbtn.val(capt_cd+'秒后重试');
+				if (capt_cd == 0) {
+					vbtn.val('发送验证码').removeAttr('disabled').removeClass('w-button-disabled');
+					clearInterval(capt_timer);
+				}
+			},1000);
+		}else{
+			ctip.html('<label for="code" generated="true" class="error">'+result.msg+'</label>');
+		}
+	},'json');
+}
+</script>
+
+
+</body>
+</html>

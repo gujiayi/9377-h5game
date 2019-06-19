@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="frontend" content="Jinlian">
+    <title>{{$title}}</title>
+	<meta name="keywords" content="{{$keywords}}">
+	<meta name="description" content="{{$description}}">
+    <meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/swiper.min.css?{{$CONFIG.build}}"/>
+	<link rel="stylesheet" type="text/css" href="{{$CONFIG.resource}}/style/2017/h5/wap2018/style.css?{{$CONFIG.build}}1sf" />
+    <script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/adaptive.js"></script>
+    <script type="text/javascript">
+        window['adaptive'].desinWidth = 1242;
+        window['adaptive'].baseFont = 36;
+        window['adaptive'].maxWidth = 640;
+        window['adaptive'].scaleType = 3;
+        window['adaptive'].init();
+    </script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/wap2018/h5_top.html"}}
+		<!-- <ul class="article-tit fix">
+			<li {{if $CATEGORY.id == '14665'}}class="on"{{/if}}><a href="http://h5.9377.com/xwzx/">游戏资讯</a></li>
+			<li {{if $CATEGORY.id == '14668'}}class="on"{{/if}}><a href="http://h5.9377.com/glzx/">游戏攻略</a></li>
+		</ul> -->
+		<div class="article-list">
+			{{data name="新闻列表"}}
+			<ul>
+				<!-- {{section name="list" loop=$artlist}}
+				<li><a href="{{$artlist[list].artlink}}" target="_blank"><span>{{$artlist[list].adddate|date_format:'%m-%d'}}</span>{{$artlist[list].title}}</a></li>
+				{{/section}} -->
+
+				{{foreach from=$DATA['新闻列表'].list item=item}}
+				<li><a href="{{$item.artlink}}" target="_blank"><span>{{$item.adddate|date_format:'%m-%d'}}</span>{{$item.title}}</a></li>
+				{{/foreach}}
+			</ul>
+		</div>
+	</div>
+    <script> var menuID = 2; </script>
+	{{include file="h5/wap2018/h5_footer.html"}}
+</body>
+</html>

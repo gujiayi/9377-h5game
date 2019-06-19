@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'icomoonx2';
+  src:  url('/images/2017/h5/fonts/g2/icomoon.eot?2017111032224');
+  src:  url('/images/2017/h5/fonts/g2/icomoon.eot?2017111032224#iefix') format('embedded-opentype'),
+    url('/images/2017/h5/fonts/g2/icomoon.ttf?2017111032224') format('truetype'),
+    url('/images/2017/h5/fonts/g2/icomoon.woff?2017111032224') format('woff'),
+    url('/images/2017/h5/fonts/g2/icomoon.svg?2017111032224#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoonx2' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* .icon-mobile:before {content: "\e909"; }
+.icon-email:before {content: "\e904"; }
+.icon-ceye:before {content: "\e900"; }
+.icon-close:before {content: "\e901"; }
+.icon-delete:before {content: "\e902"; }
+.icon-gams:before {content: "\e903"; }
+.icon-gift:before {content: "\e905"; }
+.icon-gg:before {content: "\e906"; }
+.icon-kf:before {content: "\e907"; }
+.icon-lock:before {content: "\e908"; }
+.icon-oeye:before {content: "\e90a"; }
+.icon-user2:before {content: "\e90b"; }
+.icon-user:before {content: "\e90c"; }
+.icon-arrr:before {content: "\e90d"; } 
+.icon-back :before {content: "\e90d"; } */
+
+
+
+.w-item:hover [class^="icon-"] { color: #f64956; transition: color .3s ease;}
+.userlogin-list .del { font-size: 14px; right: 5px;}
+
+.dialog-box { width: 90%; max-width: 310px; }
+.login-hd {padding: 14px 0 0 0; font-size: 24px;}
+.login-hd-tit { font-size: 20px; font-weight: normal; text-align: center;color:#f64956 }
+.mod-login .w-item { border-radius: 3px; }
+.mod-login .w-item .m-txt { position: absolute; top: 0px; right: 0px; color: #0090ff; line-height: 42px; padding: 0 10px; background: #fff; height: 38px; }
+.btn-submit, .btn-switch,.btn-submit1 {border-radius: 3px; margin: 10px auto 10px;}
+.btn-submit1 {margin: 10px auto 20px;}
+
+.login-group-tool { margin-left: -10px; margin-right: -10px; overflow: hidden; }
+.login-group-tool  li { width: 33.33%; float: left; }
+.login-group-tool  li a { display: block; line-height: 36px; color: #616161; text-align: center; position: relative;}
+/* .login-group-tool  li a:after { content: ' '; width: 1px; height: 18px; background: #cbcbcb; position: absolute; top: 12px; right: 0px; } */
+.login-group-tool  li a:hover { color: #333; }
+.login-group-tool  li:last-child a:after { display: none; }
+
+.userlogin-list { border-radius: 3px; padding: 0 10px;}
+.userlogin-list li { border-bottom: 1px dotted #ececec; }
+.userlogin-list li:last-child { border-bottom: 0 none; }
+.userlogin-list span {padding-left: 30px; line-height: 30px; color:#b5b5b5 }
+
+.mod-login .w-item .more:before { width: 10px; height: 10px; border: 1px solid #bababa; top: 13px; transform: rotate(45deg); border-top: 0 none; border-left: 0 none;}
+
+
+/*手机注册+普通注册*/
+.login-mod-sbox { width: 100%; border: 1px solid #8d8d8d; overflow: hidden; }
+.login-mod-sbox li { width: 50%; text-align: center; line-height: 32px; color: #787777; background: #eee; float: left; cursor: pointer;}
+.login-mod-sbox .active { background: #ccc; color: #000; }
+.w-item-wp { position: relative; }
+.w-item-s { width: 60%; }
+.mod-login .w-button { width: 36%; height: 42px; color: #3777ff; background:#fff;border: 1px solid #d5d5d5; right: 0; top: 0}
+.mod-login .w-button:focus{outline:0;}
+/*一键注册*/
+.login-hd img {width: 100px; }
+.onekey { font-size: 12px; text-align: center; color: #845d55; margin-top: 10px; line-height: 20px;}
+.mod-reg-onekey input:disabled { background: #fff; }
+.mod-reg-onekey .accinfo{padding: 12px 10px; line-height: 34px;}
+.mod-reg-onekey .login-btn{width:96%;margin:0 auto;}
+.mod-reg-onekey .btn-enter,.mod-reg-onekey .btn-reg { display: inline-block; width: 45%; height: 40px; line-height: 40px; font-size: 18px; color: #fff; text-align: center; margin: 15px 2%; border-radius: 2px; overflow:hidden;background: #f24767; }
+.mod-reg-onekey .btn-reg {background:#5186f0}
+
+/* 第三方登录 */
+.third-wp { width: 100%; text-align: center; position:absolute; left: 0px; bottom: 45px;}
+.btn-third-qq, .btn-third-wx { display:inline-block; width: 36%; max-width: 206px; margin: 0 5px; }
+
+/* 微信端登录界面 */
+.mask-login-wx {}
+.mask-login-wx .mod-login-ulogin .btn-submit, .mask-login-wx .mod-login-ulogin .btn-switch { margin-bottom: 0px; }
+.mask-login-wx .login-hd-tit { color: #ea3259; }
+.mask-login-wx .login-group-tool { margin: 5px 0; border-top: 0;}
+.mask-login-wx .login-group-tool li { width: auto; }
+.mask-login-wx .login-group-tool li:first-child a { text-align: left;}
+.mask-login-wx .login-group-tool li:last-child { float: right;}
+.mask-login-wx .login-group-tool li:last-child a { text-align: right;}
+.mask-login-wx .login-group-tool li a:after { display: none; }
+.mask-login-wx .mod-login-guide { padding: 0; }
+.mask-login-wx .mod-login-guide .login-form { text-align: center; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 15px 0; margin-top: 10px;}
+.mask-login-wx .mod-login-guide .icon-wechat, .mask-login-wx .mod-login-guide .icon-qqqb { font-family: 'icomoon' !important;}
+.mask-login-wx .mod-login-guide .login-form i { width: 50px; height: 50px; line-height: 48px; text-align: center; font-size: 30px!important; border: 1px solid; border-radius: 50%;}
+.mask-login-wx .mod-login-guide .icon-wechat { color: #00d10c; border-color: #00d10c; }
+.mask-login-wx .mod-login-guide .icon-qqqb { color: #4ea9ef; border-color: #4ea9ef; }
+.mask-login-wx .mod-login-guide .icon-mobile { color: #47e8c9; border-color: #47e8c9; }
+.mask-login-wx .mod-login-guide .login-group-tool { padding: 0 25px; }
+
+.mask-login-wx .login-mod-sbox { border: 0; }
+.mask-login-wx .login-mod-sbox li { color: #787777; background: #eaeaea;}
+.mask-login-wx .login-mod-sbox .active { color: #fff; background: #f64956;}
+
+.mask-login-wx .mod-login .w-button { background: none; color: #00baff; border-left: 1px solid #d5d5d5; }
+.mask-login-wx .mod-reg-pub .login-fun { font-size: 12px;}
+input[name="terms"] { width: 18px; height: 18px;vertical-align: top;background-color: #fff;-webkit-appearance:none;border: 1px solid #c9c9c9;border-radius: 2px;outline: none;}
+.login-fun input[type=checkbox]:checked{ background: url("/images/2018/read.png")no-repeat center;}
+/* 微信端登录界面 */
+/* 忘记密码 */
+.login-fun { overflow:hidden; margin: 15px 0; line-height: 14px;color:#616161 }
+.login-fun a { color: #343434; line-height:18px; }
+
+.validateCode {position: absolute; top: 0;  right: 0;width: 36%;height: 42px;border-radius: 3px;
+}

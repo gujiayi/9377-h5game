@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{$row.title}} | 耐玩游戏</title>
+    <meta name="keywords" content="{{$row.keyword}}" />
+    <meta name="description" content="{{$row.description}}" />
+    <meta content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/style.game2.css?{{$CONFIG.build}}" />
+</head>
+
+<body class='article-wrap'>
+    <div class="detail-wrap ">
+        <div class="detail">
+            <div class='top'>
+                <a class="icon-back" onclick="window.history.back()"></a>
+                <div class='sub' >消息详情</div>
+                <a class='icon-close' onclick='javascript:G9377.detail_close()'></a>
+            </div>
+            <div class='container'>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+<script></script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/main.game2.js?{{$CONFIG.build}}"></script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/common.js?{{$CONFIG.build}}"></script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/loadJsCss.js?{{$CONFIG.build}}"></script>
+<script>
+    var detailId = GetRequest().id;
+    G9377.getindexDetail(detailId)
+</script>
+
+</html>

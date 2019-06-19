@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="耐玩 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>耐玩 H5游戏平台登录</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/style.game2.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/game_login.css?{{$CONFIG.build}}" />
+    <style>.login-way{display:flex}.login-way .line{flex:1;height:1px;background:#656565;margin:18px 22px 0}.login-way .login-hd-tit{line-height:36px;font-size:12px;color:#000}</style>
+</head>
+    <body>
+        <div class="login-bg" style='width:100%;height:100%'>
+			{{data name="背景图{{$gid}}"}}
+			{{data name="背景大图{{$gid}}"}}
+			{{if $smarty.const.DEVICE_PLATFORM != 0}}
+				 {{$DATA["背景图{{$gid}}"]}}
+			{{else}}
+				{{$DATA["背景大图{{$gid}}"]}}
+			{{/if}}
+		</div>
+        <div class="mask" id="login-pop">
+             <!-- 选择登录方式 -->
+             <div class="dialog-box mod-login mod-login-module mod-login-userLogin none"> 
+                    <div class="login-hd login-way">
+                        <div class="line"></div> 
+                        <div class="login-hd-tit">请选择登录方式</div> 
+                        <div class="line"></div>
+                    </div> 
+                    <div class="login-form"> 
+                        <div class="w-form"> 
+                            <a href="javascript:;" class="btn-submit1" onClick="javascript:H9377.loadLoginMode('onekey');" style='background:#f24767'>快速登录</a> 
+                            <a href="javascript:;" class="btn-submit1" onClick="javascript:H9377.loadLoginMode('reg');" style='background:url("{{$CONFIG.resource}}/images/2018/referrer.png") #39bbec no-repeat right;background-size:contain'>手机登录</a>  
+                            <a href="javascript:;" class="btn-submit1" onClick="javascript:H9377.loadLoginMode('reg');" style='background: #42e9a4'>账号登录</a> 
+                        </div> 
+                    </div> 
+                </div>
+            <!-- 已有账号用户登录 -->
+            <div class="dialog-box mod-login mod-login-module   mod-login-ulogin none"> 
+                <div class="login-hd"> <div class="login-hd-tit">登录游戏</div> </div> 
+                <div class="login-form"> 
+                    <div class="w-form"> 
+                        <div class="w-item"> <i class="icon-user"></i> <input oninput='H9377.clearUserName(this)' name="username" type="text" placeholder="账号"> <b class="more"></b> </div>
+                        <div class="w-item-wp"> 
+                            <div class="w-item"> <i class="icon-lock" ></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+                            <i class='icon-password icon-noSee' onClick="H9377.openPassword(this);" ></i>
+                            <div class="place none"></div>
+                        </div> 
+                        <a href="javascript:;" class="btn-submit" onClick="H9377.userLogin(this)">登 录</a> 
+                    </div> 
+                </div> 
+                <ul class="login-group-tool"> 
+                    <li style='width:40%'><a href="javascript:H9377.loadLoginMode('onekey','goback');">其他方式注册</a></li> 
+                    <li style='float:right'><a href="/csi/GetPass/index?gourl={{$gourl}}">忘记密码？</a></li> 
+                </ul> 
+                
+            </div>
+           
+            <!-- 手机注册 -->
+            <div class="dialog-box mod-login mod-login-module mod-reg-phone none" > 
+                <div class="login-hd tc">
+                    <div class="login-hd-tit">手机注册</div> 
+                    <a href="javascript:H9377.loadLoginMode('select');" class="icon-back"  style='position:absolute;left:10px;top:18px'></a>
+                </div>
+                 <div class="login-form"> 
+                    <div class="w-form"> 
+                        <div class="w-item"> <i class="icon-mobile" ></i> <input name="cellphone" oninput="javascript:H9377.setNumber(this,11)" type="number" placeholder="请输入您的手机号码"> </div> 
+                        <div class="w-item-wp"> 
+                            <div class="w-item"> <i class="icon-lock" ></i> <input name="password" type="password" maxlength='16'  placeholder="请输入密码"> </div> 
+                            <i class='icon-password icon-noSee' onClick="H9377.openPassword(this);" ></i>
+                            <div class="place none"></div>
+                        </div>
+                        <div class="w-item-wp">
+                            <div class="w-item" > <i class="icon-email"></i> <input class='text'  maxlength='4'  name='imgcode' type="text" placeholder="请输入图片验证码" > </div> 
+                            <img  src='' onClick="H9377.createCode('validateCode')" class='validateCode'>
+                        </div>
+                        <div class="w-item-wp"> 
+                            <div class="w-item " > <i class="icon-email" ></i> <input name="captcha" type="number"  oninput="javascript:H9377.setNumber(this,6)" placeholder="请输入手机验证码"> </div> 
+                            <button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this);">发送验证码</button> 
+                        </div> 
+                        
+                        <div class="login-fun"><input type="checkbox" name="terms" checked> <a href="http://www.9377.com/yhxy.html" target="_blank">我同意“服务条款”和“隐私条约”</a></div>
+                        <a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'phone','terms')">注册并登录</a> 
+                    </div> 
+                </div> 
+                <ul class="login-group-tool"> 
+                    <li style='float: right;'><a href="javascript:H9377.loadLoginMode('normal');">已有账号</a></li> 
+                </ul> 
+            </div>
+             <!-- 该手机号已注册 -->
+            <div class="dialog-box mod-login mod-login-module mod-btn none" id='tips-login'>
+                <div class="login-hd tc">
+                    <div class="login-hd-tit">提示</div> 
+                </div>
+                <div class="accinfo" >
+                    <p class="aitem" style="margin-left:0;text-align: center;">该帐号已注册，请进行登录或重新输入</p>
+                </div>
+                <div class="login-btn">
+                    <a class="btn-reg" href="javascript:;" >前往登录</a>
+                    <a  class="btn-enter" href="javascript:;">重新输入</a>
+                </div>
+            </div>
+            <!-- 普通注册 -->
+            <div class="dialog-box mod-login mod-login-module mod-reg-pub none"> 
+                <div class="login-hd tc">
+                    <div class="login-hd-tit">账号注册</div> 
+                    <a href="javascript:H9377.loadLoginMode('select');" class="icon-back"  style='position:absolute;left:10px;top:18px'></a>
+                </div>
+                <div class="login-form"> 
+                    <div class="w-form"> 
+                        <div class="w-item"> <i class="icon-user" ></i> <input name="username" maxlength='16' type="text" placeholder="请输入账号"> </div> 
+                        <div class="w-item-wp"> 
+                            <div class="w-item"> <i class="icon-lock" ></i> <input name="password" maxlength='16' type="password" placeholder="请输入密码"> </div> 
+                            <i class='icon-password icon-noSee' onClick="H9377.openPassword(this);" ></i>
+                            <div class="place none"></div>
+                        </div> 
+                        <a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'reg')">注 册</a>
+                    </div> 
+                </div> 
+               
+            </div>
+            <!-- 快速注册 -->
+            <div class="dialog-box mod-login mod-login-module mod-reg-onekey none"> 
+                <div class="login-hd tc">
+                    <div class="login-hd-tit">快速注册</div> 
+                    <a href="javascript:H9377.loadLoginMode('select');" class="icon-back"  style='position:absolute;left:10px;top:18px'></a>
+                </div>
+                <div class="login-form"> 
+                    <div class="w-form "> 
+                        <div class="w-item"> <i class="icon-visitor" ></i> <input  name="username" readonly type="text" placeholder="请输入账号"  onClick="H9377.dialog('当前账号为自动生成<br>无法修改')"> </div> 
+                        <div class="w-item"> <i class="icon-lock" ></i> <input id='inputPW' name="password" maxlength='16' type="text" placeholder="请输入密码" > </div> 
+                        <a href="javascript:;" class="btn-submit" >进入游戏</a> 
+                        
+                    </div> 
+                </div> 
+                <ul class="login-group-tool"> 
+                    <li><a href="javascript:H9377.loadLoginMode('phone');">手机注册</a></li> 
+                    <li><a href="javascript:H9377.loadLoginMode('reg');">账号注册</a></li> 
+                    <li><a href="/csi/GetPass/index?gourl={{$gourl}}">忘记密码？</a></li> 
+                </ul> 
+            </div>
+            <!-- 一键登录，第二次登录-->
+                <div class="dialog-box mod-login mod-login-module mod-btn mod-reg-onekey-tips  none" id='mod-reg-onekey-tips'>
+                    <div class="login-hd tc">
+                        <div class="login-hd-tit">提示</div> 
+                        <!-- <a href="javascript:;" class="icon-back" style='position:absolute;left:10px;top:18px'></a> -->
+                        </div>
+                    <div class="accinfo" >
+                        <p class="aitem">账号：qy***</p>
+                        <p class="aitem">密码：123456789</p>
+                        <p class='acctext'>账号密码已截图存放至相册</p>
+                    </div>
+                    <div class="login-btn">
+                        <a class="btn-reg" >账号升级</a>
+                        <a  class="btn-enter" href="javascript:;">快速游戏</a>
+                    </div>
+                    <div class="login-form"> 
+                        <input name="username" disabled="disabled" type="hidden" >
+                        <input name="password" disabled="disabled" type="hidden" >
+                    </div> 
+                </div>
+        
+</body>
+</html>
+<script src="{{$CONFIG.resource}}/js/2018/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+<script type="text/javascript"> C9377.build = '{{$CONFIG.build}}', C9377.gid = '{{$gid}}'; var sign = '{{$sign}}',time='{{$time}}',gourl = '{{$gourl}}',gid='{{$gid}}';</script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/main.game2.js?{{$CONFIG.build}}"></script>
+<script>
+    localStorage.setItem('landscape',H9377.ext7)
+	function thirdLogin(type){
+		try {
+			if (type == 'wx') {
+				window.AndroidUtils.WXLogin();
+			}else if (type == 'qq'){
+				window.AndroidUtils.QQLogin();
+			}
+		} catch(e) {
+			console.log(e);
+		}
+	}
+</script>

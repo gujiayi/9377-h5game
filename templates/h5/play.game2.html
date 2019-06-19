@@ -1,0 +1,590 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{$G.CONFIG.alias_name}}_耐玩{{$G.CONFIG.alias_name}}h5游戏_一起玩更快乐</title>
+    <meta name="keywords" content="{{$G.CONFIG.alias_name}},耐玩{{$G.CONFIG.alias_name}}" />
+    <meta name="description" content="耐玩游戏平台{{$G.CONFIG.alias_name}}，{{$G.CONFIG.alias_name}}h5游戏，在线手机网页游戏，无需下载，快速玩页戏。耐玩手游{{$G.CONFIG.alias_name}}，一起玩更快乐。" />
+    <meta content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/play.game2.css?{{$CONFIG.build}}" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/game_login.css?{{$CONFIG.build}}" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/style.game2.css?{{$CONFIG.build}}" />
+    {{if $G.ID == '715'}} <style>
+        .loading { background-image: url('{{$CONFIG.resource}}/images/2017/h5/loading/xkx.jpg?20180423');} </style>
+    {{/if}}
+    {{if $G.CONFIG.parent == '736' || $G.CONFIG.parent == '739'}}
+    <style> .mask-wxshare { background-image: url('/images/2017/h5/wxshare-qzsg.png?{{$CONFIG.build}}');} </style>
+    {{/if}}
+    {{if $G.CONFIG.parent == '934' || $G.CONFIG.parent == '937'}}
+    <style>
+        .mask-wxshare { background-image: url('/images/2017/h5/wxshare-rxzr.png?{{$CONFIG.build}}');} .mask-qr .qr-wp { width: 90%; } </style>
+    {{/if}}
+</head>
+<script>
+    function nofind(evnet) {
+        var img = event.srcElement;
+        img.src = "/images/2018/01.png";
+        img.onerror = null;
+    }
+</script>
+
+<body scroll="no">
+    <div class="loading" id="loading"></div>
+    <iframe scrolling="no" id="ifr" src="{{$url}}" frameborder="0" width="100%" height="100%"></iframe>
+    <!-- 浮标 -->
+    <div class="floatmod floaticon-right" id="floatmod">
+        <img src="{{$CONFIG.resource}}/images/2018/floaticonv2.png" width="50" class="floaticon" id="floaticon">
+        <ul class="float-menu">
+            <li><a href="javascript:H9377.selectUcMod('per');"><i class="icon-personal"></i>
+                    <p>个人中心</p>
+                </a></li>
+            <li><a href="javascript:H9377.selectUcMod('kf');"><i class="icon-customer"></i>
+                    <p>客服中心</p>
+                </a></li>
+            <li>
+                <a href="javascript:H9377.selectUcMod('bindphone');" style="position:relative">
+                    <i class="icon-account"></i>
+                    <span></span>
+                    <p>账号升级</p>
+                </a>
+            </li>
+            <li><a href="javascript:H9377.selectUcMod('ctl');"><i class="icon-name"></i>
+                    <p>实名认证</p>
+                </a>
+            </li>
+            <li><a href="javascript:G9377.selectPersonal('account');"><i class="icon-switch"></i>
+                <p>切换账号</p>
+            </a>
+        </li>
+        </ul>
+    </div>
+    <div class="pay-wp">
+        <a href="javascript:closePayWindows();" class="pay-close icon-close"></a>
+        <iframe src="" frameborder="0" id="iframe-pay"></iframe>
+    </div>
+    <div class="kf-wp">
+        <a href="javascript:closeKfWindows();" class="close"></a>
+        <iframe src="" frameborder="0" id="iframe-pay"></iframe>
+    </div>
+    <!-- QQ超级会员浮标 -->
+    <div class="qqvipicon" id="qqvipicon"> <img src="{{$CONFIG.resource}}/images/2017/h5/yyb/floaticonv.png?{{$CONFIG.build}}"
+            width="46"> </div>
+    <!-- QQ超级会员 -->
+    <div class="mask qqvip-card-wp none" id="qqvip-card-wp">
+        <i class="vc-close icon-close" onClick="vcHide()"></i>
+        <iframe scrolling="no" src="" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+    <!-- QQ超级会员礼包 -->
+    <div class="mask none" id="mask-card">
+        <i class="mask-close" onClick="QQVIPCardHide()"></i>
+        <div class="dialog-box dialog-card">
+            <h3 class="hd-card">会员特权礼包</h3>
+            <div class="bd-card">
+                <p class="txt1">恭喜你获得会员特权礼包，请复制以下激活码，打开福利大厅进行兑换。</p>
+                <p class="txt2">温馨提示：完成前40级主线任务即可开启福利大厅。(点击空白区域，关闭礼包窗口)</p>
+                <img src="{{$CONFIG.resource}}/images/2017/h5/yyb/hd-qqvipcard.jpg?{{$CONFIG.build}}x">
+                <ul class="card-list">
+                    <!-- js加载 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{include file="h5/login.tpl2.html"}}
+    <div class='none' id='uc-pop'>
+        <!-- <div class='bottom-line' ></div> -->
+        <div id='container_h5'>
+            <div class="container-wrap">
+                <!-- ************************************个人中心 ************************************-->
+                <div class="personal-wrap none mask-box">
+                    <div class="avatar">
+                        <img id='avatar' onclick='H9377.selectAvatar()' src=''>
+                        <p class="phone">{{$user['LOGIN_ACCOUNT']}}</p><em style='display:none'>{{$user['LOGIN_ACCOUNT']}}</em>
+                        <a href='javascript: ;' class='icon-close dialog-close' style='position:absolute;right:10px;top:11px;'></a>
+                    </div>
+                    <!-- 2018-12-11 -->
+                    <div class='container'>
+                        <div class="mask avatar-box none ">
+                            <div class="dialog-box mod-login mod-login-module ">
+                                <div class="login-hd tc">
+                                    <div class="login-hd-tit">更换头像</div>
+                                    <a href='javascript:H9377.closeAvatarBox();' title="关闭" class=" icon-close" style="position:absolute;top:13px;right:10px;"></a>
+                                </div>
+                                <ul style='display: flex;flex-wrap:wrap;padding:10px 0;'></ul>
+                            </div>
+                        </div>
+                        <div class='list-wrap'>
+                            <div class="list" onclick="javascript:G9377.selectPersonal('msg-wrap');">
+                                <i class="icon-msg"></i>
+                                <p class='sub'>消息中心</p>
+                                <span></span>
+                            </div>
+                            <div class="list " onclick="javascript:G9377.selectPersonal('account');">
+                                <i class="icon-account"></i>
+                                <p class='sub'>切换账号</p>
+                                <span></span>
+                            </div>
+                            <div class="list " onclick="javascript:H9377.selectUcMod('bindphone');">
+                                <i class="icon-bindphone"></i>
+                                <p class='sub'>绑定手机</p>
+                                <span></span>
+                            </div>
+                            <div class="list" onclick="javascript:G9377.selectPersonal('safety-wrap');">
+                                <i class="icon-safety"></i>
+                                <p class='sub'>安全中心</p>
+                                <span></span>
+                            </div>
+                            <div class="list" onclick="javascript:H9377.selectUcMod('kf');">
+                                <i class="icon-customer "></i>
+                                <p class='sub'>客服中心</p>
+                                <span></span>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- ************************************礼包中心 ************************************-->
+                <div class="gift-wrap none  mask-box" id='rob-list'>
+                    <div class='top'>
+                        <a href='javascript:;'></a>
+                        <div class='sub'>礼 包</div>
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+
+                    <div class="title">
+                        <ul>
+                            <li class='hover'>领取礼包</li>
+                            <li>我的礼包</li>
+                        </ul>
+                    </div>
+                    <div class='container'>
+                        <div class='wrap'>
+                            <div class="contentGet">
+
+                            </div>
+                            <div class=" contentMine" style='display: none'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ************************************资讯 ************************************-->
+                <div class="news-wrap  npm-wrap  none  mask-box">
+                    <div class='top'>
+                        <a href='javascript:;'></a>
+                        <div class='sub'>快速资讯</div>
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container'>
+                        <div class="list-wrap">
+                            <ul class="news-list">
+                                {{data name="文章列表{{$G.ID}}"}}
+                                {{foreach from=$DATA["文章列表{{$G.ID}}"].list item=item}}
+                                {{if $item.typename == '最新资讯'}}
+                                <a href="javascript:;" class="list" data-id="{{$item.id}}">
+                                    <div class='left'><img src="{{$item.picurl}}?{{$CONFIG.build}}" _src="/{{$item.picurl}}?{{$CONFIG.build}}"
+                                            onerror="nofind();" alt="" class='img'></div>
+                                    <div class="right">
+                                        <h3 class="contentSub">{{$item.title}}</h3>
+                                        <p class="show">{{$item.description}}</p>
+                                    </div>
+                                </a>
+                                {{/if}}
+                                {{/foreach}}
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- ************************************攻略************************************ -->
+                <div class="PSP-wrap none npm-wrap  mask-box">
+                    <div class='top'>
+                            <a href='javascript:;'></a>
+                        <div class='sub'>攻略</div>
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class="check">
+                        <p class='checked'>全部攻略</p>
+                        {{data name="游戏攻略"}}
+                        {{foreach from=$DATA["游戏攻略"].list item=item}}
+                        <p>{{$item.name}}</p>
+                        {{$gameArr[] = $item['name']}}
+                        {{/foreach}}
+                    </div>
+                    <div class='container'>
+                        <div class="list-wrap">
+                            <ul class="news-list">
+                                {{foreach from=$DATA["文章列表{{$G.ID}}"].list item=item}}
+                                {{if in_array($item['typename'],$gameArr)}}
+                                <a href="javascript:;" class="list" data-id="{{$item.id}}">
+                                    <div class="left"><img src="{{$item.picurl}}?{{$CONFIG.build}}" _src="/{{$item.picurl}}?{{$CONFIG.build}}"
+                                            onerror="nofind();" alt="" class="img"></div>
+                                    <div class="right">
+                                        <h3 class="contentSub">{{$item.title}}</h3>
+                                        <p class="show">{{$item.description}}</p>
+                                    </div>
+                                </a>
+                                {{/if}}
+                                {{/foreach}}
+                            </ul>
+                        </div>
+                        <div class='none'></div>
+                        {{foreach from=$gameArr item=item1}}
+                        <div class="list-wrap none">
+                            <ul class="news-list">
+                                {{foreach from=$DATA["文章列表{{$G.ID}}"].list item=item}}
+                                {{if $item['typename']==$item1}}
+                                <a href="javascript:;" class="list" data-id="{{$item.id}}">
+                                    <div class="left"><img src="{{$item.picurl}}?{{$CONFIG.build}}" _src="/{{$item.picurl}}?{{$CONFIG.build}}"
+                                            onerror="nofind();" alt="" class="img"></div>
+                                    <div class="right">
+                                        <h3 class="contentSub">{{$item.title}}</h3>
+                                        <p class="show">{{$item.description}}</p>
+                                    </div>
+                                </a>
+                                {{/if}}
+                                {{/foreach}}
+                            </ul>
+                        </div>
+                        {{/foreach}}
+
+                    </div>
+                </div>
+                <!-- 安全中心 -->
+                <div class="safety-wrap none  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('personal-wrap');" class="icon-back"></a>
+                        <div class='sub'>安全中心</div>
+
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class="avatar">
+                        <img src='{{$CONFIG.resource}}/images/2018/avatar.png'>
+                        <p class="phone">当前登录：<span>{{$user['LOGIN_ACCOUNT']}}</span></p>
+                    </div>
+                    <div class='container'>
+                        <ul class="list-wrap">
+                            <li onclick="javascript:H9377.selectUcMod('edit-pass-wrap');">
+                                <i class="edit-pass"></i>
+                                <p>修改密码</p>
+                            </li>
+                            <li onclick="javascript:H9377.selectUcMod('ctl');">
+                                <i class="edit-name"></i>
+                                <p>实名信息</p>
+                            </li>
+                            <li onclick="javascript:H9377.selectUcMod('updataphone');">
+                                <i class="edit-phone"></i>
+                                <p>更换手机</p>
+                            </li>
+                            <li onclick="javascript:H9377.selectUcMod('help-wrap');">
+                                <i class="edit-help"></i>
+                                <p>帮助中心</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 消息中心 -->
+                <div class="npm-wrap msg-wrap msg-center none  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('personal-wrap');" class="icon-back"></a>
+                        <div class='sub'>消息中心</div>
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container'>
+                        <div class="list-wrap">
+                            <ul class="news-list ">
+                                {{foreach from=$DATA["文章列表{{$G.ID}}"].list item=item}}
+                                {{if $item.typename == '热门活动'}}
+                                <a href="javascript:;" class="list" data-id="{{$item.id}}">
+                                    <div class="left"><img src="{{$item.picurl}}?{{$CONFIG.build}}" _src="{{$item.picurl}}?{{$CONFIG.build}}"
+                                            onerror="nofind();" alt="" class="img"></div>
+                                    <div class="right">
+                                        <h3 class="contentSub">{{$item.title}}</h3>
+                                        <p class="show">{{$item.description}}</p>
+                                        <span class="data-time">{{$item.adddate|date_format:'%Y-%m-%d'}}</span>
+                                    </div>
+                                </a>
+                                {{/if}}
+                                {{/foreach}}
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 绑定手机 -->
+                <div class="bingphone-wrap  none phone-wrap  mask-box" style='padding:0'>
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('personal-wrap');" class="icon-back"></a>
+                        <div class='sub'>绑定手机</div>
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container mod-login'>
+                        <div class="current_phone">您正在更换账号：<span class='phone'></span></div>
+                        <div class="login-form">
+                            <div class="w-form">
+                                <div class="w-item" >
+                                     <i class="icon-mobile"></i>
+                                     <input name="cellphone" type="number" oninput="javascript:H9377.setNumber(this,11)"
+                                        placeholder="请输入您的手机号码">
+                                    <div class="place1" style='position:absolute;left:38px; top:9px'></div>
+                                     </div>
+                                <div class="w-item-wp w-item-img">
+                                    <div class="w-item"> <i class="icon-email"></i> <input name='textimg' class='text'
+                                            maxlength='4' type="text" placeholder="请输入图片验证码"> </div>
+                                    <img src='' onClick="H9377.createCode('bindcode')" id='bindcode' style='position: absolute;top:0;right:0;width:36%;height:42px;border-radius: 3px;'>
+                                </div>
+                                <div class="w-item-wp">
+                                    <div class="w-item "> <i class="icon-email"></i> <input name="captcha" type="number" oninput="javascript:H9377.setNumber(this,6)"
+                                            maxlength='6' placeholder="请输入手机验证码"> </div>
+                                    <button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this,'bindphone');">发送验证码</button>
+                                </div>
+                                <a href="javascript:;" class="btn-submit" onClick="H9377.bindPhone(this);">确 认</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客服中心 -->
+                <div class="customer-wrap none  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('personal-wrap');" class="icon-back"></a>
+                        <div class='sub'>客服中心</div>
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='code'>
+                        <img src='/images/2018/code.png'>
+                    </div>
+                    <div class='list-wrap'>
+                        <div class="list" onclick='javascript:G9377.openQQ()'>
+                            <i class="icon-qq"></i>
+                            <p class='sub'>QQ：3382286991</p>
+                        </div>
+                        <div class="list" onclick='javascript:G9377.openPhone()'>
+                            <i class="icon-phone"></i>
+                            <p class='sub'>电话：<a style='color:#333' tel='18127969906'>18127969906</a></p>
+                        </div>
+                        <div class="list">
+                            <i class="icon-time"></i>
+                            <p class='sub'>工作时间：周一至周日 09：00-21：00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 修改密码 -->
+                <div class="edit-pass-wrap none  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('safety-wrap');" class="icon-back"></a>
+                        <div class='sub'>修改密码</div>
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container'>
+                        <p></p>
+                        <div class=" mod-login mod-uc mod-uc-pass " style='padding:0'>
+                            <div class="w-form">
+                                <div class="w-item">
+                                     <i class="icon-mobile"></i> 
+                                     <input readonly name="cellphone" type="number" oninput="javascript:H9377.setNumber(this,6)"
+                                        placeholder="请输入您的手机号码">
+                                    <div class="place1" style='position:absolute;left:38px; top:9px'></div>
+                                </div>
+                                <div class="w-item-wp">
+                                    <div class="w-item">
+                                        <i class="icon-email"></i>
+                                        <input name='textpass' class='textpass' maxlength='4' type="text" placeholder="验证码">
+                                    </div>
+                                    <img src='' onClick="H9377.createCode('editcode')" id='editcode' style='position: absolute;top:0;right:0;width:36%;height:42px;border-radius: 3px;'>
+                                </div>
+                                <div class="w-item-wp">
+                                    <div class="w-item "> <i class="icon-email"></i> <input name="captcha" type="number" oninput="javascript:H9377.setNumber(this,6)"
+                                            placeholder="请输入验证码"> </div>
+                                    <button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this,'editphone');">发送验证码</button>
+                                </div>
+                                <div class="w-item">
+                                    <i class="icon-lock"></i>
+                                    <input name="password" type="password" maxlength="20" placeholder="请设置新密码">
+                                    <i class='icon-password icon-noSee' onClick="H9377.openPassword(this);"></i>
+                                    <div class="place none"></div>
+                                </div>
+                                <a href="javascript:;" class="btn-submit" onClick="H9377.modifyPass(this)">确 定</a>
+                                <div class='current_phone' style='text-align: center'>客服QQ:2850907640</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='container'></div>
+                </div>
+                <!-- 实名认证 -->
+                <div class="edit-name-wrap none  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('safety-wrap');" class="icon-back"></a>
+                        <div class='sub'>实名认证</div>
+
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container'>
+                        <div class="current_phone">您正在设置账号<span class='phone'>"{{$user['LOGIN_ACCOUNT']}}"</span>的实名认证</div>
+                        <div class="mod-login mod-uc mod-uc-idv ">
+                            <div class="w-form">
+                                <div class="w-item"> <i class="icon-user"></i> <input name="realname" type="text"
+                                        placeholder="真实姓名" value="{{$user.NAME}}"> </div>
+                                <div class="w-item"> <i class="icon-card"></i> <input name="idc" type="text"
+                                        placeholder="本人身份证号码" value="{{$user.ID_CARD_NUMBER}}">
+                                </div>
+                                <a href="javascript:;" class="btn-submit" onClick="H9377.bindIdc(this)">确 认</a>
+                            </div>
+                        </div>
+
+                        <!-- 实名认证确认信息 -->
+                        <div class="mask none commit-mask ">
+                            <div class="dialog-box mod-login mod-login-module mod-btn  mod-reg-onekey-tips">
+                                <div class="login-hd tc">
+                                    <div class="login-hd-tit">确认信息</div>
+                                </div>
+                                <div class="accinfo">
+                                    <p>姓名：<span class="realname" id='realname'></span></p>
+                                    <p>身份证号码：<span class="id_card" id='id_card'></span></p>
+                                    <p style='color:#f6587b'>*实名信息设置成功后无法修改，请再次确认。</p>
+                                </div>
+                                <div class="login-btn">
+                                    <a onclick="javascript:G9377.selectPersonal('onekey-tips-back');" class="btn-reg">返回重填</a>
+                                    <a href="javascript:;" class="btn-submit">确认提交</a>
+                                </div>
+                                <div class="login-form">
+                                    <input name="username" disabled="disabled" type="hidden">
+                                    <input name="password" disabled="disabled" type="hidden">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 实名认证提示信息 -->
+                <div class="name-confirm-wrap name-wrap none  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('safety-wrap');" class="icon-back"></a>
+                        <div class='sub'>实名认证</div>
+
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container'>
+                        <div class="readname">
+                            <img src='{{$CONFIG.resource}}/images/2018/name_submit.png'>
+                            <p style='text-align: center'>您的账号{{$user['LOGIN_ACCOUNT']}}实名信息已提交!</p>
+                            <span>一旦验证成功,查询"实名信息"我们将会返回给您关于个人实名认证的相关结果</span>
+                        </div>
+                        <div class="login-btn">
+                            <a href="javascript:;" class="btn-submit" onclick="javascript:G9377.selectPersonal('safety-wrap');">我知道了</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 实名认证确定信息成功 -->
+                <div class="name-succecc-wrap name-wrap mod-btn none  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('personal-wrap');" class="icon-back"></a>
+                        <div class='sub'>实名认证</div>
+
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container'>
+                        <div class="readname">
+                            <img src='{{$CONFIG.resource}}/images/2018/name_submit.png'>
+                            <p>设置成功!</p>
+                            <span>用户账号:"{{$user['LOGIN_ACCOUNT']}}"</span>
+                            <span class='success-pass'>已通过实名认证</span>
+                        </div>
+                        <div class="login-btn">
+                            <a href="javascript:G9377.selectPersonal('close');" class="btn-reg">进入游戏</a>
+                            <a href="javascript:;" class="btn-submit" onClick="javascript:G9377.selectPersonal('safety-wrap');">返回上一层</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 帮助中心 -->
+                <div class="help-wrap none npm-wrap  mask-box">
+                    <div class='top'>
+                        <a href="javascript:G9377.selectPersonal('safety-wrap');" class="icon-back"></a>
+                        <div class='sub'>帮助中心</div>
+
+                        <a href='javascript: ;' class=' icon-close dialog-close'></a>
+                    </div>
+                    <div class='container'>
+                        <ul class="news-list ">
+                            {{foreach from=$DATA["文章列表{{$G.ID}}"].list item=item}}
+                            {{if $item.typename == '帮助中心'}}
+                            <a href="javascript:;" class="list" data-id="{{$item.id}}">
+                                <h3 class="contentSub">{{$item.title}}</h3>
+                                <span></span>
+                            </a>
+                            {{/if}}
+                            {{/foreach}}
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-wrap detail_article none  mask-box">
+                    <div class="detail">
+                        <div class='top'>
+                            <a class="icon-back" onclick='javascript:G9377.detail_back()'></a>
+
+                            <div class='sub'>消息详情</div>
+                            <a class=' icon-close dialog-close' onclick='javascript: ;'></a>
+                        </div>
+                        <div class='container'>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--************************************ footer************************************ -->
+        <div class="footer">
+            <ul class="tab">
+                <li>
+                    <i class='icon-personal'></i>
+                    <p>个人</p>
+                </li>
+                <li>
+                    <i class='icon-gift'></i>
+                    <p>礼包</p>
+                </li>
+                <li>
+                    <i class='icon-news'></i>
+                    <p>资讯</p>
+                </li>
+                <li>
+                    <i class='icon-PSP'></i>
+                    <p>攻略</p>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <script src="{{$CONFIG.resource}}/js/2018/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+    <script src="{{$CONFIG.resource}}/js/2018/h5/clipboard.js?{{$CONFIG.build}}"></script>
+    <script type="text/javascript">
+        var footer = 0;
+        C9377.Ggourl = window.location.href;
+        C9377.game = { 'coin_radio': '{{$G.COIN_RADIO}}', 'coin_name': '{{$G.COIN_NAME}}', 'parent': '{{$G.CONFIG.parent}}' };
+        C9377.build = '{{$CONFIG.build}}';
+        C9377.gid = '{{$G.ID}}';
+        C9377.app_url = C9377.app_url.replace(/:\/\/[^\/]+\//, '://' + window.location.hostname + '/');
+        C9377.pay_url = "{{$pay_url}}";
+    </script>
+    <script src="{{$CONFIG.resource}}/js/2018/h5/main.game2.js?{{$CONFIG.build}}"></script>
+    <script src="{{$CONFIG.resource}}/js/2018/h5/play.game2.js?{{$CONFIG.build}}"></script>
+    <script src="{{$CONFIG.resource}}/js/2018/h5/common.js?{{$CONFIG.build}}"></script>
+    <script src="{{$CONFIG.resource}}/js/2018/h5/loadJsCss.js?{{$CONFIG.build}}"></script>
+    <script>
+        H9377.unbind();
+        H9377.selectCount('.phone')
+        // H9377.getIdCardInfo();
+    </script>
+</body>
+
+</html>

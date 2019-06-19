@@ -1,0 +1,21 @@
+<h1 class="wap-tit none">9377游戏盒子</h1>
+<!-- banner -->
+
+{{data name="H5首页幻灯"}}
+<div class="banner-box swiper-container">
+	<div class="swiper-wrapper">
+		{{foreach from=$DATA["H5首页幻灯"].list item="v"}}
+		<div class="swiper-slide"><a href="{{$v.url}}"><img src="{{$v.thumb}}" alt="{{$v.title}}"></a></div>
+		{{/foreach}}
+	</div>
+	<!-- Add Pagination -->
+	<div class="swiper-pagination"></div>
+</div>
+<!-- search -->
+<div class="search-box none">
+	<form action="">
+		<input type="text" class="s-search" placeholder="请输入你想要查找的关键字"/>
+		<!-- <a href="javascript:;" class="s-submit icon-search"></a> -->
+		<input type="submit" value="" class="none">
+	</form>
+</div>

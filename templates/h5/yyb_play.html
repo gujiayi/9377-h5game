@@ -1,0 +1,350 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{{$G.CONFIG.alias_name}}_9377{{$G.CONFIG.alias_name}}h5游戏_一起玩更快乐</title>
+    <meta name="keywords" content="{{$G.CONFIG.alias_name}},9377{{$G.CONFIG.alias_name}}" />
+    <meta name="description" content="9377游戏平台{{$G.CONFIG.alias_name}}，{{$G.CONFIG.alias_name}}h5游戏，在线手机网页游戏，无需下载，快速玩页戏。9377手游{{$G.CONFIG.alias_name}}，一起玩更快乐。" />
+    <meta content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.game2.css?{{$CONFIG.build}}" />
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/play.game2.css?{{$CONFIG.build}}" />
+    <style>
+        /*yyb style*/
+        /*浮标*/
+        .floatmod { width: 46px; position:absolute; top: 9%; left: 18%; z-index: 9998; display: none;}
+        .floaticon-anim { transition: all .1s linear;}
+        .floaticon-opacity { opacity: .5;}
+        /*礼包弹窗*/
+        .mask-close { position:absolute; top: 0px; left: 0px; width: 100%; height: 100%;  }
+        .dialog-card { width: 300px; height: 300px; border-radius: 0; background: url('{{$CONFIG.resource}}/images/2017/h5/yyb/bg-qqvipcard.jpg?{{$CONFIG.build}}') no-repeat; }
+        .dialog-card .hd-card { font-size: 16px; color: #a37b43; }
+        .dialog-card .bd-card { font-size: 13px; line-height: 26px; padding: 20px 20px 0; text-align: left;}
+        .dialog-card .bd-card .txt1 { color: #9a8f6a; }
+        .dialog-card .bd-card .txt2 { color: #b1281a; }
+        .dialog-card .card-list li { overflow:hidden; margin: 8px 0px; position:relative; }
+        .dialog-card .card-list .xinfo { max-width: 148px; color: #a37b43; line-height: 22px; overflow:hidden; float: left;}
+        .dialog-card .card-list .btn-get { width: 100px; height: 38px; margin-top: 3px; float: right; background: url('{{$CONFIG.resource}}/images/2017/h5/yyb/btn-qqvipcard.jpg?{{$CONFIG.build}}') no-repeat;}
+        .dialog-card .card-list .btn-getx { background-position: 0 -56px; }
+    </style>
+    {{assign var=swtArr value=[715,718,742,634,904,973,670]}}
+    {{if in_array($G.ID, $swtArr)}}
+    <style>
+        .logout { display: block; width: 55px; height: 55px; padding: 10px; position:absolute; z-index: 10000; top: 150px; left: 0px; background: transparent;}
+        .logout img { max-width: 100%; }
+        .mask-logout .dialog-box { border-radius: 2px; border: 2px solid #595e61; background: #828282;}
+        .mask-logout .dialog-box .hd { width: 100%; height: 50px; line-height: 50px; text-align: left; padding-left: 3%; color: #fff; font-size: 18px; background: #030301;}
+        .mask-logout .dialog-box .bd a { display:inline-block; vertical-align: top; width: 45%; height: 36px; line-height: 36px; text-align: center; color: #000; font-size: 14px; background: #d7d7d7; margin: 10px 5%; border-radius: 2px; box-shadow: 0 0 5px #555;}
+        .mask-logout .dialog-box .bd a:first-child { margin: 10px 2% 10px 3%; }
+        .mask-logout .dialog-box .bd a:last-child { margin: 10px 3% 10px 2%; }
+    </style>
+    {{/if}}
+    {{if $G.ID == '742'}} <style> .logout { bottom: 245px;} </style> {{/if}}
+    {{if $G.ID == '973'}} <style> .logout { bottom: 110px; left: auto; right: 0;} </style> {{/if}}
+    {{if $G.ID == '715' || $G.ID == '799'}} <style> .loading { background-image: url('{{$CONFIG.resource}}/images/2017/h5/loading/xkx.jpg?20180423');} </style> {{/if}}
+</head>
+<body scroll="no">
+    <div class="loading" id="loading" style="width:100%;height:100%"></div>
+    <iframe scrolling="no" id="ifr" src="{{$url}}" frameborder="0" width="100%" height="100%" {{if $G.ID == '715'}}style="opacity:0;"{{/if}}></iframe>
+    
+    <div class="pay-wp"> 
+        <a href="javascript:closePayWindows();" class="pay-close icon-close"></a>
+        <iframe src="" frameborder="0" id="iframe-pay"></iframe> 
+    </div>
+
+    <!-- 浮标 -->
+    <div class="floatmod" id="floatmod"> <img src="{{$CONFIG.resource}}/images/2017/h5/yyb/floaticonv.png?{{$CONFIG.build}}" width="46" id="floaticon"> </div>
+    <div class="mask none" id="mask-card">
+        <i class="mask-close" onClick="QQVIPCardHide()"></i>
+        <div class="dialog-box dialog-card">
+            <h3 class="hd-card">会员特权礼包</h3>
+            <div class="bd-card">
+                <p class="txt1">恭喜你获得会员特权礼包，请复制以下激活码，打开福利大厅进行兑换。</p>
+                <p class="txt2">温馨提示：完成前40级主线任务即可开启福利大厅。(点击空白区域，关闭礼包窗口)</p>
+                <img src="{{$CONFIG.resource}}/images/2017/h5/yyb/hd-qqvipcard.jpg?{{$CONFIG.build}}x"> 
+                <ul class="card-list">
+                    <!-- js加载 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{if in_array($G.ID, $swtArr)}}
+    <!-- 退出按钮 -->
+    {{assign var=aurl value="{{$CONFIG.app_url}}/api/combine_sdk/login/yyb_login.php?gourl=http%3a%2f%2fapp.9377.com%2fh5%2fgame_login.php%26gid%3d{{$G.ID}}%26sid%3D1"}}
+    <a href="javascript:logoutCfm();" class="logout" id="logout"><img src="{{$CONFIG.resource}}/images/2017/h5/yyb/logout.png" alt=""></a>
+    <div class="mask mask-logout none" id="mask-logout">
+        <div class="dialog-box">
+            <div class="hd">确认切换帐号？</div>
+            <div class="bd"> <a href="javascript:switchAcc();">确定</a><a href="javascript:logoutCnl();">取消</a> </div>
+        </div>
+    </div>
+    {{/if}}
+
+    <script src="{{$CONFIG.resource}}/js/2017/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+    <script type="text/javascript">
+        var footer = 0;
+        C9377.game = {'coin_radio': '{{$G.COIN_RADIO}}', 'coin_name': '{{$G.COIN_NAME}}'},
+        C9377.build = '{{$CONFIG.build}}';
+        C9377.gid = '{{$G.ID}}';
+        C9377.app_url = C9377.app_url.replace(/:\/\/[^\/]+\//, '://'+ window.location.hostname +'/');
+    </script>
+    <script>
+        // 游戏内充值推送
+        var gurl = '';
+        var spam;
+        $(window).bind('message', function(e){
+            try{
+                console.log(e);
+                var json = $.parseJSON(e.data);
+                if('pay' == json.event){
+                    if(spam) return;
+                    
+                    spam = setTimeout(function(){
+                        clearTimeout(spam);
+                        spam = null;
+                    }, 2000);
+                    
+                    json.gid = C9377.gid;
+                    var url = C9377.app_url + '/pay.php?'+ $.param(json);
+                    url = url.replace(/\?+$/, '');
+                    if(json.username == 'fuckingman'){
+                        url = url.replace(/amount=[^&]+/, 'amount=0.01');
+                    }
+                    gurl = url;
+                    
+                    if(/micromessenger/i.test(navigator.userAgent)){
+                        window.location.href = url;
+                        return;
+                    }
+                    
+                    try {
+                        var msdk = {};
+                        $.extend(true, msdk, C9377.role, C9377.game, json);
+                        window.MasterSDK.csMasterPay(JSON.stringify(msdk), url); // 融合SDK
+                    } catch(ex) {
+                        try{
+                            window.Ysdk.ysdkPay(JSON.stringify(json), url); // 应用宝支付
+                        }catch(ex){
+                            payOnWebView(); //web支付
+                        }
+                        console.log(ex);
+                    }
+                }else if('showLoad' == json.event){
+                    $('#loading').show();
+                }else if('hideLoad' == json.event){
+                    $('#ifr').css('opacity','1'); //load 隐藏，显示游戏
+                    $('#loading').hide();
+                }else if('role' == json.event){
+                    try {
+                        C9377.role = json;
+                        window.MasterSDK.submitUserInfo(JSON.stringify(json));
+                    } catch(ex) {
+                        console.log(ex);
+                    }
+                }else if('qrfocus' == json.event || 'down' == json.event || 'qrexe' == json.event){
+                    var xjpg = json.event;
+                    var xurl = {
+                        'qrfocus' : 'javascript:;',
+                        'qryyb' : 'http://android.myapp.com/myapp/detail.htm?apkName=com.tencent.tmgp.xkxyyb&ADTAG=mobile',
+                        'qrapk' : 'https://wvw.9377.com/downloads.php?game=xkxpc&item=client&url=https%3A%2F%2Fcdnsjzs.9377.com%2Fxkx%2Fxkxlj_xkx_ptgwlj.apk&lm=xkx_ptgwlj&game_id=856&platform=3&uid=1',
+                        'qrexe' : 'https://cdnsjzs.9377.com/xkx/xkxgwzm/xkxgwzm.exe',
+                    }
+                    var jumpurl = xurl[xjpg];
+                    if ('down' == json.event) {
+                        xjpg = 'qrapk'; // 下微端图片名
+                        if(/micromessenger/i.test(navigator.userAgent)){
+                            jumpurl = xurl['qryyb'];    
+                        }else{
+                            jumpurl = xurl['qrapk'];    
+                        }
+                    }
+                    var tpl = '<div class="mask mask-qr"> <div class="qr-wp"> <img src="'+C9377.resource+'/images/2017/h5/'+xjpg+'.jpg?'+C9377.build+'"> <a href="javascript:;" class="close"></a> <a href="'+jumpurl+'" target="_blank" class="btn-url"></a> </div> </div>';
+                    $('body').append(tpl);
+                    $('.mask-qr .close').click(function() {
+                        $(this).closest('.mask').remove();
+                    });
+                }else if('closePayIframe' == json.event){
+                    $('.pay-wp').hide();
+                    $('.pay-wp iframe').attr('src', '');
+                }
+            }catch(ex){
+                console.log(ex);
+            }
+        });
+
+        function payOnWebView(){
+            $('.pay-wp iframe').attr('src', gurl);
+            $('.pay-wp').show();
+        }
+        // QQ超级会员
+        var yyb_user = '{{$user.LOGIN_ACCOUNT}}', yyb_user = yyb_user.toLocaleLowerCase();
+        setTimeout(function(){
+            if (yyb_user == 'yyb_7c09ccb7c3773ce410021245daca7dec') {
+                $('#floatmod').show(); // 点击事件在iconTouchEnd()
+                $('#floatmod').click(function() {
+                    try{
+                        window.QQMember.onQQMember(yyb_user, 1);
+                    }catch(e){
+                        console.log(e); 
+                    } 
+                });
+                // 初始化图标  审核前 只显示，不可拖动
+                // $(window).resize(function() {
+                //     iconFloatFun('floaticon');
+                // }).trigger('resize');
+            }
+        }, 30*1000);
+        function QQVIPCardShow(){
+            $('#mask-card').show();
+            try{
+                // 获取礼包
+                $.getJSON(C9377.app_url+'/api/combine_sdk/gift/qqvip_505.php?check_id[]=3511&check_id[]=3514&_ajax=1', function(json) {
+                    var chtml = '', cname = {3511:'畅玩礼包', 3514:'尊享礼包'};
+                    for(var i in json){
+                        chtml += '<li> <div class="xinfo"> <p>'+cname[i]+'：</p> <p>'+json[i]+'</p> </div> <a href="javascript:clientCopy(\''+json[i]+'\');" class="btn-get"></a> </li>'
+                    }
+                    $('.card-list').html(chtml);
+                });
+            }catch(e){
+                console.log(e); 
+                $('.card-list').html('<li class="xinfo">加载失败，请联系客服！</li>');
+            }
+        }
+        function QQVIPCardHide(){
+            $('#mask-card').hide();
+        }
+        function clientCopy(str){
+            try{
+                window.QQMember.onClip(str);
+            }catch(e){
+                console.log(e); 
+            }
+        }
+        // 浮标
+        function iconFloatFun(ele){ 
+            var idrag = true,
+                ivclick = true,
+                nleft, ntop, disX, disY,
+                obj = document.getElementById(ele),
+                part = obj.parentNode;
+                ww = document.documentElement.clientWidth, // 屏幕宽度
+                wh = document.documentElement.clientHeight, // 屏幕高度
+                aw = ww - obj.clientWidth, // 图标可移动max
+                ah = wh - obj.clientHeight, // 图标可移动max
+                toOpacity = ''; //图标透明
+            part.style.left = '18%'; //固定位置
+            part.style.top = '9%';
+            obj.addEventListener('touchstart', iconTouchStart);
+            obj.addEventListener('touchend', iconTouchEnd);
+            obj.addEventListener('touchmove', iconTouchMove);
+            
+            function iconTouchStart(e){
+                nleft = parseInt(part.style.left);
+                ntop = parseInt(part.style.top);
+                disX = e.touches[0].pageX;
+                disY = e.touches[0].pageY;
+                $(part).removeClass('floaticon-opacity')
+                $(part).removeClass('floaticon-anim');
+                clearTimeout(toOpacity);
+                return false;
+            }
+            function iconTouchEnd(){
+                if (ivclick) {
+                    // 点击事件
+                    var mactive = $('#floatmod').hasClass('active');
+                    if (mactive) {
+                        // 已经被点亮
+                        try{
+                            window.QQMember.onQQMember(yyb_user, 1);
+                        }catch(e){
+                            console.log(e); 
+                        } 
+                    }else{
+                        // 隐藏状态被点击
+                        iconMoveIn();
+                        $('#floatmod').addClass('active');
+                    }
+                }
+                iconMoveOut();
+                ivclick = true;
+            }
+            function iconTouchMove(e){
+                if (idrag) {
+                    ivclick = false; 
+                }
+                e.preventDefault();
+                if (idrag) {
+                    var xl = nleft + e.touches[0].pageX - disX,
+                        xy = ntop + e.touches[0].pageY - disY,
+                        xl = xl > 0 ? xl : 0, //左侧边界
+                        xy = xy > 0 ? xy : 0; //顶部边界
+                        xl = xl > aw ? aw : xl; //右边边界
+                        xy = xy > ah ? ah : xy; //底部边界
+                    part.style.left = xl + 'px';
+                    part.style.top = xy + 'px';
+                    return false;
+                }
+            }
+            function iconMoveOut(){
+                $(part).addClass('floaticon-anim');
+                var floatox = parseInt(part.style.left) < (ww/2) ? 0 : aw,
+                    movein = floatox == 0 ? -25 : 25;
+                part.style.left = floatox + 'px';
+                
+                toOpacity = setTimeout(function(){
+                    $(part).addClass('floaticon-opacity');
+                    part.style.left = (floatox+movein) + 'px';
+                }, 1000);
+                
+                if (floatox == 0) {
+                    $(part).removeClass('floaticon-right').addClass('floaticon-left');
+                }else{
+                    $(part).removeClass('floaticon-left').addClass('floaticon-right');
+                }
+            }
+            function iconMoveIn(){
+                $(part).addClass('floaticon-anim');
+                var floatox = parseInt(part.style.left) <= 0 ? 0 : aw;
+                part.style.left = floatox + 'px';
+            }
+        }
+    </script>
+    {{if in_array($G.ID, $swtArr)}}
+    <script>
+        function logoutCfm(){$('#mask-logout').show(); }
+        function logoutCnl(){$('#mask-logout').hide(); }
+        var url='{{$CONFIG.app_url}}/api/combine_sdk/login/yyb_login.php'
+        var urlData= '{{$CONFIG.app_url}}/api/combine_sdk/login/yyb_login.php?gourl=http%3a%2f%2ffront.qiyouworld.com%2fh5%2fgame_login.php%26gid%3d{{$G.ID}}%26sid%3D1'
+        function switchAcc(){
+            try {
+                window.Ysdk.ysdkSwitchAccount();
+                var param={
+                    'return_json':1,
+					'do' : 'logout'
+                }
+                $.ajax({
+                    url:url,
+                    type:'get',
+                    data:param,
+                    dataType:'json',
+                    success:function(result){
+                        if (result.satus == 1) {
+                            window.location.href = urlData;
+                        }
+                    }
+                })
+                // setTimeout(function(){
+                //     // window.location.href = "{{$CONFIG.app_url}}/login.php?do=logout&gourl={{$aurl|urlencode}}";
+                // }, 100);
+            } catch(e) {
+                console.log(e);
+            }
+        }
+    </script>
+    {{/if}}
+</body>
+</html>

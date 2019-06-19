@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>用户中心_找回{{$append.name}}密码_9377国内游戏娱乐平台，用心创造快乐！</title>
+    <meta name="keywords" content="{{$CONFIG.site_keyword}}" />
+	<meta name="description" content="{{$CONFIG.site_description}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2016/getpass.css?{{$CONFIG.build}}" />
+	<script type="text/javascript">document.domain = '{{$CONFIG.cookie_domain}}';</script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2016/main_2016.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/jquery.validator.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/users_index.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+{{include file="/header.html"}}
+<div class="user_main">
+    <div class="g-main wrapper">
+        <div class="getpass_box">
+			<div class="user_list_tab">
+				<ul>
+					{{if empty($getpass_user.safe_verify)}}
+					<li class="current"><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?do=set_getpass_user">确认帐号</a></li>
+					{{else}}
+						{{if !empty($getpass_user.phone)}}
+						<li {{if $type==2}} class="current"{{/if}}><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?type=2{{$append.url}}">手机找回{{$append.name}}密码</a></li>
+						{{/if}}
+						{{if !empty($getpass_user.email)}}
+						<li {{if $type==0}} class="current"{{/if}}><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?type=0{{$append.url}}">邮箱找回{{$append.name}}密码</a></li>
+						{{/if}}
+						{{if !empty($getpass_user.question)}}
+						<li {{if $type==1}} class="current"{{/if}}><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?type=1{{$append.url}}">密保找回{{$append.name}}密码</a></li>
+						{{/if}}
+					{{/if}}
+				</ul>
+			</div>
+			<div class="usercen_cen">
+				{{if $set_getpass_user && !$getpass_user.safe_verify}}
+				<div class="usercen_getpwd">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+						  <td height="30" align="left">您的帐号尚未绑定任何安全方式，请通过“</span><a href="{{$CONFIG.url}}/kefu/" ><font color="red"> 帐号丢失申诉</font></a>”找回密码。</td>
+						  <td class="int">&nbsp;</td>
+						</tr>
+					</table>
+				</div>
+				{{elseif empty($set_getpass_user)}}
+				<div class="usercen_getpwd">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<form class="usercen_validator" action="{{$CONFIG.app_url}}/new_getpass/getpass.php" method="post" name="post">
+							<input name="do" value="set_getpass_user" type="hidden" />
+							<input name="pwd2" value="{{$append.pwd2}}" type="hidden" />
+							<tr>
+								<td height="30" align="right">用户名：&nbsp;</td>
+								<td class="int">
+									<input type="text" class="p_input" name="username" id="username"/>
+									<!-- <span class="set_getpass_user"><a href="?do=set_getpass_user">[更换用户名]</a></span> -->
+								</td>
+							</tr>
+							<tr>
+								<td height="30" align="right">验证码：&nbsp;</td>
+								<td class="int">
+									<input name="code" type="text" id="code" class="p_input" style="width:70px;text-transform:uppercase; vertical-align:middle;" dataType="Limit" msg="请填写验证码!" onKeyUp="value=value.replace(/[^0-9,]/g,'');"/>
+									<img id="img_sec" onclick="this.src= '{{$CONFIG.app_url}}/code.php?'+Math.random();" src="{{$CONFIG.app_url}}/code.php?{{$smarty.now}}" alt="点击更换"/>
+								</td>
+							</tr>
+							<tr>
+								<td height="50">&nbsp;</td>
+								<td><input type="submit" class="p_submit_btn" value="提　交"/></td>
+							</tr>
+						</form>
+					</table>
+				</div>
+
+				{{elseif $getpass_user.LOGIN_ACCOUNT && $type==0 && $do!='enter'}}
+				<div class="usercen_getpwd">
+					<table border="0" cellpadding="0" cellspacing="0">
+					{{if !empty($mail_index)}}
+						<tr>
+							<td height="30" align="left">验证邮件已经发送至您的邮箱:<font color="red">{{$getpass_user.EMAIL}}</font></td>
+							<td class="int">&nbsp;</td>
+						</tr>
+						<tr>
+							<td height="30" align="left">请您尽快登录邮箱，按邮件中指示完成验证</td>
+							<td class="int">&nbsp;</td>
+						</tr>
+						<tr>
+							<td height="30" align="left"><a href="{{$mail_index}}" target="_blank" class="p_submit_btn">前往邮箱</a></td>
+							<td class="int">&nbsp;</td>
+						</tr>
+					{{else}}
+						<form class="usercen_validator" action="{{$CONFIG.app_url}}/new_getpass/getpass.php" method="post" name="post">
+							<input name="do" value="getpass_email" type="hidden" />
+							<input name="pwd2" value="{{$append.pwd2}}" type="hidden" />
+							<tr>
+								<td height="30" align="right">用户名：&nbsp;</td>
+								<td class="int">{{$getpass_user.LOGIN_ACCOUNT}}<span class="set_getpass_user"><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?do=set_getpass_user">[更换用户名]</a></span></td>
+							</tr>
+							<tr>
+								<td height="30" align="right">您的密保邮箱：&nbsp;</td>
+								<td class="int">{{$getpass_user.EMAIL}}</td>
+							</tr>
+							<!--
+							<tr>
+								<td height="30" align="right">验证码：&nbsp;</td>
+								<td class="int"><input name="code" type="text" id="code" class="p_input" style='width:70px;text-transform:uppercase; vertical-align:middle;' dataType="Limit"     msg="请填写验证码!"   onKeyUp="value=value.replace(/[^0-9,]/g,'');"  />
+								&nbsp;&nbsp;<img id="img_sec" onclick="this.src= '/code.php?'+Math.random();" src="/code.php?{{$smarty.now}}" alt="点击更换"/>&nbsp;&nbsp;<span></span></td>
+								<td>&nbsp;</td>
+							</tr>-->
+							<tr>
+								<td height="50">&nbsp;</td>
+								<td><input type="submit" class="p_submit_btn" value="发送验证邮件"/></td>
+							</tr>
+						</form>
+					{{/if}}
+					</table>
+				</div>
+				{{/if}}
+            
+				{{if $do=='enter'}}
+				<div class="usercen_getpwd">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<form action="{{$CONFIG.app_url}}/new_getpass/getpass.php" method="post" name="post" onSubmit="return Validator.Validate(this,3)">
+							<input name="do" value="getpass_update" type="hidden" />
+							<input name="pwd2" value="{{$append.pwd2}}" type="hidden" />
+							<input name="k" value="{{$k}}" type="hidden" />
+							<tr>
+								<td height="30" align="right">新{{$append.name}}密码：&nbsp;</td>
+								<td class="int"><input type="password"class="p_input" name="password" id="password" dataType="Limit" min="6" max="20" msg="请输入6-20位的原始{{$append.name}}密码!"/></td>
+							</tr>
+							<tr>
+								<td height="30" align="right">确认{{$append.name}}密码：&nbsp;</td>
+								<td class="int"><input type="password" class="p_input" name="password1" id="password1" dataType="Repeat" to="password" msg="两次输入的{{$append.name}}密码不一致"/></td>
+							</tr>
+							<tr>
+								<td height="50">&nbsp;</td>
+								<td class="btn"><input type="submit" class="p_submit_btn" value="提　交"/></td>
+							</tr>
+						</form>
+					</table>
+				</div>
+				{{/if}}
+				
+				{{if $getpass_user.LOGIN_ACCOUNT && $type==1}}
+				<div class="usercen_getpwd">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<form class="usercen_validator" action="{{$CONFIG.app_url}}/new_getpass/getpass.php" method="post" name="post">
+							<input name="do" value="answer" type="hidden" />
+							<input name="pwd2" value="{{$append.pwd2}}" type="hidden" />
+							<tr>
+								<td height="30" align="right">用户名：&nbsp;</td>
+								<td class="int">{{$getpass_user.LOGIN_ACCOUNT}}<span class="set_getpass_user"><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?do=set_getpass_user">[更换用户名]</a></span></td>
+							</tr>
+							<tr>
+								<td height="30" align="right">提示问题：&nbsp;</td>
+								<td class="int">
+									<select title="{{$append.name}}密码保护问题" class="sel_ques" name="question" id="question">
+										<option value="">请选择一个问题</option>
+										<option value="我就读的第一所学校的名称？">我就读的第一所学校的名称？</option>
+										<option value="我最喜欢的休闲运动是什么？">我最喜欢的休闲运动是什么？</option>
+										<option value="我最喜欢的运动员是谁？">我最喜欢的运动员是谁？</option>
+										<option value="我最喜欢的物品的名称？">我最喜欢的物品的名称？</option>
+										<option value="我最喜欢的歌曲？">我最喜欢的歌曲？</option>
+										<option value="我最喜欢的食物？">我最喜欢的食物？</option>
+										<option value="我最爱的人的名字？">我最爱的人的名字？</option>
+										<option value="我最爱的电影？">我最爱的电影？</option>
+										<option value="我妈妈的生日？">我妈妈的生日？</option>
+										<option value="我的初恋日期？">我的初恋日期？</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td height="30" align="right">问题答案：&nbsp;</td>
+								<td class="int"><input type="text" class="p_input" name="answer" id="answer"/></td>
+							</tr>
+							<tr>
+								<td height="30" align="right">新{{$append.name}}密码：&nbsp;</td>
+								<td class="int"><input type="password" class="p_input" name="password" id="password"/></td>
+							</tr>
+							<tr>
+								<td height="30" align="right">确认{{$append.name}}密码：&nbsp;</td>
+								<td class="int"><input type="password" class="p_input" name="password1" id="password1"/></td>
+							</tr>
+							<tr>
+								<td height="50">&nbsp;</td>
+								<td><input type="submit" class="p_submit_btn" value="提　交"/></td>
+							</tr>
+						</form>
+					</table>
+				</div>
+				{{/if}} 
+            
+				{{if $getpass_user.LOGIN_ACCOUNT && $type == 2 && $do != 'enter'}}
+				<div class="usercen_getpwd">
+					<form class="usercen_validator" action="{{$CONFIG.app_url}}/new_getpass/getpass.php" method="post" id="form">
+						<table border="0" cellpadding="0" cellspacing="0">
+							<input name="pwd2" value="{{$append.pwd2}}" type="hidden" />
+						{{if empty($step)}}
+							<tr>
+							   <td height="30" align="right" >用户名：&nbsp;</td>
+							   <td class="int">{{$getpass_user.LOGIN_ACCOUNT}}<span class="set_getpass_user"><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?do=set_getpass_user">[更换用户名]</a></span></td>
+							</tr>
+							<tr>
+							   <td height="30" align="right" >您的手机号码：&nbsp;</td>
+							   <td class="int"><font color="red">{{$getpass_user.PHONE}}</font></td>
+							</tr>
+							<tr>
+							   <td height="30" align="right" >验证码：&nbsp;</td>
+							   <td class="int">
+							   		<input name="code" type="text" id="code" class="p_input" style="width:70px;text-transform:uppercase; vertical-align:middle;" dataType="Limit" msg="请填写验证码!" onKeyUp="value=value.replace(/[^0-9,]/g,'');"/>
+							   		<img id="img_sec" onclick="this.src= '{{$CONFIG.app_url}}/code.php?'+Math.random();" src="{{$CONFIG.app_url}}/code.php?{{$smarty.now}}" alt="点击更换"/>
+							   </td>
+							</tr>
+							<tr>
+								<td height="50">&nbsp;</td>
+								<td class="btn">
+									<input name="step" value="2" type="hidden" />
+									<input type="submit" class="p_submit_btn"  value="发送验证码" />
+								</td>
+							</tr>
+						{{elseif $getpass_user.LOGIN_ACCOUNT && $step == 2}}
+							<tr>
+								<td height="30" align="right" >用户名：&nbsp;</td>
+								<td class="int">{{$getpass_user.LOGIN_ACCOUNT}}<span class="set_getpass_user"><a href="{{$CONFIG.app_url}}/new_getpass/getpass.php?do=set_getpass_user">[更换用户名]</a></span></td>
+							</tr>
+							<tr>
+								<td height="30" align="right" >已绑定手机：&nbsp;</td>
+								<td class="int">{{$getpass_user.PHONE}}</td>
+							</tr>
+							<tr>
+								<td height="30" align="right" >短信验证码：&nbsp;</td>
+								<td class="int">
+									<input type="text" name="captcha" id="captcha" class="p_input"/>
+									<input class="p_submit_blue_btn" style="width:150px; height:30px; line-height:30px;" type="button" value="获取验证码" id="fetch" onclick="cellphone_captcha();" />
+								</td>
+							</tr>
+							<tr>
+							  <td height="50">&nbsp;</td>
+							  <td class="btn"><input type="button" class="p_submit_btn"  value="提　交" onclick="check_captcha();" /></td>
+							</tr>
+							<script type="text/javascript">
+							function cellphone_captcha(){
+								
+								$.ajax({
+									type: 'post',
+									cache: false,
+									dataType: 'json',
+									url: '/new_getpass/getpass.php',
+									data: {'do': 'cellphone', step: 3},
+									success: function(data){
+										//print_r(data);
+										if(data.status > 0){
+											refetch.time = 60;
+											refetch(true);
+										}else if(data.status == -1){
+											alert('验证码发送太频繁，请稍后再试');
+											if(data.remain){
+												refetch.time = parseInt(data.remain);
+												refetch(true);
+											}
+										}else{
+											alert('发送失败');
+										}
+									}
+								});
+							}
+							
+							function refetch(start){
+								if(start === true){
+									$('#fetch').attr('disabled', true);
+									refetch.interval = setInterval(refetch, 1000);
+									refetch.time--;
+								}else if(0 == refetch.time){
+									clearInterval(refetch.interval);
+									$('#fetch').val(refetch.text);
+									$('#fetch').attr('disabled', false);
+									return;
+								}
+								
+								$('#fetch').val('('+ refetch.time +') '+ refetch.text);
+								
+								refetch.time--;
+							}
+							refetch.text = '重新获取验证码';
+							refetch.interval = null;
+							refetch.time = 60;
+							
+							function check_captcha(){
+								var captcha = $('#captcha').val();
+								if(!/^\d+$/.test(captcha)){
+									alert('验证码的格式不正确');
+									$('#captcha').val('').focus();
+									return;
+								}
+								
+								$.ajax({
+									type: 'post',
+									cache: false,
+									dataType: 'json',
+									url: '/new_getpass/getpass.php',
+									data: {'do': 'cellphone', captcha: captcha, step: 4},
+									success: function(ret){
+										if(ret){
+											$('#form').submit();
+										}else{
+											alert('短信验证码错误，请重新获取验证');
+										}
+									}
+								});
+							}
+							</script>
+						{{elseif $step == 5}}
+							<tr>
+								<td height="30" align="right" >新{{$append.name}}密码：&nbsp;</td>
+								<td class="int"><input type="password" name="password" class="p_input"/></td>
+							</tr>
+							<tr>
+								<td height="30" align="right" >确认{{$append.name}}密码：&nbsp;</td>
+								<td class="int"><input type="password" name="password2" class="p_input"/></td>
+							</tr>
+							<tr>
+								<td height="50">&nbsp;</td>
+								<td><input class="p_submit_btn" type="button" value="修改{{$append.name}}密码" onclick="check_password();" /></td>
+							</tr>
+							<script type="text/javascript">
+								function check_password(){
+									var password = $('#form input[name=password]').val(),
+										password2 = $('#form input[name=password2]').val();
+									
+									if(password.length < 6){
+										alert('{{$append.name}}密码长度必须大于6位');
+										$('#form input[name=password]').focus();
+										return;
+									}
+									
+									if(password !== password2){
+										alert('两次{{$append.name}}密码不一致');
+										return;
+									}
+									
+									$('#form').submit();
+								}
+							</script>
+						{{/if}}
+						</table>
+						<input name="pwd2" value="{{$append.pwd2}}" type="hidden" />
+						<input type="hidden" name="type" value="2" />
+						<input type="hidden" name="step" value="{{$next_step|default:2}}" />
+						<input type="hidden" name="do" value="cellphone" />
+					</form>
+				</div>
+				{{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<!--脚注开始-->    
+{{include file="/footer.html"}}
+<!--脚注结束-->
+<script type="text/javascript"> 
+$(function(){
+	$('.usercen_validator').validate({
+		rules:{
+			username:{
+				required: true,
+				minlength: 4
+			},
+			email:{
+				required: true,
+				email:"/^\w+([-+.]\w+)*@\w+([-.]\\w+)*\.\w+([-.]\w+)*$/"
+			},
+			question:{
+				required: true
+			},
+			answer:{
+				required: true
+			},
+			password:{
+				required: true,
+                minlength: 6
+			},
+			password1:{
+				required: true,
+                minlength: 6,
+                equalTo: "#password"
+			},
+			code:{
+				required: true
+			}
+		},
+		messages:{
+			username:{
+				required: '请填写你的登陆账号',
+				minlength: '账号不能少于四位'
+			},
+			email:{
+				required: '请填写你的邮箱地址',
+				email:'请输入正确的邮箱地址'
+			},
+			question:{
+				required: '请选择密保问题!'
+			},
+			answer:{
+				required: '请填写你的答案',
+				minlength: '字数不能少于4个字',
+				maxlength: '字数不能多于30个字'
+			},
+			password:{
+				required: '请输入密码',
+				minlength: '密码必须长于6位'
+			},
+			password1:{
+				required: '请输入密码',
+				minlength: '密码必须长于6位',
+				equalTo: '2次输入的密码不一致'
+			},
+			code:{
+				required: '请输入验证码'
+			}
+		},
+		errorPlacement: function(error, element){
+			element.parent().find('span').empty().append(error);
+		},
+		success: function(e){
+			e.removeClass('error').addClass('correct').html('&nbsp;');
+		},
+		errorClass: 'error',
+		validClass: 'correct',
+		onkeyup: false
+	});
+});
+</script>
+</body>
+</html>

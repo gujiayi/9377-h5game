@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台登录</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.game2.css?{{$CONFIG.build}}" />
+	<style> .menu, .dialog-close { display: none; } html, body { width: 100%; height: 100%; overflow:hidden; } .login-hd .btn-loginmod { top: 20px; } </style>
+</head>
+<body>
+	<div class="login-bg">
+		{{data name="背景图{{$gid}}"}}
+		{{data name="背景大图{{$gid}}"}}
+		{{if $smarty.const.DEVICE_PLATFORM != 0}}
+			 {{$DATA["背景图{{$gid}}"]}}
+		{{else}}
+			{{$DATA["背景大图{{$gid}}"]}}
+		{{/if}}
+	</div>
+		
+	<div class="mask none mask-login-wx" id="login-pop">
+		<!-- 用户登录 -->
+		<div class="dialog-box mod-login mod-login-module mod-login-guide none"> 
+			<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+			<div class="login-hd"> <div class="login-hd-tit">快捷登录</div> </div> 
+			<div class="login-form flex"> 
+				 <a href="javascript:thirdLogin('wx');" class="flex-list"><i class="icon-wechat"></i></a>
+				 <a href="javascript:thirdLogin('qq');" class="flex-list"><i class="icon-qqqb"></i></a>
+				 <a href="javascript:H9377.loadLoginMode('phone');;" class="flex-list"><i class="icon-mobile"></i></a>
+			</div>
+			<ul class="login-group-tool"> 
+				<li><a href="javascript:H9377.loadLoginMode('normal');">已有账号登录</a></li> 
+				<li><a href="javascript:H9377.loadLoginMode('reg');">帐号注册</a></li> 
+			</ul> 
+		</div>
+		<!-- 用户登录 -->
+		<div class="dialog-box mod-login mod-login-module mod-login-ulogin none"> 
+			<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+			<div class="login-hd"> <div class="login-hd-tit">账号登录</div> </div> 
+			<div class="login-form"> 
+				<div class="w-form"> 
+					<div class="w-item"> <i class="icon-user"></i> <input name="username" type="text" placeholder="请输入账号"> <b class="more none"></b> </div>
+					<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+					<a href="javascript:;" class="btn-submit" onClick="H9377.userLogin(this)">登 录</a> 
+				</div> 
+			</div> 
+			<ul class="login-group-tool"> 
+				<li><a href="javascript:H9377.loadLoginMode('guide');">其他登录方式</a></li> 
+				<li><a href="javascript:H9377.dialog('联系客服QQ：2850907640');">忘记密码?</a></li> 
+			</ul> 
+		</div>
+		<!-- 手机注册 -->
+		<div class="dialog-box mod-login mod-login-module mod-reg-phone none"> 
+			<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+			<div class="login-hd"> <a href="javascript:H9377.loadLoginMode();" class="icon-back"></a> </div> 
+			<ul class="login-mod-sbox"> <li class="active">手机号注册</li> <li onClick="H9377.loadLoginMode('reg');">用户名注册</li> </ul> 
+			<div class="login-form"> 
+				<div class="w-form"> 
+					<div class="w-item"> <i class="icon-mobile"></i> <input name="cellphone" type="phone" placeholder="请输入您的手机号码"> </div> 
+					<div class="w-item-wp"> 
+						<div class="w-item"> <i class="icon-email"></i> <input name="captcha" type="text" placeholder="请输入验证码"> </div> 
+						<button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this);">发送验证码</button> 
+					</div> 
+					<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+					<a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'phone')">注 册</a> 
+				</div> 
+			</div> 
+		</div>
+		<!-- 普通注册 -->
+		<div class="dialog-box mod-login mod-login-module mod-reg-pub none"> 
+			<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+			<div class="login-hd"> <a href="javascript:H9377.loadLoginMode();" class="icon-back"></a> </div> 
+			<ul class="login-mod-sbox"> <li onClick="H9377.loadLoginMode('phone');">手机号注册</li> <li class="active">用户名注册</li> </ul> 
+			<div class="login-form"> 
+				<div class="w-form"> 
+					<div class="w-item"> <i class="icon-user"></i> <input name="username" type="text" placeholder="请输入账号"> </div> 
+					<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+					<div class="login-fun"><input type="checkbox" name="terms"> <a href="http://www.9377.com/yhxy.html" target="_blank">我已阅读并同意《用户注册服务中心》</a></div>
+					<a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'reg',1)">注 册</a> 
+				</div> 
+			</div> 
+		</div>
+	</div>
+	
+	<!-- 底部菜单模块 -->
+	<script src="{{$CONFIG.resource}}/js/2017/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript"> C9377.build = '{{$CONFIG.build}}', C9377.gid = '{{$gid}}'; </script>
+	<script src="{{$CONFIG.resource}}/js/2017/h5/main.game2.js?{{$CONFIG.build}}"></script>
+	<script> H9377.checkUserLogin();</script>
+	<script>
+		function thirdLogin(type){
+			try {
+				if (type == 'wx') {
+					window.AndroidUtils.WXLogin();
+				}else if (type == 'qq'){
+					window.AndroidUtils.QQLogin();
+				}
+			} catch(e) {
+				console.log(e);
+			}
+		}
+	</script>
+	<script> document.querySelector('body').addEventListener('touchmove', function (e) {e.preventDefault(); }); //禁止页面滑动</script>
+</body>
+</html>

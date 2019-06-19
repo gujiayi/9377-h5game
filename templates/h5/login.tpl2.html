@@ -1,0 +1,70 @@
+<div class="mask none" id="login-pop">
+	<!-- 用户登录 -->
+	<div class="dialog-box mod-login mod-login-module mod-login-ulogin none"> 
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+		<div class="login-hd"> <div class="login-hd-tit">用户登录</div> </div> 
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-user"></i> <input name="username" type="text" placeholder="账号"> <b class="more"></b> </div>
+				<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="密码"> <a href="javascript:H9377.dialog('联系客服QQ：2850907640');" class="m-txt">忘记密码</a> </div> 
+				<a href="javascript:;" class="btn-submit" onClick="H9377.userLogin(this)">登 录</a> 
+			</div> 
+		</div> 
+		<ul class="login-group-tool"> 
+			<li><a href="javascript:H9377.loadLoginMode('phone');">手机注册</a></li> 
+			<li><a href="javascript:H9377.loadLoginMode('reg');">注 册</a></li> 
+			<li><a href="javascript:H9377.loadLoginMode('onekey');">一键注册</a></li> 
+		</ul> 
+	</div>
+	<!-- 手机注册 -->
+	<div class="dialog-box mod-login mod-login-module mod-reg-phone none"> 
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+		<div class="login-hd"> <a href="javascript:H9377.loadLoginMode();" class="icon-back"></a> </div> 
+		<ul class="login-mod-sbox"> <li class="active">手机注册</li> <li onClick="H9377.loadLoginMode('reg');">注 册</li> </ul> 
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-mobile"></i> <input name="cellphone" type="phone" placeholder="请输入您的手机号码"> </div> 
+				<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+				<div class="w-item-wp">
+						<div class="w-item w-item-s" style='display:inline-block;margin:0'> <i class="icon-email"></i> <input id='text1'  maxlength='4' type="text" placeholder="验证码" > </div> 
+						<img  src="/csi/ImageVerify/getImageCode?{{$smarty.now}}" onClick="H9377.createCode1(this)" id='validateCode1' style='position: absolute;top:0;right:0;width:36%;height:42px;border-radius: 3px;'>
+					</div>
+				<div class="w-item-wp"> 
+					<div class="w-item w-item-s" > <i class="icon-email"></i> <input name="captcha" type="text" placeholder="请输入验证码"> </div> 
+					<button class="w-button J-sendcaptcha" onClick="H9377.sendCaptcha(this);">发送验证码</button> 
+				</div> 
+				<a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'phone')">注 册</a> 
+			</div> 
+		</div> 
+	</div>
+	<!-- 普通注册 -->
+	<div class="dialog-box mod-login mod-login-module mod-reg-pub none"> 
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a> 
+		<div class="login-hd"> <a href="javascript:H9377.loadLoginMode();" class="icon-back"></a> </div> 
+		<ul class="login-mod-sbox"> <li onclick="H9377.loadLoginMode('phone');">手机注册</li> <li class="active">注 册</li> </ul> 
+		<div class="login-form"> 
+			<div class="w-form"> 
+				<div class="w-item"> <i class="icon-user"></i> <input name="username" type="text" placeholder="请输入账号"> </div> 
+				<div class="w-item"> <i class="icon-lock"></i> <input name="password" type="password" placeholder="请输入密码"> </div> 
+				<a href="javascript:;" class="btn-submit" onClick="H9377.userRegister(this,'reg')">注 册</a> 
+			</div> 
+		</div> 
+	</div>
+	<!-- 一键注册 -->
+	<div class="dialog-box mod-login mod-login-module mod-reg-onekey none"> 
+		<div class="login-hd tc">
+			 <div class="login-hd-tit">注册成功</div> 
+			<a href="javascript:;" class="icon-back" style='position:absolute;left:10px;top:18px'></a>
+			</div>
+		<div class="accinfo">
+			<p class="aitem">账号：qy***</p>
+			<p class="aitem">密码：123456789</p>
+			<p class="xitem">账号密码已截图存放至相册</p>
+		</div>
+		<a href="javascript:;" class="btn-enter">进入游戏</a>
+		<div class="login-form"> 
+			<input name="username" disabled="disabled" type="hidden" >
+			<input name="password" disabled="disabled" type="hidden" >
+		</div> 
+	</div>
+</div>

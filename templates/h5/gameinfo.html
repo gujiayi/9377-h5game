@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+</head>
+<body>
+	<div class="wrapper mod-gameinfo">
+		<div class="hd-img">{{data name="{{$game_info.NAME}}-首图"}} {{$DATA["{{$game_info.NAME}}-首图"]}}</div>
+		<div class="wrap">
+			<div class="flex info-box">
+				<img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$game_info.ALIAS}}.png" width="50" height="50">
+				<div class="flex flex-list flex-v flex-x-between info">
+					<p class="flex"><strong>{{$game_info.NAME}}</strong></p>
+					<p>{{$game_info.SHORT_DESCRIPTION}}</p>
+				</div>
+				<a href="{{$CONFIG.app_url}}/game_login.php?gid={{$gid}}&sid=1" class="btn">开始游戏</a>
+			</div>
+		</div>
+		<div class="normal-title">游戏简介</div>
+		<div class="wrap">
+			<div class="gameintro">{{$game_info.DESCRIPTION}}  </div>
+
+			<div class="Js-pubtab-wrap">
+				<ul class="Js-pubtab tab flex">
+					<li class="flex-list active">公告</li> 
+					{{if $card_list}}<li class="flex-list">礼包</li>{{/if}}
+				</ul>
+				<div class="Js-tabitem-box">
+					<div class="Js-tabitem news-list">
+						{{data name="{{$game_info.NAME}}-公告"}}
+						<ul>
+							{{foreach from=$DATA["{{$game_info.NAME}}-公告"].list item=item}}
+							<li class="flex">  <span class="tags-grn">公告</span>  <a href="{{$item.artlink}}" class="flex-list">{{$item.title}}</a> <span>{{$item.pubdate|date_format:'%y-%m-%d'}}</span> </li>
+							{{/foreach}}
+						</ul>
+					</div>
+					<ul class="Js-tabitem gift-list none">
+						{{foreach from=$card_list item=item}}
+						<li class="flex">
+							<div class="flex-list">
+								<p class="name">{{$item.name}}</p>
+								<p>{{$item.description}}</p>
+								<i class="percent"><em style="width: {{$item.surplus/$item.total*100}}%"></em></i>
+								<p>礼包剩余：{{$item.surplus/$item.total*100|intval}}%</p>
+							</div>
+							<a href="javascript:H9377.getCard('', '{{$item.CONFIG.bindingMobile}}', '{{$item.id}}');" class="btn {{if $item.CONFIG.bindingMobile == 1}}btn-getBPcard{{/if}}">领礼包</a>
+						</li>
+						{{/foreach}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{include file="h5/footer.html"}}
+</body>
+</html>

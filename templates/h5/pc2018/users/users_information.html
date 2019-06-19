@@ -1,0 +1,118 @@
+<div class="user-section user-section-1">
+	<form action="/users/users_do.php" method="post">
+		<input name="do" value="userinfo_up" type="hidden" />
+		<input name="web" value="1" type="hidden" />
+		<div class="section-tit">个人资料</div>
+		<div class="w-item">
+			<label class="w-label">用户名：</label> 
+			<div class="w-div">{{$user.LOGIN_ACCOUNT}}</div>
+		</div>
+		<div class="w-item none"> 
+			<label class="w-label">昵称：</label> 
+			<div class="w-div">{{if !$user['BBS_NAME']}}<a href="{{$CONFIG.app_url}}/users/users_index.php?type=6" class="c-blue">激活论坛</a>{{else}}{{$user['BBS_NAME']}}{{/if}}</div> 
+		</div>
+		<div class="w-item"> 
+			<label class="w-label">性别：</label> 
+			<div class="w-div">
+				<label for="male"><input name="sex" type="radio" id="male" value="1" checked="checked" {{if $user['SEX']==1}}checked="checked"{{/if}}> 男&nbsp; &nbsp;</label>
+				<label for="female"><input name="sex" type="radio" id="female" value="0" {{if $user['SEX']==0}}checked="checked"{{/if}}> 女</label>
+			</div> 
+		</div>
+		<div class="w-item"> 
+			<label class="w-label">生日：</label> 
+			<div class="w-div">
+				<select id="birth-year" name="birth_year" class="w-select">
+					{{if $user['BIRTH_YEAR']!=''}}
+						<option value="{{$user['BIRTH_YEAR']}}" selected="selected" >{{$user['BIRTH_YEAR']}}</option>
+					{{/if}}
+					<option value="0" >无</option>
+					{{foreach from=range(2010, 1940) item=year}}
+					<option value="{{$year}}">{{$year}}</option>
+					{{/foreach}}
+				</select> 年
+				<select id="birth-month" name="birth_month" class="w-select">
+					{{if $user['BIRTH_MONTH']!=''}}
+					<option value="{{$user['BIRTH_MONTH']}}" selected="selected" >{{$user['BIRTH_MONTH']}}</option>
+					{{/if}}
+					<option value="0">无</option>
+					<option value="1" >1</option>
+					<option value="2" >2</option>
+					<option value="3" >3</option>
+					<option value="4" >4</option>
+					<option value="5" >5</option>
+					<option value="6" >6</option>
+					<option value="7" >7</option>
+					<option value="8" >8</option>
+					<option value="9" >9</option>
+					<option value="10" >10</option>
+					<option value="11" >11</option>
+					<option value="12" >12</option>
+				</select> 月
+				<select id="birth-date" name="birth_date" class="w-select">
+					{{if $user['BIRTH_DAY']!=''}}
+					<option value="{{$user['BIRTH_DAY']}}" selected="selected" >{{$user['BIRTH_DAY']}}</option>
+					{{/if}}
+					<option value="0">无</option>
+					<option value="1" >1</option>
+					<option value="2" >2</option>
+					<option value="3" >3</option>
+					<option value="4" >4</option>
+					<option value="5" >5</option>
+					<option value="6" >6</option>
+					<option value="7" >7</option>
+					<option value="8" >8</option>
+					<option value="9" >9</option>
+					<option value="10" >10</option>
+					<option value="11" >11</option>
+					<option value="12" >12</option>
+					<option value="13" >13</option>
+					<option value="14" >14</option>
+					<option value="15" >15</option>
+					<option value="16" >16</option>
+					<option value="17" >17</option>
+					<option value="18" >18</option>
+					<option value="19" >19</option>
+					<option value="20" >20</option>
+					<option value="21" >21</option>
+					<option value="22" >22</option>
+					<option value="23" >23</option>
+					<option value="24" >24</option>
+					<option value="25" >25</option>
+					<option value="26" >26</option>
+					<option value="27" >27</option>
+					<option value="28" >28</option>
+					<option value="29" >29</option>
+					<option value="30" >30</option>
+					<option value="31" >31</option>
+				</select> 日
+			</div> 
+		</div>
+		<div class="w-item"> 
+			<label class="w-label">邮箱：</label> 
+			<input type="text" class="w-input" value="{{$user['EMAIL']}}" {{if $user['EMAIL']!='' and $user['EMAIL']!='undefined'}}disabled  name="email2" id="email2"  {{else}} name="email" id="email"  dataType="Email" msg="请认真填写邮箱地址！" {{/if}}> 
+		</div>
+		<div class="w-item"> <label class="w-label">QQ号码：</label> <input type="text" name="qq" class="w-input" id="qq" value="{{$user['QQ']}}"> </div>
+		<div class="w-item"> 
+			<label class="w-label">真实姓名：</label> 
+			<input type="text" class="w-input" name="name" value="{{$user['NAME']}}" {{if $user['NAME']!='' and $user['NAME']!='张三'}}disabled {{else}}  dataType="Chinese" msg="请认真填写姓名" {{/if}}> 
+		</div>
+		<div class="w-item"> 
+			<label class="w-label">身份证号：</label> 
+			<input type="text" class="w-input" value="{{$user['ID_CARD_NUMBER']}}" {{if $user['ID_CARD_NUMBER']!=''}}disabled name="idCardNumber2" id="id_card_number2" {{else}} name="idCardNumber" id="id_card_number" dataType="IdCard" msg="身份证号码不正确" {{/if}}> 
+		</div>
+		<div class="w-item"> <label class="w-label"></label> 
+			<div class="w-div lh24">
+				<span class="c-blue">注意：此帐号的身份证信息只能填写一次，是判断帐号归属的重要依据。</span><br>
+				以上证件信息将作为您的防沉迷信息。<br>
+				我们将保证您填写的信息不会外泄。
+			</div> 
+		</div>
+		<div class="w-item"> 
+			<label class="w-label"></label> 
+			<div class="w-div">
+				<input type="submit" value="提交保存" class="g-btn">&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="reset" value="重新编辑" class="g-btn">
+			</div> 
+		</div>
+	</form>
+</div>

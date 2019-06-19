@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>{{$CONFIG.site_title}}</title>
+	<meta name="keywords" content="{{$CONFIG.site_keyword}}" />
+	<meta name="description" content="{{$CONFIG.site_description}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/global.css?{{$CONFIG.build}}" />
+	<link href="{{$CONFIG.resource}}/style/2017/h5/pc/login.css?{{$CONFIG.build}}" rel="stylesheet" type="text/css" />
+	<script> if(/(mobile|Android|iPhone|iPod|iPad|BlackBerry|SymbianOS|webOS|Windows Phone|\s+adr\s+)/i.test(navigator.userAgent)){window.location.href = '{{$CONFIG.app_url}}/login.php?ac=login&type=wap'; } </script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+<div class="middle_main middle_body">
+		{{include file="h5/pc/header.html"}}
+	<!-- 头部 -->
+    <div class="g-header none">
+		<div class="g-main fix">
+			<a href="{{$CONFIG.url}}" title="9377手游" class="g-logo fl"> <h1>9377手游</h1> </a>
+			<div class="g-menu fr">
+				<a href="{{$CONFIG.url}}"><span>平台首页</span><i></i></a>
+				<a href="{{$CONFIG.app_url}}/game_center.php"><span>游戏大全</span><i></i></a>
+				<a href="{{$CONFIG.app_url}}/new_gamecard/game_card.php"><span>礼包中心</span><i></i></a>
+				<a href="{{$CONFIG.app_url}}/kefu_center.php?ac=pay&pc=1" target="_blank"><span>充值中心</span><i></i></a>
+				<a href="{{$CONFIG.app_url}}/kefu_center.php"><span>客服中心</span><i></i></a>
+				<a href="{{$CONFIG.app_url}}/users/users_index.php" class="active"><span>用户中心</span><i></i></a>
+				<a href="{{$CONFIG.url}}/news/"><span>游戏资讯</span><i></i></a>
+				<a href="http://www.9377.com/" target="_blank"><span>页游平台</span><i></i></a>
+			</div>
+		</div>
+	</div>
+
+    
+	<div id="banner">
+		<div class="login_ban">
+			<h1 class="none">玩游戏，上9377手游,一起玩更快乐！</h1>
+			<div class="monkey"></div>
+			<div class="cloud1"></div>
+			<div class="cloud2"></div>
+			<div class="cloud3"></div>
+			<div class="car"><span></span></div>
+			<div class="boat"><span></span></div>
+            <p style="color:#f00; position:absolute; top:400px; right:50px;">温馨提示：本游戏适合18岁(含)以上玩家娱乐</p>
+			
+            <div class="form_box fr">
+
+                <h2 class="title_box">9377手游帐号登录</h2>
+				<div class="loginbox">
+                    <form method="post" id="login_form" action="{{$CONFIG.app_url}}/login.php" onsubmit="return _login_form(this);">
+						<input type="hidden" name="do" value="login" />
+						<input type="hidden" name="gourl" value="{{$gourl}}" />
+						<div class="form_tips">
+							{{if $msg}}
+							<div id="form_tips"><p>{{$msg}}</p></div>
+							<script type="text/javascript">
+								$(function(){
+									$('.form_item').addClass('error');
+								});
+							</script>
+							{{else}}
+							<div id="form_tips"></div>
+							{{/if}}
+						</div>
+						<p class="form_item">
+							<label class="c_account_icon" for="username"></label>
+							<input name="username" id="username" type="text" value="" placeholder="账号"/>
+						</p>
+						<p class="form_item">
+							<label class="c_password_icon" for="password"></label>
+							<input name="password" id="password" type="password" placeholder="密码"/>
+						</p>
+						<p class="forgot_l">
+							<a class="fr" href="{{$CONFIG.app_url}}/getpass.php" target="_blank" rel="nofollow">忘记密码?</a>
+							<input name="login_save" type="checkbox" value="1" id="login_save" /><label for="login_save">自动登录</label>
+						</p>
+						<p class="f_submit">
+							<input type="submit" value="登 录" />
+						</p>
+						<p class="f_links clearfix">
+							<a class="f_quick fr" href="{{$CONFIG.app_url}}/register.php?gourl={{$gourl|urlencode}}" rel="nofollow">立即注册</a>
+							<a class="f_qq" href="javascript:;" onclick="window.location.href = '{{$CONFIG.app_url}}/api/qq.php?_qq_action=login&_9377_forward='+ encodeURIComponent($('#login_form input[name=gourl]').val()); return false;" title="QQ登录" target="_blank" rel="nofollow"></a><a class="f_wx" href="javascript:;" onclick="window.location.href = 'http://s.9377.com/api/wx_login.php?_wx_action=login&_s9377=1&_9377_forward='+ encodeURIComponent($('#login_form input[name=gourl]').val()); return false;" title="微信登录" target="_blank" rel="nofollow"></a><a class="f_wb" href="javascript:;" onclick="window.location.href = 'http://s.9377.com/api/weibo.php?_wb_action=login&_s9377=1&_9377_forward='+ encodeURIComponent($('#login_form input[name=gourl]').val()); return false;" title="微博登录" target="_blank" rel="nofollow"></a>
+						</p>
+                    </form>
+				</div>
+            </div>
+        </div>
+		<div class="water_back"></div>
+		<div class="water_front"></div>
+		
+    </div>
+
+    <!--脚注开始-->    
+	{{include file="h5/pc/footer.html"}}
+	<!--脚注结束-->
+</div>
+<script type="text/javascript">
+	if($_COOKIE['Puser']){
+		$('#username').val($_COOKIE['Puser']);
+	}
+	function _login_form(form) {
+		var form = $(form);
+		var username = form.find('input[name=username]').val();
+		var index_user = form.find('input[name=username]');
+		
+		if(username.length < 3 || username.length > 30) {
+			$('#form_tips').html('<p>账户名不存在，请重新输入</p>');
+			index_user.parent('.form_item').addClass('error');
+			index_user.focus();
+			return false;
+		}else{
+			index_user.parent('.form_item').removeClass('error');
+		}
+		
+		var pwd = form.find('input[name=password]').val();
+		if(pwd.length < 1){
+			var index_pwd = form.find('input[name=password]');
+			$('#form_tips').html('<p>账号与密码不匹配，请重新输入</p>');
+			index_pwd.parent('.form_item').addClass('error');
+			index_pwd.focus();
+			return false;
+		}
+
+		return true;
+	}
+	//鼠标动背景动
+	$(document).mousemove(function (e) {
+		var x=e.pageX;  //表示鼠标相对于文档的位置
+		var y=e.pageY;
+		//前面的数值是为默认的位置值 x为x轴,即left/right值; y为y轴,即top/bottom值
+		var x1=73+x/90,
+			y1=156+y/60,
+			x2=-18+x/90,
+			y2=119+y/60;
+		 
+		$('.login_page .monkey').css({"left":x1+'px',"top":y1+'px'});
+		$('.login_page2 .monkey').css({"left":x2+'px',"top":y2+'px'});
+	});
+	
+	
+	window.onload = function(){ 
+		var arr = ['login_page','login_page2'];
+		var index = Math.floor((Math.random()*arr.length));
+		document.getElementById('banner').className = ''+ arr[index] + '';
+	}
+</script>
+</body>
+</html>

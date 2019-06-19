@@ -1,0 +1,32 @@
+<!-- 底部菜单模块 -->
+<ul class="menu flex">
+	<li class="flex-list active"><a href="{{$CONFIG.app_url}}/index.php"><i class="icon-game"></i><span>游戏</span></a></li>
+	<li class="flex-list"><a href="{{$CONFIG.app_url}}/gift.php"><i class="icon-gift"></i><span>礼包</span></a></li>
+	<li class="flex-list"><a href="{{$CONFIG.app_url}}/sms/"><i class="icon-sms"></i><span>社区</span></a></li>
+	<li class="flex-list"><a href="{{$CONFIG.app_url}}/user.php"><i class="icon-user"></i><span>个人</span></a></li>
+</ul>
+
+<div class="mask none">
+	<div class="dialog-box dialog-pay">
+		<a href="javascript:;" title="关闭" class="dialog-close icon-close"></a>
+		<h3 class="pay-hd">确认支付方式</h3>
+		<div class="pay-info">
+			<p id="pname">200钻石（充值2元）</p>
+			<p id="price">¥ 2.00</p>
+		</div>
+		<div class="pay-mode">
+			<ul id="pay-list">
+				<li class="flex"><i class="pay-wx"></i><span class="flex-list">微信支付</span><em class="icon-select"></em></li>
+				<li class="flex"><i class="pay-zfb"></i><span class="flex-list">支付宝支付</span><em class=""></em></li>
+			</ul>
+		</div>
+		<a href="javascript:;" class="btn-submit">立即支付</a>
+		<div class="pay-tip">
+			<p>若充值遇到任何问题请联系客服：</p>
+			<p><span>QQ：2850907640</span>   <span>电话：020-37039849</span></p>
+		</div>
+	</div>
+</div>
+<script src="{{$CONFIG.resource}}/js/2017/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+<script type="text/javascript"> C9377.build = '{{$CONFIG.build}}', C9377.gid = '{{$gid}}'; </script>
+<script src="{{$CONFIG.resource}}/js/2017/h5/main.js?{{$CONFIG.build}}"></script>

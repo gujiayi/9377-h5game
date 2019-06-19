@@ -1,0 +1,104 @@
+<!doctype html>
+<html >
+
+<head >
+    <meta charset="utf-8" />
+    <title>游戏攻略_手机游戏游戏攻略_耐玩游戏</title>
+    <meta name="keywords" content="手机游戏攻略,最新手游攻略,耐玩手机游戏攻略,手游动态" />
+    <meta name="description" content="耐玩手机游戏攻略中心，每天为大家提供最近更新的各种手游攻略、手游行情等" />
+    <meta content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Cache-Control" content="max-age=3600" />
+    <meta name="x5-fullscreen" content="true">
+    <meta name="full-screen" content="yes">
+    <link rel="stylesheet" href="{{$CONFIG.resource}}/style/2018/h5/style.game2.css?{{$CONFIG.build}}" />
+    <script>
+        function nofind(evnet) {
+            var img = event.srcElement;
+            img.src = "/images/2018/01.png";
+            img.onerror = null;
+        }
+    </script>
+</head>
+
+<body class='article-wrap'>
+    <div class="PSP-wrap  npm-wrap ">
+        <div class='top' >
+            <a href='javascript:;'></a>
+            <div class='sub' >攻略</div>
+            <a class='icon-close' onclick='javascript:G9377.detail_close()'></a>
+        </div>
+        <div class="check">
+            <p class='checked'>全部攻略</p>
+            {{data name="游戏攻略"}}
+            {{foreach from=$DATA["游戏攻略"].list item=item}}
+            <p>{{$item.name}}</p>
+            {{$gameArr[] = $item['name']}}
+            {{/foreach}}
+        </div>
+        <div class='container'>
+            <div class="list-wrap">
+                <ul class="news-list">
+                    {{foreach from=$DATA["文章列表{{$gid}}"].list item=item}}
+                    {{if in_array($item['typename'],$gameArr)}}
+                    <a href="javascript:;" class="list" data-id="{{$item.id}}">
+                        <div class="left"><img src="{{$item.picurl}}?{{$CONFIG.build}}" _src="/{{$item.picurl}}?{{$CONFIG.build}}"
+                                onerror="nofind();" alt="" class="img"></div>
+                        <div class="right">
+                            <h3 class="contentSub">{{$item.title}}</h3>
+                            <p class="show">{{$item.description}}</p>
+                        </div>
+                    </a>
+                    {{/if}}
+                    {{/foreach}}
+                </ul>
+            </div>
+            <div class='none'></div>
+            {{foreach from=$gameArr item=item1}}
+            <div class="list-wrap none">
+                <ul class="news-list">
+                    {{foreach from=$DATA["文章列表{{$gid}}"].list item=item}}
+                    {{if $item['typename']==$item1}}
+                    <a href="javascript:;" class="list" data-id="{{$item.id}}">
+                        <div class="left"><img src="{{$item.picurl}}?{{$CONFIG.build}}" _src="/{{$item.picurl}}?{{$CONFIG.build}}"
+                                onerror="nofind();" alt="" class="img"></div>
+                        <div class="right">
+                            <h3 class="contentSub">{{$item.title}}</h3>
+                            <p class="show">{{$item.description}}</p>
+                        </div>
+                    </a>
+                    {{/if}}
+                    {{/foreach}}
+                </ul>
+            </div>
+            {{/foreach}}
+
+        </div>
+    </div>
+</body>
+<script src="{{$CONFIG.resource}}/js/2018/h5/zepto.min.js?{{$CONFIG.build}}"></script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/clipboard.js?{{$CONFIG.build}}"></script>
+<script type="text/javascript">
+    var footer = 0;
+    C9377.Ggourl = window.location.href;
+    C9377.game = { 'coin_radio': '{{$G.COIN_RADIO}}', 'coin_name': '{{$G.COIN_NAME}}', 'parent': '{{$G.CONFIG.parent}}' },
+        C9377.build = '{{$CONFIG.build}}';
+    C9377.gid = '{{$gid}}';
+    C9377.app_url = C9377.app_url.replace(/:\/\/[^\/]+\//, '://' + window.location.hostname + '/');
+</script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/main.game2.js?{{$CONFIG.build}}"></script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/common.js?{{$CONFIG.build}}"></script>
+<script src="{{$CONFIG.resource}}/js/2018/h5/loadJsCss.js?{{$CONFIG.build}}"></script>
+<script>
+  
+    $('.container').delegate('.list', 'click', function (e) {
+        var detailId = e.currentTarget.dataset.id;
+        console.log(detailId)
+        window.location.href = '/csi/ItemArticle/ArticleDetail?id=' + detailId;
+    })
+    G9377.sliceLen('.PSP-wrap')
+</script>
+
+</html>

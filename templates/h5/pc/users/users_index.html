@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit" />
+	<title>h5游戏用户中心_H5游戏登录_html5游戏用户注册_9377h5游戏平台</title>
+	<meta name="keyword" content="h5游戏用户中心,H5游戏登录,html5游戏用户注册,H5游戏密码找回">
+	<meta name="description" content="9377h5游戏用户中心,玩家可从这里注册帐号,去体验各种好玩的html5游戏,并且能领取更多的H5游戏福利。如果你忘记了密码，还能找回来哦。玩h5游来9377,一起玩更快乐。" />
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/user.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/pc/header.html"}}
+		<div class="g-container">
+			<div class="g-main">
+				<div class="user-hd laybox">
+					<div class="user-hd-left fl">
+						<div class="user-avatar">
+							<a href="javascript:;"><img src="{{$CONFIG.resource}}/images/2017/h5/pc/noavatar_middle.gif" width="100" height="100" /></a>
+							<!-- <a href="javascript:avapopOpen();" class="btn-avatar">修改头像</a> -->
+						</div>
+						<ul class="user-info">
+							<li>您好，<b class="js-user-openid">{{if !$user['BBS_NAME']}}{{$user['LOGIN_ACCOUNT']}}{{else}}{{$user['BBS_NAME']}}{{/if}}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="{{$CONFIG.url}}/login.php?do=logout" class="quit">[退出]</a>
+							</li>
+							<li>账号：{{$user.LOGIN_ACCOUNT}}</li>
+							<li>上次登陆时间：{{$user.LAST_LOGIN_TIME}}</li>
+							<li><a href="{{$CONFIG.app_url}}/game_card.php" class="g-btn-s btn-getlb">领取礼包</a></li>
+						</ul>
+					</div>
+					
+					<div class="user-hd-right fl">
+					{{data name="个人中心游戏推荐"}}
+						<ul class="remgame-list fix">
+
+						{{foreach from=$DATA['个人中心游戏推荐'].list item=item}}
+							<li>
+								<a href="{{$CONFIG.app_url}}{{$path}}/game.php?gid={{$item.ID}}&sid=new" target="_blank" class="img"><img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png" alt="" width="70" height="70"></a>
+								{{data name="{{$item.NAME}}下载次数"}}
+								<div class="info">
+									<a href="{{$item.CONFIG.site}}" class="name">《{{$item.NAME}}》</a>
+									<p>{{$DATA["{{$item.NAME}}下载次数"]}}次下载</p>
+								</div>
+							</li>
+						{{/foreach}}
+						</ul>
+					</div>
+				</div>
+				<div class="user-bd laybox fix">
+					<ul class="user-menu fl" id="user-menu">
+						<li {{if !isset($type) || $type == 0}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php" class="menu-1"><i></i> 账号资料</a>
+						</li>
+						<li {{if isset($type) && $type == 1 || $type == 3 || $type == 4}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php?type=1" class="menu-2"><i></i> 帐号安全</a>
+						</li>
+						<li {{if isset($type) && $type == 5}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php?type=5" class="menu-3"><i></i> 修改密码</a>
+						</li>
+						<li {{if isset($type) && $type == 2}}class="active"{{/if}}>
+							<a href="{{$CONFIG.app_url}}/users/users_index.php?type=2" class="menu-4"><i></i> 礼包中心</a>
+						</li>
+					</ul>
+					<div class="user-section-wrap fl" id="user-section-wrap">
+						{{if !isset($type) || $type == 0}}
+							{{include file="h5/pc/users/users_information.html"}}
+						{{elseif $type == 1}}
+							{{include file="h5/pc/users/users_safe.html"}}
+						{{elseif $type == 2}}
+							{{include file="h5/pc/users/users_gift.html"}}
+						{{elseif $type == 3}}
+							{{include file="h5/pc/users/users_mibao.html"}}
+						{{elseif $type == 4}}
+							{{include file="h5/pc/users/users_phone.html"}}
+						{{elseif $type == 5}}
+							{{include file="h5/pc/users/users_password.html"}}
+						{{elseif $type == 6}}
+							{{include file="h5/pc/users/users_bbs.html"}}
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="h5/pc/footer.html"}}
+	</div>
+
+	<!-- 修改头像弹窗 -->
+	<i class="mask none" id="mask"></i>
+	<div class="avatar-pop none" id="avatar-pop">
+		<a href="javascript:avapopClose();" class="avapop-close"></a>
+		<div class="ava-hd" id="curavatar">
+			<!-- <img src="{{$user_avatar}}" /> -->
+			<p>当前头像</p>
+		</div>
+		<div class="ava-bd">
+			<div class="ava-uptype fix">
+				<a href="javascript:;" class="active">推荐头像</a>
+				{{if $user['BBS_ID']}}
+				<a href="javascript:;">自定义头像</a>
+				<span class="line"></span>
+				{{/if}}
+			</div>
+			<div class="ava-upwrap">
+				<div class="ava-upbox ava-system">
+					<p class="tips">选择一个新照片进行保存，即可获得全新造型。</p>
+					<div class="sys-ava-list fix" id="sys-ava-list"></div>
+					<a href="javascript:;" class="sys-ava-submit" id="sys-ava-submit">保存</a>
+					<p class="sub-tips" id="s-tips"></p>
+				</div>
+				<div class="ava-upbox ava-custom none">
+					{{if $user['BBS_ID']}} {{$avatar_swf}} {{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script> var BBS_ID = "{{$user['BBS_ID']}}"; var navactive = '1'; </script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/main.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/users.js?{{$CONFIG.build}}"></script>
+</body>
+</html>

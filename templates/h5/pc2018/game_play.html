@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>{{$game_info.CONFIG.alias_name}}手游官网_{{$game_info.CONFIG.alias_name}}h5游戏_{{$game_info.CONFIG.alias_name}}手机网页游戏—9377h5游戏</title>
+	<meta name="keywords" content="{{$game_info.CONFIG.alias_name}},{{$game_info.CONFIG.alias_name}}手游,{{$game_info.CONFIG.alias_name}}h5游戏" />
+	<meta name="description" content="{{$game_info.CONFIG.alias_name}}在线玩，9377h5游戏{{$game_info.CONFIG.alias_name}}官网提供{{$game_info.CONFIG.alias_name}}手机在线玩，{{$game_info.CONFIG.alias_name}}攻略，介绍，网友点评{{$game_info.CONFIG.alias_name}}手游好玩吗。{{$game_info.SHORT_DESCRIPTION}}。" />
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc2018/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc2018/game_play.css?{{$CONFIG.build}}" />
+	<script src="{{$CONFIG.resource}}/js/2017/h5/pc2018/ajax.js?{{$CONFIG.build}}"></script>
+    <script>document.domain = "9377.com";</script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<div class="header">
+				<div class="g-main">
+					<a href="http://www.9377.com/" target="_blank"><img src="{{$CONFIG.resource}}/images/2017/h5/logo.png" height="46"></a>
+					<div class="user-status">
+						<div class="nologin" id="nologin">
+							<a href="{{$CONFIG.app_url}}/pc_login.php?ac=login" class="g-btn">登录</a>
+							<a href="{{$CONFIG.app_url}}/register.php" class="g-btn">注册</a>
+						</div>
+						<div class="logined none" id="logined">
+							<div class="ustatus js-ustatus" id="ustatus"></div>
+							<ul class="logined-opt">
+								<li class="item1"><a href="{{$CONFIG.app_url}}/users/users_index.php" target="_blank"><i class="xicon"></i>用户中心</a></li>
+								<!-- <li class="item2"><a href="{{$CONFIG.app_url}}/users/users_index.php" target="_blank"><i class="xicon"></i>消息</a></li> -->
+								<li class="item3"><a href="{{$CONFIG.app_url}}/login.php?do=logout"><i class="xicon"></i>切换账号</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="h5play" id="h5play">
+				<iframe src="{{$CONFIG.app_url}}/game_login.php?gid={{$game_info.ID}}&sid=new" width="100%" height="100%" class="iframe-game" name="gameIframe" id="iframe-game"></iframe>
+				<a href="javascript:;" class="fullsrc" id="fullsrc"><i class="xicon"></i>全屏模式</a>
+			</div>
+			<div class="full-tools none" id="full-tools">
+				<div class="qr-play">
+					<p class="hd">点我！手机上玩！</p>
+					{{if !$smarty.session.FAKE}}
+					<img src="{{$CONFIG.app_url}}/api/qrcode.php?code={{$CONFIG.app_url|cat:'/game_login.php?gid='|cat:$game_info.ID|cat:'&sid=new&session_id='|cat:$session_id|urlencode}}" class="qr" width="128" height="128"/>
+					<p class="fd">手机电脑可以同步玩了！</p>
+					{{/if}}
+				</div>
+				<a href="javascript:;" class="zoomout" id="zoomout"><i class="xicon"></i>退出全屏</a>
+			</div>
+
+			<div class="leftbar">
+				<ul class="fun-list">
+					<li class="item1">
+						<div class="a"><i class="xicon"></i>在手机上玩</div>
+						{{if !$smarty.session.FAKE}}
+						<div class="b"><img src="{{$CONFIG.app_url}}/api/qrcode.php?code={{$CONFIG.app_url|cat:'/game_login.php?gid='|cat:$game_info.ID|cat:'&sid=new&session_id='|cat:$session_id|urlencode}}"  width="110" height="110"/></div>
+						{{/if}}
+					</li>
+					{{if !$smarty.session.FAKE}}
+					<li class="item2">
+						{{data name="{{$game_info.NAME}}二维码"}}
+						<div class="a"><a href="{{$game_info.CONFIG.download_url}}"><i class="xicon"></i>下载游戏</a></div>
+						<div class="b">{{$DATA["{{$game_info.NAME}}二维码"]}}</div>
+					</li>
+					{{/if}}
+					<li class="item3">
+						{{data name="公众号二维码"}}
+						<div class="a"><i class="xicon"></i>关注公众号</div>
+						<div class="b">{{$DATA['公众号二维码']}}</div>
+					</li>
+					<li class="item4">{{data name="客户端文件链接{{$game_info.ID}}"}}
+						<div class="y">
+							<a href='{{if $DATA["客户端文件链接{{$game_info.ID}}"]}}{{$DATA["客户端文件链接{{$game_info.ID}}"]}}{{else}}javascript:alert("敬请期待");{{/if}}'><i class="xicon"></i><p>添加桌面</p></a>
+							<div class="save-tips"> <p>为方便您下次继续游戏，请点击<span>“添加桌面”</span>，安装程序后就可以在桌面生成图标随时回来了哦！</p> </div>
+						</div>
+						<div class="z">
+							<p>020-36152720</p>
+							<div><a href="https://tb.53kf.com/code/client/10165082/1" target="_blank" class="g-btn">在线客服</a></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="rightbar">
+				<div class="user-hd"> <!-- js加载 --> </div>
+				<p class="playing">您正在玩：{{$game_info.CONFIG.alias_name|default:$game_info.NAME}}</p>
+				<ul class="nav">
+					<li><i class="xicon icon-1"></i><p>礼包</p></li>
+					<li><i class="xicon icon-2"></i><p>资讯</p></li>
+					<li><i class="xicon icon-3"></i><p>客服</p></li>
+				</ul>
+				<div class="gamecnt-wp">
+					<div class="gamecnt-box">
+						<ul class="card-list">
+							{{data name="游戏礼包{{$game_info.ID}}"}}
+							{{foreach from=$DATA["游戏礼包{{$game_info.ID}}"].list item=item}}
+							<li>
+								<p class="name"> <img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.G.ALIAS}}.png" width="40" alt=""> {{$item.name}} </p>
+								<div class="info">
+									{{$item.description}}
+								</div>
+								{{$plus = (($item.surplus/$item.total)|number_format:3)*100}}
+								<div class="progress-box"><em class="progress"><i style="width:{{$plus}}%"></i></em></div>
+								<p>礼包剩余：{{$plus}}%</p>
+								<a href="{{$CONFIG.app_url}}/game_card.php?game={{$item.game}}&card_type={{$item.id}}" target="_blank" class="g-btn-s btn-get">领礼包</a>
+							</li>
+							{{/foreach}}
+						</ul>
+					</div>
+					<div class="gamecnt-box none">
+						{{data name="游戏资讯{{$game_info.ID}}"}}
+						<ul class="news-list">
+							{{foreach from=$DATA["游戏资讯{{$game_info.ID}}"].list item=item}}
+							<li><a href="{{$item.artlink}}" target="_blank"><em><i>·</i>{{$item.title}}</em><span>{{$item.adddate|date_format:"%m-%d"}}</span></a></li>
+							{{/foreach}}
+						</ul>
+					</div>
+					<div class="gamecnt-box none">
+						<div class="kf-box">
+							<i class="x-kf"></i>
+							<p>请点击下方“咨询客服”按钮</p>
+							<p>我们的专业客服马上为您服务</p>
+							<a href="https://tb.53kf.com/code/client/10165082/1" target="_blank" class="btn-tokf">咨询客服</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{include file="h5/pc2018/footer.html"}}
+	</div>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc2018/main.js?{{$CONFIG.build}}s"></script>
+	<script>
+		C9377.gid = '{{$gid}}';
+		gamePlay.init(); 
+
+		if ($_GET['fake'] == '0' || $_GET['fake'] == '1') {
+
+	    	setTimeout(function(){
+	        	$('#fullsrc').click();
+	    	}, 500)
+    	}
+	</script>
+		
+    {{if $smarty.session.FAKE}}
+    <script> C9377.fake = 1; </script>
+    {{/if}}
+</body>
+</html>

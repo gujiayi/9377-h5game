@@ -1,0 +1,17 @@
+    .mod-reg-phone .w-item {
+        height: 39px;
+        padding: 10px 10px;
+        margin: 5px 0;
+    }
+    .mod-reg-phone .login-fun{
+        margin:7px 0;
+    }
+    .mod-reg-phone .validateCode {
+        height: 39px;
+    }
+    .mod-reg-phone .w-button{
+        height:39px;
+    }
+    .mod-reg-phone .login-group-tool li a{
+        line-height:28px;
+    }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+	<meta name="renderer" content="webkit"/>
+	<title>{{$game_info.CONFIG.alias_name}}手游官网_{{$game_info.CONFIG.alias_name}}h5游戏_{{$game_info.CONFIG.alias_name}}手机网页游戏—9377h5游戏</title>
+	<meta name="keywords" content="{{$game_info.CONFIG.alias_name}},{{$game_info.CONFIG.alias_name}}手游,{{$game_info.CONFIG.alias_name}}h5游戏" />
+	<meta name="description" content="{{$game_info.CONFIG.alias_name}}在线玩，9377h5游戏{{$game_info.CONFIG.alias_name}}官网提供{{$game_info.CONFIG.alias_name}}手机在线玩，{{$game_info.CONFIG.alias_name}}攻略，介绍，网友点评{{$game_info.CONFIG.alias_name}}手游好玩吗。{{$game_info.SHORT_DESCRIPTION}}。" />
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/global.css?{{$CONFIG.build}}" />
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/pc/game_play.css?{{$CONFIG.build}}" />
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/ajax.js?{{$CONFIG.build}}"></script>
+</head>
+<body>
+	<div class="wrapper">
+		{{include file="h5/pc/header.html"}}
+		<div class="g-container">
+			<div class="g-main">
+				<div class="game-wp" id="game-wp">
+					<div class="game-box" id="game-box">
+						<iframe src="{{$CONFIG.app_url}}/game_login.php?gid={{$game_info.ID}}&sid=new" id="iframe-game" frameborder="0"></iframe>
+						<div class="app-box-s none" id="app-box-s">
+							<a href="javascript:;" title="关闭" class="app-box-close"></a>
+							<div class="hd J-username"></div>
+							<div class="bd">
+								<img src="{{$CONFIG.resource}}/images/2017/h5/pc/game_qr/{{$game_info.ALIAS}}.jpg?{{$CONFIG.build}}" onError="javascript:this.src='{{$CONFIG.resource}}/images/2017/h5/pc/game_qr/cqll.jpg?{{$CONFIG.build}}';" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="game-fun">
+						<a href="javascript:gamePlay.fullSrc();" class="full">全屏</a>
+						<a href="javascript:gamePlay.theBest();" class="zoomin">最佳</a>
+						<a href="javascript:gamePlay.zoomout();" class="zoomout">还原</a>
+						<a href="javascript:gamePlay.rePlay();" class="replay">重玩</a>
+						<a href="javascript:;" alias="{{$game_info.ALIAS}}" class="mbplay J-appPlay">用手机玩</a>
+						<a href="javascript:addToDesk('{{$game_info.ALIAS}}');" class="fav">收藏</a>
+					</div>
+					<div class="game-opt">
+						<h1 class="name">{{$game_info.CONFIG.alias_name|default:$game_info.CONFIG.alias_name}}</h1>
+						<div class="fr">
+							{{data name="{{$game_info.CONFIG.alias_name}}玩过"}}
+							<span class="item">{{$DATA["{{$game_info.CONFIG.alias_name}}玩过"]}}人玩过</span> |
+							<!-- <a href="javascript:;" class="item favorite">收藏</a>| -->
+							<span class="item">分享到：</span>
+							<div class="dib bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></div>
+						</div>
+					</div>
+				</div>
+				<div class="app-box-l none" id="app-box-l">
+					<a href="javascript:;" title="关闭" class="app-box-close"></a>
+					<div class="hd J-username"></div>
+					<div class="bd"> <img src="{{$CONFIG.resource}}/images/2017/h5/pc/game_qr/{{$game_info.ALIAS}}.jpg?{{$CONFIG.build}}" alt=""> </div>
+				</div>
+				<div class="game-introduce">
+					<h3 class="game-title title-intro"><i></i>游戏特色</h3>
+					<div class="game-txt">
+						{{$game_info.DESCRIPTION}}
+					</div>
+					<h3 class="game-title title-operate none"><i></i>操作说明</h3>
+					<div class="game-txt none">
+						{{data name="操作说明"}}
+						{{$DATA['操作说明']}}
+					</div>
+					<h3 class="game-title title-like"><i></i>猜你喜欢</h3>
+					<ul class="game-list">
+						{{data name="H5猜你喜欢"}}
+						{{foreach from=$DATA['H5猜你喜欢'].list item=item}}
+						<li> <a href="{{$CONFIG.app_url}}/game.php?gid={{$item.ID}}&sid=new" target="_blank" class="item"> <img src="{{$CONFIG.resource}}/images/2017/h5/icon/{{$item.ALIAS}}.png" alt=""> <p>{{$item.NAME}}</p> </a> </li>
+						{{/foreach}}
+					</ul>
+					<div id="SOHUCS" sid="{{$game_info.ALIAS}}"></div>
+				</div>
+			</div>
+		</div>
+		{{include file="h5/pc/footer.html"}}
+	</div>
+	<!-- 弹窗 -->
+	{{include file="h5/pc/game_pop.html"}}
+	<!-- 弹窗 -->
+	<script> var navactive = '2';C9377.build = '{{$CONFIG.build}}';</script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/plugin/jquery.slideBox.js?{{$CONFIG.build}}"></script>
+	<script type="text/javascript" src="{{$CONFIG.resource}}/js/2017/h5/pc/main.js?{{$CONFIG.build}}"></script>
+	<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+	<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+	<script type="text/javascript">
+		window.changyan.api.config({
+			appid: 'cyt8WduQk',
+			conf: 'prod_b42b45c8a0b8f7ef1c348f21d3a409af'
+		});
+		window.onbeforeunload = function(){
+			var tips = '9377H5游戏平台提示：\r\n玩家爸爸，扫描二维码下载游戏，随时随地玩！\r\n-------------------------------------\r\n9377H5游戏平台：http://www.9377.com/h5/';
+			return tips;
+		};
+	</script>
+</body>
+</html>

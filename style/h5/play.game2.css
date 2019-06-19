@@ -1,0 +1,75 @@
+@charset "utf-8";
+    html, body {width: 100%;height: 100%;margin: 0;padding: 0;overflow: hidden;background-color: #000;position:relative;}
+    iframe {border: none;}
+    .loading { width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; background-position: center center; background-repeat: no-repeat; background-size: cover; z-index: 10002; display: none;}
+    /*充值弹窗*/
+    .pay-wp, .kf-wp { width: 100%; height: 100%; position: fixed; top: 0; left: 0; display: none; z-index: 10002;} /*盖住浮标*/
+    .pay-wp iframe, .kf-wp iframe { width: 100%; height: 100%; position:relative; z-index: 1;}
+    .pay-wp .pay-close{ width: 26px; height: 26px; line-height: 26px; text-align: center; font-size: 18px; color: #fff; background: rgba(0,0,0,.5); border-radius: 3px; position:absolute; top: 17px; right: 10px; z-index: 9; display: none;}
+    .kf-wp .close { width: 44px; height: 44px; position:absolute; top: 0px; left: 0px; z-index: 9;}
+    /*弹窗位置调整*/
+    .login-hd .btn-loginmod {top: 34px;}
+    /* v2 */
+    .w-item:hover .J-eye { color: #b3b8bf!important;}
+    .dialog-box { background: #f8f8f8;}
+    .mod-login .w-item { background: #fff; }
+    .mod-uc { padding-top: 20px; }
+    .mod-uc .dialog-close { font-size: 24px; color: #77808b; }
+    .mod-uc .icon-back { font-size: 24px; color: #858d97; }
+    /* .mod-uc .btn-submit { padding: 10px 0; background: #06bf04;} */
+    .mod-uc .icon-oeye, .mod-uc .icon-ceye { font-size: 20px; position: absolute; top: 10px; right: 10px; color: #b3b8bf; z-index: 3;} 
+    .mod-uc .login-hd { padding-top: 0; text-align: center; color: #ff8000; border-bottom: 1px solid #aaa; padding-bottom: 10px;}
+    /* .mod-uc-ctl */
+    .mod-uc-ctl { padding-top: 30px; }
+    .mod-uc-ctl .w-item .icon-user2 { font-size: 22px; margin-right: 10px; }
+    .mod-uc-ctl .place { padding-left: 42px; }
+    .mod-uc-ctl .uc-tool { border-radius: 3px; background: #fff; padding: 0 10px; margin: 10px 0 16px; border: 1px solid #d5d5d5;}
+    .mod-uc-ctl .uc-tool li { height: 36px; line-height: 36px; color: #b3b3b3; border-bottom: 1px solid #aaa; position:relative; padding-left: 32px;}
+    .mod-uc-ctl .uc-tool li i { position:absolute; top: 11px; right: 10px; color: #8b929b;}
+    .mod-uc-ctl .uc-tool li:last-child { border-bottom: 0 none; }
+    .mod-uc-ctl .logout { background: #eb6100; }
+    /* .mod-uc-pass */
+    .mod-uc-pass .w-item .place {color: #D5CCD5; }
+    /* .mod-uc-gift */
+    .mod-uc-gift .gift-tab { overflow:hidden;  margin: 10px 0;}
+    .mod-uc-gift .gift-tab li { height: 32px; line-height: 32px; text-align: center; color: #fff; width: 48%; border-radius: 3px; float: left; background: #c7ccd0;}
+    .mod-uc-gift .gift-tab li:last-child { float: right; }
+    .mod-uc-gift .gift-tab .active { background: #06bf04; }
+    .gift-wp .gift-box:last-child { display: none; }
+    .gift-list .ginfo { margin: 0 10px; }
+    .gift-list .ginfo p { line-height: 24px; }
+    .gift-list .ginfo .num { display:inline-block; min-width: 42px; }
+    .gift-list .btn-get {padding: 6px 18px; height: 32px; line-height: 22px; color: #fff; font-size: 14px; border-radius: 3px; margin: auto 0; background: #4ed68a; }
+    /* .mod-uc-kf */
+    .mod-uc-kf .w-item a { display: block; text-align: center; color: #3d9ced;}
+    /* .mod-uc-gg */
+    .mod-uc-gg .gg-list { padding: 10px 0; min-height: 110px;}
+    .mod-uc-gg .gg-list li { height: 30px ;line-height: 30px;border-bottom: 1px dashed #bbb; }
+    .mod-uc-ggc .icon-back { position:absolute; top: 20px; left: 10px; z-index: 3;}
+    .gg-con-wp .login-hd { font-size: 20px; padding: 0 0 5px 0; }
+    .gg-con-wp .gg-con { margin: 10px 0; height: 240px; overflow-y: auto; }
+    /* QQ超级会员 */
+    .qqvipicon { width: 46px; position:absolute; top: 9%; left: 18%; z-index: 9998; display: none; }
+    .qqvip-card-wp { width: 100%; height: 100%; max-width: 924px; overflow:hidden; position: absolute; top: 0px; left: 0px;}
+    .qqvip-card-wp iframe { display: block; width: 100%; height:100%; overflow:hidden;}
+    .qqvip-card-wp .vc-close { width: 30px; height: 30px; font-size: 30px; position:absolute; top: 10px; right: 10px; z-index: 2;}
+    /*QQ超级会员礼包弹窗*/
+    .mask-close { position:absolute; top: 0px; left: 0px; width: 100%; height: 100%;  }
+    .dialog-card { width: 300px; height: 300px; border-radius: 0; background: url('/images/2017/h5/yyb/bg-qqvipcard.jpg?20180423') no-repeat; }
+    .dialog-card .hd-card { font-size: 16px; color: #a37b43; }
+    .dialog-card .bd-card { font-size: 13px; line-height: 26px; padding: 20px 20px 0; text-align: left;}
+    .dialog-card .bd-card .txt1 { color: #9a8f6a; }
+    .dialog-card .bd-card .txt2 { color: #b1281a; }
+    .dialog-card .card-list li { overflow:hidden; margin: 8px 0px; position:relative; }
+    .dialog-card .card-list .xinfo { max-width: 148px; color: #a37b43; line-height: 22px; overflow:hidden; float: left;}
+    .dialog-card .card-list .btn-get, .dialog-card .card-list .btn-topay { width: 100px; height: 38px; margin-top: 3px; float: right; background: url('/images/2017/h5/yyb/btn-qqvipcard.jpg?20180423') no-repeat;}
+    .dialog-card .card-list .btn-getx { background-position: 0 -56px; }
+    .dialog-card .card-list .btn-topay { display: block; background-position: 0 -100px; margin: 20px auto 0; float: none; }
+    /* 微信后退提示 */
+    .mask-totop { width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 10001; background: rgba(0,0,0,.8) url('/images/2017/h5/wx-top.png?20180423') no-repeat; background-size: cover;}
+    /* 二维码弹窗  postmessage {"event":"qryyb"}  2018年4月28日 10:35:14*/
+    .mask-qr .close { width: 80px; height: 60px; position:absolute; top: 0px; right: 0px; background: transparent; }
+    .mask-qr .btn-url { width: 100%; height: 28%; position:absolute; bottom: 0px; left: 0px; background: transparent; }
+    .mask-qr .qr-wp { width: 72%; max-width: 540px; margin: 0 auto; position:relative; top: 50%; -webkit-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%); transform: translateY(-50%);}
+
+    .mask-wxshare { background-image: url('/images/2017/h5/wxshare.png?201805080945'); background-size: contain;}

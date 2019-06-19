@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+	<meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="9377 H5游戏" >
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="cache" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+	<title>9377 H5游戏平台</title>
+	<meta name="frontend" content="Robin">
+	<link rel="stylesheet" href="{{$CONFIG.resource}}/style/2017/h5/style.css?{{$CONFIG.build}}" />
+	<script type="text/javascript">document.domain = "9377.com";</script>
+</head>
+<body>
+	<div class="wrapper mod-user">
+		<div class="row user-info flex">
+			<img src="http://bbs.9377.com/uc_server/images/noavatar_big.gif" width="50" height="50" class="avatar">
+			<div class="flex-list flex-x-between mga">
+				<p class="nick-name"></p>
+				<p class="uid"></p>
+			</div>
+			<div class="flex-x-between mga">
+				<p class="btn-bindphone"><i class="icon-mobile"></i> <span>绑定手机</span></p>
+				<p class="btn-bindidc"><i class="icon-idc"></i> <span>绑定身份证</span></p>
+			</div>
+		</div>
+		<ul class="row user-menu flex">
+			<li class="flex-list um-kf"><i class="icon-kf"></i><span>联系客服</span></li>
+			<li class="flex-list um-clear"><i class="icon-clear"></i><span>清理缓存</span></li>
+		</ul>
+		<div class="row">
+			<a href="{{$CONFIG.app_url}}/login.php?do=logout" class="btn-logout">退出登录</a>
+		</div>
+	</div>
+	{{include file="h5/footer.html"}}
+</body>
+</html>
